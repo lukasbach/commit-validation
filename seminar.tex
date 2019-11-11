@@ -1,0 +1,65 @@
+%% Available page modes: oneside, twoside
+%% Available languages: english, ngerman
+%% Available modes: draft, final (see README)
+\documentclass[twoside, english, draft]{sdqseminar}
+
+\author{Lukas Bach}
+\title{Commit Validation}
+
+%% Type of the thesis 
+% \thesistype{Seminar Thesis}
+
+%% Change the institute here, ``IPD'' is default
+% \myinstitute{Institute for \dots}
+\advisor{Dr.-Ing. Thomas Kühn}
+
+\settitle
+
+%% --------------------------------
+%% | Settings for word separation |
+%% --------------------------------
+
+%% Describe separation hints here.
+%% For more details, see 
+%% http://en.wikibooks.org/wiki/LaTeX/Text_Formatting#Hyphenation
+\hyphenation{
+% me-ta-mo-del
+}
+
+%% --------------------------------
+%% | Bibliography                 |
+%% --------------------------------
+
+%% Use biber instead of BibTeX, see README
+\usepackage[citestyle=numeric,style=alphabetic,backend=biber]{biblatex}
+\addbibresource{seminar.bib}
+
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\newcommand{\todo}[1]{\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title=TODO]#1\end{tcolorbox}}
+
+\begin{document}
+
+\setpdf
+\maketitle
+
+%% ----------------
+%% |   Abstract   |
+%% ----------------
+\begin{abstract}
+\input{sections/abstract.tex}
+\end{abstract}
+
+%% -----------------
+%% |   Main part   |
+%% -----------------
+\input{sections/content.tex}
+
+%% --------------------
+%% |   Bibliography   |
+%% --------------------
+
+%% Add entry to the table of contents for the bibliography
+\printbibliography[heading=bibintoc]
+
+\end{document}
