@@ -2,27 +2,32 @@
 
 \subsection{Motivation}
 \begin{itemize}
-	\item Motivate Software engineering and QA during software engineering
-	\item Motivate Commit Validation as method to reduce engineering costs
-	\item Shortly mention some Commit Validation approaches as examples (CLEVER \cite{Nayrolles2018}, CommitGuru \cite{Rosen2015}, maybe Kamei? \cite{Kamei2013})
+	\item Motivate Software engineering and QA during software engineering.
+	\item Motivate Commit Validation as method to reduce engineering costs.
+	\item Shortly mention some Commit Validation approaches as examples (CLEVER \cite{Nayrolles2018}, CommitGuru \cite{Rosen2015}, maybe Kamei? \cite{Kamei2013}).
 \end{itemize}
 
 \subsection{Problem Definition}
 \begin{itemize}
-	\item Problem Definition of this work
+	\item Discuss the Problem Definition of this work
+	\begin{itemize}
+		\item Describe the problems that motivate existing approaches.
+		\item Describe the goals that this paper tries to fulfill and discuss how it realizes a solution for these goals.
+		\item State the success criteria for this work.
+	\end{itemize}
 \end{itemize}
 
 \subsection{Scope of This Paper}
 \label{sec:scope}
 \begin{itemize}
-	\item Which kinds of work have been considered for this paper?
-	\item Why have naive commit-checking techniques such as just "tests are green, coverage is high enough, sonarqube gates passed" not been considered?
-	\item Why have works based on fault-detection unrelated to commits not been considered for this paper?
+	\item Describe which kinds of work have been considered for this paper.
+	\item Describe why naive commit-checking techniques such as just "tests are green, coverage is high enough, sonarqube gates passed" have not been considered.
+	\item Discuss why works based on fault-detection unrelated to commits have not been considered for this. paper.
 \end{itemize}
 
 \subsection{Outline}
 \begin{itemize}
-	\item Outline of this work
+	\item Describe the outline of this work.
 \end{itemize}
 
 
@@ -31,25 +36,27 @@
 \subsection{Commit Validation Process}
 \label{sec:cvprocess}
 \begin{itemize}
-	\item Basics on Commit-based QA
-	\item How is Commit Validation implemented in a developers workflow?
+	\item Introduce the basics on Commit-based QA.
+	\item Outline how Commit Validation is implemented in a developers workflow.
 \end{itemize}
 
 \subsection{Just-In-Time Fault Detection}
-(TODO: Some of these subsections might have to be moved to section \ref{sec:cvprocess})
+%TODO (TODO: Some of these subsections might have to be moved to section \ref{sec:cvprocess})
 \begin{itemize}
-	\item Why is this necessary? How does this benefit developers?
-	\item How does a potentially "faulty" commit look like? (unusually big, commits at unusual times, touching rarely touched files, see \cite{Goyal2017})
-	\item Describe how bug-tracking/issue-tracking systems can be used to gather data about bug-introducing commits and matching bugfix-commits
-	\item Describe how this can be implemented using static metrics extracted from commits
-	\item Describe how this can be implemented using pattern recognition on commits
+	\item Introduce Just-in-Time Fault Detection.
+	\item Discuss why Just-in-Time Fault Detection is necessary and how it benefits developers.
+	\item Showcase how a potentially "faulty" commit looks like (unusually big, commits at unusual times, touching rarely touched files, see \cite{Goyal2017}).
+	\item Describe how bug-tracking/issue-tracking systems can be used to gather data about bug-introducing commits and matching bugfix-commits.
+	\item Describe how this can be implemented using static metrics extracted from commits.
+	\item Describe how this can be implemented using pattern recognition on commits.
 \end{itemize}
 
 \subsection{Just-In-Time Fault Prevention}
-(TODO: maybe not the best title. What I mean here is automatic patch generation as described in \cite{Nayrolles2018}. Maybe just use the title "Automatic Patch Generation"?)
+%TODO (TODO: maybe not the best title. What I mean here is automatic patch generation as described in \cite{Nayrolles2018}. Maybe just use the title "Automatic Patch Generation"?)
 \begin{itemize}
+	\item Introduce Just-in-Time Fault Prevention and distinguish from Just-in-Time Fault Detection.
 	\item Motivate why this benefits developers over just manually fixing detected bugs.
-	\item Describe idea of how to implement this using pattern recognition on commits
+	\item Describe idea of how to implement this using pattern recognition on commits.
 \end{itemize}
 
 
@@ -62,27 +69,27 @@
 \subsection{Classification Scheme for Commit Validation Approaches}
 \label{sec:scheme}
 \begin{itemize}
-	\item How do relevant approaches differ from each other?
-	\item List of criteria derived to compare Commit Validation approaches. For each criterium (roughly in one paragraph):
+	\item Describe how relevant approaches differ from each other.
+	\item Derive list of criteria to compare Commit Validation approaches. For each criterium (roughly in one paragraph):
 	\begin{itemize}
-		\item Explanation for the criterium, what it means
-		\item How is the criterium measured/derived from an Commit Validation approach
-		\item Why is this criterium important for comparing Commit Validation approaches?
-		\item For which use case context is this criterium relevant?
+		\item Explain the criterium and what it means.
+		\item Discuss how the criterium is measured and derived from an Commit Validation approach.
+		\item Highlight the importance of this criterium in respect to comparing Commit Validation approaches.
+		\item Describe use cases for which this criterium is relevant.
 	\end{itemize}
 	
 \end{itemize}
 
 \subsection{Search Process}
 \begin{itemize}
-	\item Describe why CLEVER was used as starting position for research for this paper. \cite{Nayrolles2018}
+	\item Describe why CLEVER was used as starting point for research for this paper. \cite{Nayrolles2018}
 	\item Describe how other approaches have been found based on CLEVER and how they match the papers scope as described in \ref{sec:scope}.
 \end{itemize}
 
 \subsection{Threads to Validity}
 \begin{itemize}
-	\item Could there be any biases when choosing and comparing Commit Validation approaches? (See \cite{Kitchenham2004})
-	\item How did this paper make sure not to be biased?
+	\item Discuss if there can be any biases when choosing and comparing Commit Validation approaches (See \cite{Kitchenham2004}).
+	\item Describe how this paper made sure not to be biased.
 \end{itemize}
 
 
@@ -90,38 +97,38 @@
 
 \subsection{Comparison Results}
 \begin{itemize}
-	\item Table mapping all metrics/criteria (described in \ref{sec:scheme}) and all 5 approaches to results
+	\item Table mapping all metrics/criteria (described in \ref{sec:scheme}) and all 5 approaches to results.
 \end{itemize}
 
-(TODO: Subsections for each categories of approaches follow. I'm not entirely sure yet how the different approaches can be distributed on the categories, if the categories are well defined enough and how they should be ordered in this paper. The following is an initial suggestion for categories.)
+%TODO (TODO: Subsections for each categories of approaches follow. I'm not entirely sure yet how the different approaches can be distributed on the categories, if the categories are well defined enough and how they should be ordered in this paper. The following is an initial suggestion for categories.)
 \subsection{Results for Metric Based Approaches}
 \begin{itemize}
-	\item Description for the results for metric based approaches such as Commit-Guru (\cite{Nayrolles2018}) and Kamei's approach (\cite{Kamei2013}).
+	\item Describe the results for metric based approaches such as Commit-Guru (\cite{Nayrolles2018}) and Kamei's approach (\cite{Kamei2013}).
 \end{itemize}
 \subsection{Results for Approaches Based on Anomaly Detection}
-(TODO: I'm not sure yet if anomaly-based approaches differ from metric-based approaches enough to justify an additional subsection)
+%TODO (TODO: I'm not sure yet if anomaly-based approaches differ from metric-based approaches enough to justify an additional subsection)
 \begin{itemize}
-\item Description for the results for approaches based on anomaly detection such as UnusualCommit (\cite{Goyal2017}).
+\item Describe the results for approaches based on anomaly detection such as UnusualCommit (\cite{Goyal2017}).
 \end{itemize}
 \subsection{Results for Machine Learning Approaches}
 \begin{itemize}
-\item Description for the results for machine learning approaches such as Deeper (\cite{Yang2015}) or CLEVER (\cite{Nayrolles2018}, could also be a metric-based approach).
+\item Describe the results for machine learning approaches such as Deeper (\cite{Yang2015}) or CLEVER (\cite{Nayrolles2018}, could also be a metric-based approach).
 \end{itemize}
 
 
 
 \section{Discussion of Comparison Results}
 \begin{itemize}
-	\item Interesting findings from the results?
-	\item How can categories of Commit Validation techniques be mapped to use cases?
-	\item How can this mapping be used to find an suitable Commit Validation technique for a new project?
+	\item Emphasize interesting findings from the results.
+	\item Describe how the specified categories of Commit Validation techniques can be mapped to use cases.
+	\item Outline how this mapping can be used to find an suitable Commit Validation technique for a new project.
 \end{itemize}
 
 
 \section{Related Surveys on Commit Validation}
 \begin{itemize}
-	\item Reference and description on other surveys such as \cite{Kim2008,Catolino2019,Syed2019,Yang2016}
-	\item For each survey: How does its scope differ from the scope of this paper?
+	\item Discuss and describe other surveys such as \cite{Kim2008,Catolino2019,Syed2019,Yang2016}.
+	\item Highlight for each survey how its scope differs from the scope of this paper.
 \end{itemize}
 
 
@@ -129,17 +136,18 @@
 
 \subsection{Summary}
 \begin{itemize}
-	\item Short summary on the comparison scheme, which relevant criteria have been defined.
-	\item Which interesting findings could be derived from the comparison results?
+	\item Give a short summary on the comparison scheme and which relevant criteria have been defined.
+	\item Highlight interesting findings that were derived from the comparison results.
 \end{itemize}
 
 \subsection{Contributions}
 \begin{itemize}
-	\item How does the proposed comparison scheme contribute to the scientific topic of Commit Validation?
-	\item Why are the results and the findings from them relevant for the topic?
+	\item Highlight the contributions that the proposed comparison scheme did to the scientific topic of Commit Validation.
+	\item Discuss the relevance of the findings in regards to the scientific topic.
 \end{itemize}
 
 \subsection{Future Work}
 \begin{itemize}
-	\item Which relevant parts have not been covered by this work? Why are they still relevant for the topic?
+	\item Discuss relevant parts that have not been covered by this work.
+	\item Highlight next steps to conduct to improve results.
 \end{itemize}
