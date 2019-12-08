@@ -73,20 +73,32 @@ The VCS Git supports a concept named \textit{Hooks}. A hook specifies a custom s
 
 There exists a variety of approaches for analyzing the quality of code changes at commit time. A popular approach is the manual authoring of unit-, integration- or end-to-end-tests to verify that a project's implementation fulfills its specification \cite{Maayan2018}. Such test definitions can be setup as a commit hook for them to run at commit time.
 
-However, this paper focuses on approaches which do not require manual specifications such as test cases to detect a faulty commit, but instead automatically rate the probability of a commit introducing a bug by leveraging external data sources that are available.
+However, this paper focuses on approaches which do not require manual specifications such as test cases to detect a faulty commit, but instead automatically rate the probability of a commit introducing a bug by leveraging external data sources that are available. (TODO: \cite{Koyuncu2019} motivates why test cases are not enough)
 
 \subsection{Just-In-Time Fault Detection}
 %TODO (TODO: Some of these subsections might have to be moved to section \ref{sec:cvprocess})
-\begin{itemize}
-	\item Introduce Just-in-Time Fault Detection.
-	\item Discuss why Just-in-Time Fault Detection is necessary and how it benefits developers.
-	\item Showcase how a potentially "faulty" commit looks like (unusually big, commits at unusual times, touching rarely touched files, see \cite{Goyal2017}).
-	\item Describe how bug-tracking/issue-tracking systems can be used to gather data about bug-introducing commits and matching bugfix-commits.
-	\item Describe how this can be implemented using static metrics extracted from commits.
-	\item Describe how this can be implemented using pattern recognition on commits.
-\end{itemize}
+%\begin{itemize}
+	%\item Introduce Just-in-Time Fault Detection.
+	%TODO\item Discuss why Just-in-Time Fault Detection is necessary and how it benefits developers.
+	%\item Showcase how a potentially "faulty" commit looks like (unusually big, commits at unusual times, touching rarely touched files, see \cite{Goyal2017}).
+	%\item Describe how bug-tracking/issue-tracking systems can be used to gather data about bug-introducing commits and matching bugfix-commits.
+	%TODO\item Describe how this can be implemented using static metrics extracted from commits.
+	%TODO\item Describe how this can be implemented using pattern recognition on commits.
+%\end{itemize}
+
+While it may seem to be uncomplicated to hook analysis events to commit-based version-control systems, the actual analysis of commits to determine whether they are faulty or not, i.e. they introduce a bug which was not part of the system before, is a much more complicated task. This procedure is referred to as \textit{just-in-time fault detection}. \cite{Nayrolles2018, Kamei2013}
+
+When trying to identify potentially faulty commits, there are many metrics and characteristics that can be taken into account. Typical metrics include the amount of code-lines that were added, removed or changed in a commit, characteristics about the developer or the time of day during which the commit happened. There are various motivations which justify these metrics, such as the fact that developers who commit during a late time are likely to implement a last-minute bug-fix that could not wait until the next day, and thus are more likely to introduce new bugs as the commit was made under time pressure. \cite{Goyal2017}
+
+There are more complex methods of detecting a faulty commit, which are described in [TODO].
+
+When validating a new commit, it has to be matched against some kind of database or it has to be evaluated with a model which is trained with a training dataset. Thus, an important part of Fault Detection is the data source from where this training- or matching-information comes from. The approaches that were identified in this paper all used the commit histories of the analyzed project as raw data source, in the work of Nayrolles et. al. even the commit histories of similar projects were taken into account \cite{Nayrolles2018}. Rosen et. al. also stated that enough time had to be elapsed since a commit for it to be taken as training data in form of an faulty example commit so that it had a chance to be fixed by a followed commit \cite{Rosen2015}. This leads to the second part of the required data, information which identifies the past commit data as either faulty or not. 
+
+Three of the five considered approaches took external issue systems into account (\cite{Nayrolles2018, Yang2015, Kamei2013}). A issue system, or bug tracker, is a tool used in software engineering to identify bugs introduced to the system as well as their fixes. As such systems typically create associations between issue reports and both the bug-introducing commits as well as commits which fix said bugs. This association between a bug-introducing commits and their fix-commits gives additional useful information which comes handy in the process of just-in-time fault prevention as described in section \ref{sec:faultprevention}.
+One approach simply computed metrics for past commits and classified new commits as outliers by comparing their metrics with the average values of their project \cite{Goyal2017}. Another approach analyzed the commit messages to detect keywords such as "fix" or "bug" to identify fix-commits and then backtrack the latest commit before the fix that changed similar lines as the fix-commit to find out when the matching bug was introduced \cite{Rosen2015}.
 
 \subsection{Just-In-Time Fault Prevention}
+\label{sec:faultprevention}
 %TODO (TODO: maybe not the best title. What I mean here is automatic patch generation as described in \cite{Nayrolles2018}. Maybe just use the title "Automatic Patch Generation"?)
 \begin{itemize}
 	\item Introduce Just-in-Time Fault Prevention and distinguish from Just-in-Time Fault Detection.
