@@ -8,14 +8,34 @@
 \end{itemize}
 
 \subsection{Problem Definition}
+%\begin{itemize}
+%	\item Discuss the Problem Definition of this work
+%	\begin{itemize}
+%		\item Describe the problems that motivate existing approaches.
+%		\item Describe the goals that this paper tries to fulfill and discuss how it realizes a solution for these goals.
+%		\item State the success criteria for this work.
+%	\end{itemize}
+%\end{itemize}
+
+[TODO should the background be defined here or in the motivation?]
+
+There exists different tools with varying techniques on the topic of Commit Validation. As this is an emerging topic with many published works in the past few years, a clear State of the Art approach has not been defined yet, and it is hard to choose a suitable Commit Validation technique for a new project to leverage its benefits. 
+
+The goal of this paper is to explore how Commit Validation techniques can be compared in an objective way, and to define a method of how to choose a fitting Commit Validation technique for a Software Engineering project.
+
+To satisfy this goal the paper will propose an objective evaluation schema to compare existing Commit Validation techniques in an objective and fair way. Then a selection of five recent relevant technical approaches will be compared using the proposed evaluation schema in an effort to give guidelines for determining which approaches are suitable in which context. [TODO reference to where in this paper these approaches are listed/specified]
+
+The following success criteria have been defined for this paper: 
+
 \begin{itemize}
-	\item Discuss the Problem Definition of this work
-	\begin{itemize}
-		\item Describe the problems that motivate existing approaches.
-		\item Describe the goals that this paper tries to fulfill and discuss how it realizes a solution for these goals.
-		\item State the success criteria for this work.
-	\end{itemize}
+	\item The proposed comparison schema does not take any considerations into account that are not relevant for Commit Validation approaches.
+	\item The proposed comparison schema takes the context for which the compared approaches were designed for into account.
+	\item The comparison result of the compared approaches is specified in an explanatory way that helps potential readers to see for which use case the approach is suitable for.
+	\item The paper serves as guidelines for readers to find a suitable Commit Validation technique for their use cases.
 \end{itemize}
+
+%  When working with commit based Version Management Systems, manual effort and costs can be significantly reduced by leveraging methods of automated Fault Prediction and Fault Prevention. As this is an emerging topic with many published works in the past few years, a clear State of the Art approach has not been defined yet. The goal of this work is to introduce the reader to the concept of commit validation, introduce 5 relevant approaches that have been implemented and compare them with an evaluation scheme that will be proposed. The evaluation scheme should compare the approaches in fair way to give insights to their effectiveness and use cases.
+
 
 \subsection{Scope of This Paper}
 \label{sec:scope}
@@ -33,12 +53,27 @@
 
 \section{Background on Commit Validation}
 
+This chapter gives an introduction on the topic of Commit Validation. First the process of Commit Validation, its target and how it is implemented in a developers workflow is described, then its two major components, Just-in-Time Fault-Detection and Just-in-Time Fault Prevention are specified. 
+
 \subsection{Commit Validation Process}
 \label{sec:cvprocess}
-\begin{itemize}
-	\item Introduce the basics on Commit-based QA.
-	\item Outline how Commit Validation is implemented in a developers workflow.
-\end{itemize}
+
+%\begin{itemize}
+%	\item Introduce the basics on Commit-based QA.
+%	\item Outline how Commit Validation is implemented in a developers workflow.
+%\end{itemize}
+
+%TODO in a previous chapter, define "Commit Validation" and other names that are used in literature, and maybe that this name is specifically used for this paper
+
+There are many ways of increasing software quality in the field of software engineering. While the field is very broad, there are many tools and technical utilities that have been established as part of a state-of-the-art technology stack. Among others, that also includes \define{version-control systems}{VCS}. A version-control system is used to track the evolution of code projects and enable collaborative teams of software developers to cooperate on a consistent code base. The currently most used VCS is \textit{Git} (TODO cite). \cite{Chacon:2014:PG:2695634}
+
+An important concept for version-control systems are \textit{commits}, small sets of code changes that usually happen atomically and are annotated by the developer describing what the changes do. Commits are explicitly performed by the developer and are usually mark a finished feature, bug-fix, chore work or similar artifacts. Because of that, the time where a developer performs a commit is a suitable time for validating the change and analyzing it to find potential bugs that have been introduced by the change while the developer still has the changes in his mind, yet considers them to be final. %TODO citation?
+
+The VCS Git supports a concept named \textit{Hooks}. A hook specifies a custom script which runs programatically in response to a event such as commits or uploading a set of commits to a remote server (which is called a \textit{Push}-event in Git). Such hooks are differentiated into \textit{Client-Side Hooks}, which run on the local device of the developer that is authoring the commit, and \textit{Server-Side Hooks}, which run on the remote server. \cite{Chacon:2014:PG:2695634}
+
+There exists a variety of approaches for analyzing the quality of code changes at commit time. A popular approach is the manual authoring of unit-, integration- or end-to-end-tests to verify that a project's implementation fulfills its specification \cite{Maayan2018}. Such test definitions can be setup as a commit hook for them to run at commit time.
+
+However, this paper focuses on approaches which do not require manual specifications such as test cases to detect a faulty commit, but instead automatically rate the probability of a commit introducing a bug by leveraging external data sources that are available.
 
 \subsection{Just-In-Time Fault Detection}
 %TODO (TODO: Some of these subsections might have to be moved to section \ref{sec:cvprocess})
