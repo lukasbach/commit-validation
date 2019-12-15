@@ -5,6 +5,7 @@
 	\item Motivate Software engineering and QA during software engineering.
 	\item Motivate Commit Validation as method to reduce engineering costs.
 	\item Shortly mention some Commit Validation approaches as examples (CLEVER \cite{Nayrolles2018}, CommitGuru \cite{Rosen2015}, maybe Kamei? \cite{Kamei2013}).
+	\item Background of the problem
 \end{itemize}
 
 \subsection{Problem Definition}
@@ -17,13 +18,12 @@
 %	\end{itemize}
 %\end{itemize}
 
-[TODO should the background be defined here or in the motivation?]
 
 There exists different tools with varying techniques on the topic of Commit Validation. As this is an emerging topic with many published works in the past few years, a clear State of the Art approach has not been defined yet, and it is hard to choose a suitable Commit Validation technique for a new project to leverage its benefits. 
 
 The goal of this paper is to explore how Commit Validation techniques can be compared in an objective way, and to define a method of how to choose a fitting Commit Validation technique for a Software Engineering project.
 
-To satisfy this goal the paper will propose an objective evaluation schema to compare existing Commit Validation techniques in an objective and fair way. Then a selection of five recent relevant technical approaches will be compared using the proposed evaluation schema in an effort to give guidelines for determining which approaches are suitable in which context. [TODO reference to where in this paper these approaches are listed/specified]
+To satisfy this goal the paper will propose an objective evaluation schema to compare existing Commit Validation techniques in an objective and fair way. Then a selection of five recent relevant technical approaches will be compared using the proposed evaluation schema in an effort to give guidelines for determining which approaches are suitable in which context. These five approaches are described in section [TODO].
 
 The following success criteria have been defined for this paper: 
 
@@ -92,19 +92,25 @@ When trying to identify potentially faulty commits, there are many metrics and c
 
 There are more complex methods of detecting a faulty commit, which are described in [TODO].
 
-When validating a new commit, it has to be matched against some kind of database or it has to be evaluated with a model which is trained with a training dataset. Thus, an important part of Fault Detection is the data source from where this training- or matching-information comes from. The approaches that were identified in this paper all used the commit histories of the analyzed project as raw data source, in the work of Nayrolles et. al. even the commit histories of similar projects were taken into account \cite{Nayrolles2018}. Rosen et. al. also stated that enough time had to be elapsed since a commit for it to be taken as training data in form of an faulty example commit so that it had a chance to be fixed by a followed commit \cite{Rosen2015}. This leads to the second part of the required data, information which identifies the past commit data as either faulty or not. 
+When validating a new commit, it has to be matched against some kind of database or it has to be evaluated with a model which is trained with a training dataset. Thus, an important part of Fault Detection is the data source from where this training- or matching-information comes from. The approaches that were identified in this paper all used the commit histories of the analyzed project as raw data source, in the work of Nayrolles et. al. even the commit histories of similar projects were taken into account \cite{Nayrolles2018}. Rosen et. al. also stated that enough time had to be elapsed since a commit for it to be taken as training data in form of an faulty example commit so that it had a chance to be fixed by a follow-up commit \cite{Rosen2015} (TODO rephrase). This leads to the second part of the required data, information which identifies the past commit data as either faulty or not. 
 
-Three of the five considered approaches took external issue systems into account (\cite{Nayrolles2018, Yang2015, Kamei2013}). A issue system, or bug tracker, is a tool used in software engineering to identify bugs introduced to the system as well as their fixes. As such systems typically create associations between issue reports and both the bug-introducing commits as well as commits which fix said bugs. This association between a bug-introducing commits and their fix-commits gives additional useful information which comes handy in the process of just-in-time fault prevention as described in section \ref{sec:faultprevention}.
-One approach simply computed metrics for past commits and classified new commits as outliers by comparing their metrics with the average values of their project \cite{Goyal2017}. Another approach analyzed the commit messages to detect keywords such as "fix" or "bug" to identify fix-commits and then backtrack the latest commit before the fix that changed similar lines as the fix-commit to find out when the matching bug was introduced \cite{Rosen2015}.
+Three of the five considered approaches took external issue systems into account (\cite{Nayrolles2018, Yang2015, Kamei2013}). A issue system, or bug tracker, is a tool used in software engineering to identify bugs introduced to the system as well as their fixes. Such systems typically create associations between issue reports and both the bug-introducing commits as well as commits which fix said bugs. This association between a bug-introducing commit and its fix-commit gives additional useful information which comes handy in the process of just-in-time fault prevention as described in section \ref{sec:faultprevention}.
+One approach simply computed metrics for past commits and classified new commits as outliers by comparing their metrics with the average values of their project \cite{Goyal2017}. Another approach analyzed the commit messages to detect keywords such as \texttt{fix} or \texttt{bug} to identify fix-commits and then backtrack the latest commit before the fix that changed similar lines as the fix-commit to find out when the matching bug was introduced \cite{Rosen2015}.
 
 \subsection{Just-In-Time Fault Prevention}
 \label{sec:faultprevention}
 %TODO (TODO: maybe not the best title. What I mean here is automatic patch generation as described in \cite{Nayrolles2018}. Maybe just use the title "Automatic Patch Generation"?)
-\begin{itemize}
-	\item Introduce Just-in-Time Fault Prevention and distinguish from Just-in-Time Fault Detection.
-	\item Motivate why this benefits developers over just manually fixing detected bugs.
-	\item Describe idea of how to implement this using pattern recognition on commits.
-\end{itemize}
+%\begin{itemize}
+%	\item Introduce Just-in-Time Fault Prevention and distinguish from Just-in-Time Fault Detection.
+%	\item Motivate why this benefits developers over just manually fixing detected bugs.
+%	\item Describe idea of how to implement this using pattern recognition on commits.
+%\end{itemize}
+
+A process closely related to Fault Detection is \textit{Just-in-Time Fault Prevention}, which describes the process of automatically generating a potential patch for a newly introduced bug. If the Fault Detection mechanism detects a buggy commit as described in the previous section, this is often done by finding a past commit which introduced a similar bug. Using information from issue systems, the fix-commit for the similar bug can be used to find out how it was fixed in the past, and use that information to suggest how the newly introduced bug can be fixed. \cite{Nayrolles2018}
+
+From the identified approaches, only the one by Nayrolles et. al. implemented this technique, however there exist other works in literature where such techniques have been explored without a focus on Commit Validation, such as the work by Pan et. al. and the work by Kim et. al \cite{Nayrolles2018, Kim2013, Pan2009}.
+
+In an internal expert study, Nayrolles reported that $41,6\%$ of the proposed fixes have been accepted by all participants in the study while $25\%$ have been accepted by at least one participant \cite{Nayrolles2018}.
 
 
 %\subsection{Technical Approaches}
@@ -142,31 +148,47 @@ One approach simply computed metrics for past commits and classified new commits
 
 \section{Comparison of Commit Validation Approaches}
 
+%TODO (TODO: Subsections for each categories of approaches follow. I'm not entirely sure yet how the different approaches can be distributed on the categories, if the categories are well defined enough and how they should be ordered in this paper. The following is an initial suggestion for categories.)
+
+%TODO use \paragraph{title} per approach
+\subsection{Metric Based Approaches}
+\begin{itemize}
+	\item Describe the results for metric based approaches.
+\end{itemize}
+
+%\subsection{Results for Approaches Based on Anomaly Detection}
+%%TODO (TODO: I'm not sure yet if anomaly-based approaches differ from metric-based approaches enough to justify an additional subsection)
+%\begin{itemize}
+%\item Describe the results for approaches based on anomaly detection such as UnusualCommit (\cite{Goyal2017}).
+%\end{itemize}
+
+\subsection{Approaches based on Machine Learning}
+\begin{itemize}
+\item Describe the results for machine learning approaches.
+\end{itemize}
+
+\subsection{Approaches based on Code-Matching}
+\begin{itemize}
+\item Describe the results for machine learning approaches.
+\end{itemize}
+
 \subsection{Comparison Results}
 \begin{itemize}
 	\item Table mapping all metrics/criteria (described in \ref{sec:scheme}) and all 5 approaches to results.
 \end{itemize}
 
-%TODO (TODO: Subsections for each categories of approaches follow. I'm not entirely sure yet how the different approaches can be distributed on the categories, if the categories are well defined enough and how they should be ordered in this paper. The following is an initial suggestion for categories.)
-\subsection{Results for Metric Based Approaches}
-\begin{itemize}
-	\item Describe the results for metric based approaches such as Commit-Guru (\cite{Nayrolles2018}) and Kamei's approach (\cite{Kamei2013}).
-\end{itemize}
-\subsection{Results for Approaches Based on Anomaly Detection}
-%TODO (TODO: I'm not sure yet if anomaly-based approaches differ from metric-based approaches enough to justify an additional subsection)
-\begin{itemize}
-\item Describe the results for approaches based on anomaly detection such as UnusualCommit (\cite{Goyal2017}).
-\end{itemize}
-\subsection{Results for Machine Learning Approaches}
-\begin{itemize}
-\item Describe the results for machine learning approaches such as Deeper (\cite{Yang2015}) or CLEVER (\cite{Nayrolles2018}, could also be a metric-based approach).
-\end{itemize}
-
+\begin{figure}[H]
+	\label{fig:classification}
+	\centering
+	\includegraphics[width=15cm]{images/classification}
+	\caption{Classification results [TODO]}
+\end{figure}
 
 
 \section{Discussion of Comparison Results}
 \begin{itemize}
 	\item Emphasize interesting findings from the results.
+	\item Describe how performance was evaluated on the approaches and how their performance can be compared.
 	\item Describe how the specified categories of Commit Validation techniques can be mapped to use cases.
 	\item Outline how this mapping can be used to find an suitable Commit Validation technique for a new project.
 \end{itemize}
