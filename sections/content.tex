@@ -52,8 +52,9 @@ The following success criteria have been defined for this paper:
 
 
 \section{Background on Commit Validation}
+\todo{Rename just to "Background" because this chapter contains infos about statistics}
 
-This chapter gives an introduction on the topic of Commit Validation. First the process of Commit Validation, its target and how it is implemented in a developers workflow is described, then its two major components, Just-in-Time Fault-Detection and Just-in-Time Fault Prevention are specified. 
+This chapter introduces the topic of Commit Validation. First the process of Commit Validation, its target and how it is implemented in a developers workflow is described, then its two major components, Just-in-Time Fault-Detection and Just-in-Time Fault Prevention are specified. 
 
 \subsection{Commit Validation Process}
 \label{sec:cvprocess}
@@ -112,6 +113,12 @@ From the identified approaches, only the one by Nayrolles et. al. implemented th
 
 In an internal expert study, Nayrolles reported that $41,6\%$ of the proposed fixes have been accepted by all participants in the study while $25\%$ have been accepted by at least one participant \cite{Nayrolles2018}.
 
+\subsection{Background on statistical measures}
+\todo{Section naming}
+
+\begin{itemize}
+	\item Describe Precision, Recall, F1 measure
+\end{itemize}
 
 %\subsection{Technical Approaches}
 %\cite{Goyal2017,Rosen2015,Nayrolles2018,Kamei2013,Yang2015}
@@ -148,13 +155,21 @@ In an internal expert study, Nayrolles reported that $41,6\%$ of the proposed fi
 
 \section{Comparison of Commit Validation Approaches}
 
-%TODO (TODO: Subsections for each categories of approaches follow. I'm not entirely sure yet how the different approaches can be distributed on the categories, if the categories are well defined enough and how they should be ordered in this paper. The following is an initial suggestion for categories.)
+While the previous section has described the comparison schema, the results will now be presented. Section [TODO] specified categories with which the selected commit validation approaches have been categorized. The results are ordered using these categories. They are then presented in tabular form in table \ref{fig:classification}.
 
 %TODO use \paragraph{title} per approach
-\subsection{Metric Based Approaches}
-\begin{itemize}
-	\item Describe the results for metric based approaches.
-\end{itemize}
+\subsection{Purely Metric Based Approaches}
+
+The approaches \textit{Commit Guru} by Rosen et. al. and \textit{Unusual Commits} by Goyal et. al. fall into the category of purely metric based approaches \cite{Rosen2015,Goyal2017}. They only rely on metrics that were directly derived from commits and used them to rate commits based on that. While Commit Guru works for any kinds of Git repositories, Unusual Commits only works for repositories hosted on GitHub \cite{Rosen2015,Goyal2017}.
+
+Both approaches support Online Learning, thus every new commit after the initial training is taken into account for the analysis of later commits.
+%Unusual Commits implemented more data normalization methods than Commit Guru. 
+Unusual Commits also normalizes data in regards to user information by building a profile per project and per developer, thus user information is respected when analyzing commits. Both approaches did not mention that any other normalization techniques were used.
+Both techniques also vary in their output: Unusual Commits is the only approach to not strictly categorize a commit as either buggy or not, instead it rates the likelyhood that a commit is \textit{unusual}, thus it differs from previous commits. Commit Guru outputs the same information as all other approaches, which is said categorization as buggy or not. \cite{Rosen2015,Goyal2017}
+
+They also both use only the past commit history of the project which is analyzed as event data source, not any other data sources. Commit Guru is implemented in Python while Unusual Commits is realized in Java and R. It is also worth to mention that both implement a graphical user interface. Unusual Commits is implemented as Chrome Plugin which embeds classification results into the commit history on GitHub, while Commit Guru runs in a web application that lists a repositories analysis results. It also listens to new commits and automatically reanalyzes them and sends E-Mail notifications in response to the event, thus it shows CI capability in form of a Push Hook. Unusual Commits does not support and CI capabilities. Both are realized as free-to-use cloud applications. \cite{Rosen2015,Goyal2017}
+
+\todo{describe metrics used}
 
 %\subsection{Results for Approaches Based on Anomaly Detection}
 %%TODO (TODO: I'm not sure yet if anomaly-based approaches differ from metric-based approaches enough to justify an additional subsection)
@@ -170,6 +185,12 @@ In an internal expert study, Nayrolles reported that $41,6\%$ of the proposed fi
 \subsection{Approaches based on Code-Matching}
 \begin{itemize}
 \item Describe the results for machine learning approaches.
+\end{itemize}
+
+\subsection{Performance comparison}
+\begin{itemize}
+	\item Show Performance comparison tables
+	\item Describe tables
 \end{itemize}
 
 \subsection{Comparison Results}
