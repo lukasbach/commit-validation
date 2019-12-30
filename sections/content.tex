@@ -42,7 +42,7 @@ The following success criteria have been defined for this paper:
 \begin{itemize}
 	\item Describe which kinds of work have been considered for this paper.
 	\item Describe why naive commit-checking techniques such as just "tests are green, coverage is high enough, sonarqube gates passed" have not been considered.
-	\item Discuss why works based on fault-detection unrelated to commits have not been considered for this. paper.
+	\item Discuss why works based on fault-detection unrelated to commits have not been considered for this paper.
 \end{itemize}
 
 \subsection{Outline}
@@ -225,15 +225,28 @@ Both approaches considered the metrics which regard the content of the commits, 
 \end{itemize}
 
 \subsection{Performance comparison}
-\begin{itemize}
-	\item Show Performance comparison tables
-	\item Describe tables
-\end{itemize}
+
+When comparing Commit Validation approaches, the evaluation performance is an important point to consider. Due to the effort of this work and the fact that not all approaches are publicly available, an objective performance evaluation on all five approaches on a consistent dataset was out of scope for this paper. However, Nayrolles et. al. included an objective performance comparison between their approach and Rosen's approach \cite{Nayrolles2018}. In the same 
+way, %TODO wording?
+Yang et. al. included a performance comparison between their approach and Kamei's \cite{Yang2015}. While both use different datasets, it does give insights into how CLEVER compares to Commit Guru and how Deeper compares to Kamei's approach in regards to evaluation performance.
+
+Table [TODO] describes the findings from Nayrolle's paper \cite{Nayrolles2018}, while table [TODO] describes the findings from Yang's paper \cite{Yang2015}.
+
+\todo{Tables}
+
+\todo{Describe tables}
+
+%\begin{itemize}
+%	\item Show Performance comparison tables
+%	\item Describe tables
+%\end{itemize}
 
 \subsection{Comparison Results}
-\begin{itemize}
-	\item Table mapping all metrics/criteria (described in \ref{sec:scheme}) and all 5 approaches to results.
-\end{itemize}
+%\begin{itemize}
+%	\item Table mapping all metrics/criteria (described in \ref{sec:scheme}) and all 5 approaches to results.
+%\end{itemize}
+
+The aforementioned results have been collected in Table \ref{fig:classification} where each of the described facettes map to specific values per identified Commit Validation approach.
 
 \begin{figure}[H]
 	\label{fig:classification}
@@ -241,7 +254,6 @@ Both approaches considered the metrics which regard the content of the commits, 
 	\includegraphics[width=15cm]{images/classification}
 	\caption{Classification results [TODO]}
 \end{figure}
-
 
 \section{Discussion of Comparison Results}
 \begin{itemize}
