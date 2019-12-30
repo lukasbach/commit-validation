@@ -133,19 +133,48 @@ A primary goal of this paper is to define a method for choosing suitable Commit 
 \label{sec:scheme}
 
 To compare the Commit Validation approaches, a feature model was derived from the features described in the papers which introduce the approaches. 
-todo feature model figure, describe the figure.
+todo feature model figure, describe the figure \ref{fig:featuremodel}.
 
+\begin{figure}[h]
+	\label{fig:featuremodel}
+	\centering
+	\includegraphics[width=15cm]{images/featuremodel}
+	\caption{Featuremodel [TODO]}
+\end{figure}
+
+%Three categories have been specified for comparing Commit Validation approaches.
+%TODO see in pdf view if the following is too long
+For comparing Commit Validation approaches the three categories
 \begin{itemize}
-	\item Describe how relevant approaches differ from each other.
-	\item Derive list of criteria to compare Commit Validation approaches. For each criterium (roughly in one paragraph):
-	\begin{itemize}
-		\item Explain the criterium and what it means.
-		\item Discuss how the criterium is measured and derived from an Commit Validation approach.
-		\item Highlight the importance of this criterium in respect to comparing Commit Validation approaches.
-		\item Describe use cases for which this criterium is relevant.
-	\end{itemize}
-	
+	\item Technological Features, 
+	\item Event Data Source and
+	\item CI Capability
 \end{itemize}
+have been defined.
+
+The first category compares which \textit{Technological Features} approaches implement. The most important facette in this category are \textit{User Features}, which are features that a relevant to the end user of the approach. 
+%Common user features are the detection of buggy commits and rating the anomality of commits.
+More relevant to the performance of the approach are the facettes \textit{Metrics} and \textit{Data Normalization}. All approaches use some metrics to compare commit data, however the used metrics vary between the approaches.
+%TODO correct grammar?
+The later facette shows which normalization techniques are used in the approaches to further improve their classification performance.
+\textit{Online-Learning} describes whether an approach is able to integrate analysis results made during production use into its analysis database, otherwise only the analysis results made on initial training data are considered. 
+
+The \textit{Event Data Source} was also considered. This facette describes which sources of data are considered for training the classifier. All approaches are using the commit history of the repository for which new commits are being analyzed. Some approaches also used the commit history of similar repository or issue trackers which correspond to the repositories.
+%TODO rename facettes in featuremodel from "...project" to "...repository".
+
+Last % TODO correct wording?
+the \textit{Capability for Continuous Capability} (or CI Capability) was considered. Because this paper focuses on Commit Validation, it is important how such an approach can be integrated into the commit process. As described in section \ref{sec:cvprocess}, VCM hooks are typical integration methods. The deployment of approaches is also interesting for practical usage, as a cloud based solutions can be incompatible with company guidelines.
+
+%\begin{itemize}
+%	\item Describe how relevant approaches differ from each other.
+%	\item Derive list of criteria to compare Commit Validation approaches. For each criterium (roughly in one paragraph):
+%	\begin{itemize}
+%		\item Explain the criterium and what it means.
+%		\item Discuss how the criterium is measured and derived from an Commit Validation approach.
+%		\item Highlight the importance of this criterium in respect to comparing Commit Validation approaches.
+%		\item Describe use cases for which this criterium is relevant.
+%	\end{itemize}
+%\end{itemize}
 
 \subsection{Search Process}
 \begin{itemize}
@@ -176,8 +205,6 @@ Unusual Commits also normalizes data in regards to user information by building 
 Both techniques also vary in their output: Unusual Commits is the only approach to not strictly categorize a commit as either buggy or not, instead it rates the likelyhood that a commit is \textit{unusual}, thus it differs from previous commits. Commit Guru outputs the same information as all other approaches, which is said categorization as buggy or not. \cite{Rosen2015,Goyal2017}
 
 They also both use only the past commit history of the project which is analyzed as event data source, not any other data sources. Commit Guru is implemented in Python while Unusual Commits is realized in Java and R. It is also worth to mention that both implement a graphical user interface. Unusual Commits is implemented as Chrome Plugin which embeds classification results into the commit history on GitHub, while Commit Guru runs in a web application that lists a repositories analysis results. It also listens to new commits and automatically reanalyzes them and sends E-Mail notifications in response to the event, thus it shows CI capability in form of a Push Hook. Unusual Commits does not support and CI capabilities. Both are realized as free-to-use cloud applications. \cite{Rosen2015,Goyal2017}
-
-\todo{describe metrics used}
 
 Both approaches considered the metrics which regard the content of the commits, such as changed lines of code or the number of changed files. Commit Guru also considered the history of the commit, its purpose and information about the authoring developer, while Unusual Commits considered the length of the commit message, the time of commit and the changed file types. \cite{Rosen2015,Goyal2017}
 
