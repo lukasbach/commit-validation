@@ -32,17 +32,20 @@
 				</and>
 			</and>
 			<and mandatory="true" name="Event Data Source">
-				<feature mandatory="true" name="Commit History of relevant project"/>
-				<feature name="Commit History of similar projects"/>
-				<feature name="Issue Tracker"/>
+				<and mandatory="true" name="Commit History of relevant project">
+					<feature name="Issue Tracker"/>
+				</and>
+				<and name="Commit History of similar projects">
+					<feature name="Issue Tracker "/>
+				</and>
 			</and>
-			<and mandatory="true" name="CI Capability">
+			<and name="CI Capability">
 				<or name="VCM Hook">
 					<feature name="Precommit Hook"/>
 					<feature name="Push Hook"/>
 				</or>
 				<or mandatory="true" name="Deployment">
-					<feature name="Clozud"/>
+					<feature name="Cloud"/>
 					<feature name="On-Premise"/>
 				</or>
 			</and>
