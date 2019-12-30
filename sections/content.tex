@@ -126,8 +126,15 @@ In an internal expert study, Nayrolles reported that $41,6\%$ of the proposed fi
 
 \section{Comparing Commit Validation Approaches}
 
+
+A primary goal of this paper is to define a method for choosing suitable Commit Validation techniques for arbitrary projects. To achieve this goal, the following section introduces a classification scheme which was used to classify and compare the five identified commit validation approaches. Section \ref{sec:comparison} will then present the results of the comparison.
+
 \subsection{Classification Scheme for Commit Validation Approaches}
 \label{sec:scheme}
+
+To compare the Commit Validation approaches, a feature model was derived from the features described in the papers which introduce the approaches. 
+todo feature model figure, describe the figure.
+
 \begin{itemize}
 	\item Describe how relevant approaches differ from each other.
 	\item Derive list of criteria to compare Commit Validation approaches. For each criterium (roughly in one paragraph):
@@ -154,6 +161,7 @@ In an internal expert study, Nayrolles reported that $41,6\%$ of the proposed fi
 
 
 \section{Comparison of Commit Validation Approaches}
+\label{sec:comparison}
 
 While the previous section has described the comparison schema, the results will now be presented. Section [TODO] specified categories with which the selected commit validation approaches have been categorized. The results are ordered using these categories. They are then presented in tabular form in table \ref{fig:classification}.
 
@@ -170,6 +178,8 @@ Both techniques also vary in their output: Unusual Commits is the only approach 
 They also both use only the past commit history of the project which is analyzed as event data source, not any other data sources. Commit Guru is implemented in Python while Unusual Commits is realized in Java and R. It is also worth to mention that both implement a graphical user interface. Unusual Commits is implemented as Chrome Plugin which embeds classification results into the commit history on GitHub, while Commit Guru runs in a web application that lists a repositories analysis results. It also listens to new commits and automatically reanalyzes them and sends E-Mail notifications in response to the event, thus it shows CI capability in form of a Push Hook. Unusual Commits does not support and CI capabilities. Both are realized as free-to-use cloud applications. \cite{Rosen2015,Goyal2017}
 
 \todo{describe metrics used}
+
+Both approaches considered the metrics which regard the content of the commits, such as changed lines of code or the number of changed files. Commit Guru also considered the history of the commit, its purpose and information about the authoring developer, while Unusual Commits considered the length of the commit message, the time of commit and the changed file types. \cite{Rosen2015,Goyal2017}
 
 %\subsection{Results for Approaches Based on Anomaly Detection}
 %%TODO (TODO: I'm not sure yet if anomaly-based approaches differ from metric-based approaches enough to justify an additional subsection)
