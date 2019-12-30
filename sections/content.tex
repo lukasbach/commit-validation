@@ -208,6 +208,8 @@ While the previous section has described the comparison schema, the results will
 %TODO use \paragraph{title} per approach
 \subsection{Purely Metric Based Approaches}
 
+\todo{I forgot that Kamei also falls into this category...}
+
 The approaches \textit{Commit Guru} by Rosen et. al. and \textit{Unusual Commits} by Goyal et. al. fall into the category of purely metric based approaches \cite{Rosen2015,Goyal2017}. They only rely on metrics that were directly derived from commits and used them to rate commits based on that. While Commit Guru works for any kinds of Git repositories, Unusual Commits only works for repositories hosted on GitHub \cite{Rosen2015,Goyal2017}.
 
 Both approaches support Online Learning, thus every new commit after the initial training is taken into account for the analysis of later commits.
@@ -226,9 +228,23 @@ Both approaches considered the metrics which regard the content of the commits, 
 %\end{itemize}
 
 \subsection{Approaches based on Machine Learning}
-\begin{itemize}
-\item Describe the results for machine learning approaches.
-\end{itemize}
+%\begin{itemize}
+%\item Describe the results for machine learning approaches.
+%\end{itemize}
+
+\todo{Use the term "Deep-Learning" instead of "Machine-learning"?}
+
+This category describes approaches which use Machine Learning techniques to increase evaluation performance. Deeper by Yang and CLEVER by Nayrolles both use such techniques \cite{Nayrolles2018, Yang2015}. It is worth to mention that CLEVER also belongs to the next category of approaches based on Code-Matching.
+
+CLEVER is designed to work in production context inside Ubisoft where is was developed, while Deeper was developed in a research context. Thus CLEVER supports Online-Learning while Deeper does not. CLEVER stands out as the only approach which not only offers Bug Detection, but also Code Altering Suggestions, and as such also normalizes code syntax while Deeper does not. \cite{Nayrolles2018, Yang2015}
+
+When considering the Event Data Source, CLEVER also stands out here. While both use the commit history of the project on which commits are analyzed on as well as the associated issue tracker, CLEVER also takes the commit history of similar projects into account \cite{Nayrolles2018, Yang2015}. Nayrolles et. al. describes how the dependencies between projects are analyzed to calculate a measure of similarity for distinct projects \cite{Nayrolles2018}.
+
+\todo{Technical platform and CI Capability if/when author of Deeper answers.}
+
+They both use the same set of metrics when comparing commits, which are metrics considering the commit content such as changed lines of code or the changed number of files, and information about the 
+commit message %TODO other description for this metric category?
+such as the commit history or the purpose of the commit.
 
 \subsection{Approaches based on Code-Matching}
 \begin{itemize}
