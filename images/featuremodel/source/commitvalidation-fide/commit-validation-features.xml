@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<featureModel>
+	<properties>
+		<graphics key="showhiddenfeatures" value="true"/>
+		<graphics key="legendautolayout" value="true"/>
+		<graphics key="showshortnames" value="false"/>
+		<graphics key="layout" value="vertical"/>
+		<graphics key="showcollapsedconstraints" value="true"/>
+		<graphics key="legendhidden" value="false"/>
+		<graphics key="layoutalgorithm" value="4"/>
+	</properties>
+	<struct>
+		<and abstract="true" mandatory="true" name="Commit Validation Approach">
+			<graphics key="collapsed" value="false"/>
+			<and mandatory="true" name="Technological Feature">
+				<feature name="Online Learning"/>
+				<or mandatory="true" name="User Features">
+					<feature name="Commit Bug Detection"/>
+					<feature name="Commit Anomality Score"/>
+					<feature name="Code Altering Suggestions"/>
+				</or>
+				<and name="Data Normalization">
+					<feature name="Normalization in regards to user"/>
+					<feature name="Metric normalization"/>
+					<feature name="Code Cleaning"/>
+					<feature name="Data Resampling"/>
+				</and>
+				<and mandatory="true" name="Metrics">
+					<feature name="Commit Content"/>
+					<feature name="Commit Metadata"/>
+					<feature name="Commit Message"/>
+				</and>
+			</and>
+			<and mandatory="true" name="Event Data Source">
+				<feature mandatory="true" name="Commit History of relevant project"/>
+				<feature name="Commit History of similar projects"/>
+				<feature name="Issue Tracker"/>
+			</and>
+			<and mandatory="true" name="CI Capability">
+				<or name="VCM Hook">
+					<feature name="Precommit Hook"/>
+					<feature name="Push Hook"/>
+				</or>
+				<or mandatory="true" name="Deployment">
+					<feature name="Clozud"/>
+					<feature name="On-Premise"/>
+				</or>
+			</and>
+		</and>
+	</struct>
+</featureModel>

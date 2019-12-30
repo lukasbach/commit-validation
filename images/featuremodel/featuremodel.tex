@@ -1,0 +1,18 @@
+\begin{forest}
+	featureDiagram
+	[Commit Validation Approach,abstract[Technological Feature,concrete,mandatory[Online Learning,concrete,optional][User Features,concrete,mandatory[Commit Bug Detection,concrete,or][Commit Anomality Score,concrete][Code Altering Suggestions,concrete]][Data Normalization,concrete,optional[Normalization in regards to user,concrete,optional][Metric normalization,concrete,optional][Code Cleaning,concrete,optional][Data Resampling,concrete,optional]][Metrics,concrete,mandatory[Commit Content,concrete,optional][Commit Metadata,concrete,optional][Commit Message,concrete,optional]]][Event Data Source,concrete,mandatory[Commit History of relevant project,concrete,mandatory][Commit History of similar projects,concrete,optional][Issue Tracker,concrete,optional]][CI Capability,concrete,mandatory[VCM Hook,concrete,optional[Precommit Hook,concrete,or][Push Hook,concrete]][Deployment,concrete,mandatory[Clozud,concrete,or][On-Premise,concrete]]]]	
+	\matrix [anchor=north west] at (current bounding box.north east) {
+		\node [placeholder] {}; \\
+	};
+	\matrix [draw=drawColor,anchor=north west] at (current bounding box.north east) {
+		\node [label=center:\underline{Legend:}] {}; \\
+		\node [abstract,label=right:Abstract Feature] {}; \\
+		\node [concrete,label=right:Concrete Feature] {}; \\
+		\node [mandatory,label=right:Mandatory] {}; \\
+		\node [optional,label=right:Optional] {}; \\
+			\filldraw[drawColor] (0.1,0) - +(-0,-0.2) - +(0.2,-0.2)- +(0.1,0);
+			\draw[drawColor] (0.1,0) -- +(-0.2, -0.4);
+			\draw[drawColor] (0.1,0) -- +(0.2,-0.4);
+			\fill[drawColor] (0,-0.2) arc (240:300:0.2);
+		\node [or,label=right:Or Group] {}; \\	};
+\end{forest}
