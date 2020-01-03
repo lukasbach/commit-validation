@@ -48,11 +48,19 @@ The following success criteria have been defined for this paper:
 
 \subsection{Scope of This Paper}
 \label{sec:scope}
-\begin{itemize}
-	\item Describe which kinds of work have been considered for this paper.
-	\item Describe why naive commit-checking techniques such as just "tests are green, coverage is high enough, sonarqube gates passed" have not been considered.
-	\item Discuss why works based on fault-detection unrelated to commits have not been considered for this paper.
-\end{itemize}
+
+%\begin{itemize}
+%	\item Describe which kinds of work have been considered for this paper.
+%	\item Describe why naive commit-checking techniques such as just "tests are green, coverage is high enough, sonarqube gates passed" have not been considered.
+%	\item Discuss why works based on fault-detection unrelated to commits have not been considered for this paper.
+%\end{itemize}
+
+This paper focuses on Just-in-Time Fault Detection approaches which have the concept of code commits in mind. 
+While the research area for code quality is large, the focus restricts the area into an observable set of research works.
+
+The Just-in-Time aspect and the relevance of commits is important to fight the aforementioned drawback of typical code quality approaches, which is the expensiveness of fixing bugs much later after they were introduced into the project. 
+There exist various approaches which just focus on detecting bugs and generating fixes such as Getafix by Bader et. al. or iFixR by Koyuncu et. al., however they are out of scope for this paper as the commit concept is not considered \cite{Bader2019,Koyuncu2019}.
+
 
 \subsection{Outline}
 This section gave an introduction on the topic and a problem definition and scope for this paper.
