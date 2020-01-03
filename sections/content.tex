@@ -303,7 +303,35 @@ When comparing Commit Validation approaches, the evaluation performance is an im
 way, %TODO wording?
 Yang et. al. included a performance comparison between their approach and Kamei's \cite{Yang2015}. While both use different datasets, it does give insights into how CLEVER compares to Commit Guru and how Deeper compares to Kamei's approach in regards to evaluation performance.
 
-Table [TODO] describes the findings from Nayrolle's paper \cite{Nayrolles2018}, while table [TODO] describes the findings from Yang's paper \cite{Yang2015}.
+Table \ref{tab:perfclever} describes the findings from Nayrolle's paper \cite{Nayrolles2018}, while table \ref{tab:perfdeeper} describes the findings from Yang's paper \cite{Yang2015}.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|l|l|}
+		\cline{2-3}
+		& CLEVER  & Commit Guru \\ \hline
+		\multicolumn{1}{|l|}{Precision}  & 79.10\% & 66.71\%     \\ \hline
+		\multicolumn{1}{|l|}{Recall}     & 65.61\% & 63.01\%     \\ \hline
+		\multicolumn{1}{|l|}{F1 measure} & 71.72\% & 64.80\%     \\ \hline
+	\end{tabular}
+	% TODO precision is avg precision
+	\caption{Performance comparison of CLEVER and Commit Guru, as evaluated by Nayrolles et. al. \cite{Nayrolles2018}}
+	\label{tab:perfclever}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|l|l|l|}
+		\cline{2-4}
+		& Deeper  & Kamei   & LR      \\ \hline
+		\multicolumn{1}{|l|}{Precision}  & 35.64\% & 35.71\% & 59.92\% \\ \hline
+		\multicolumn{1}{|l|}{Recall}     & 69.03\% & 65.52\% & 18.28\% \\ \hline
+		\multicolumn{1}{|l|}{F1 measure} & 45.06\% & 43.91\% & 25.30\% \\ \hline
+	\end{tabular}
+	\caption{Performance comparison of Deeper and Kamei's approach as well as an standard Logistic Regression, denoted as LR. The comparison was evaluated by Yang et. al. \cite{Yang2015}}
+	\label{tab:perfdeeper}
+\end{table}
+
 
 \todo{Tables, description of tables}
 
