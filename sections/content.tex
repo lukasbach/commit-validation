@@ -2,12 +2,20 @@
 \label{sec:intro}
 
 \subsection{Motivation}
-\begin{itemize}
-	\item Motivate Software engineering and QA during software engineering.
-	\item Motivate Commit Validation as method to reduce engineering costs.
-	\item Shortly mention some Commit Validation approaches as examples (CLEVER \cite{Nayrolles2018}, CommitGuru \cite{Rosen2015}, maybe Kamei? \cite{Kamei2013}).
-	\item Background of the problem
-\end{itemize}
+%\begin{itemize}
+%	\item Motivate Software engineering and QA during software engineering.
+%	\item Motivate Commit Validation as method to reduce engineering costs.
+%	\item Shortly mention some Commit Validation approaches as examples (CLEVER \cite{Nayrolles2018}, CommitGuru \cite{Rosen2015}, maybe Kamei? \cite{Kamei2013}).
+%	\item Background of the problem
+%\end{itemize}
+
+Software Quality belongs to the many relevant topics of software engineering, one which often directly maps to costs and expenses. While good quality leads to well-maintainable code and reduced effort, software faults can lead to very expensive results. The US National Institute of Standards and Technology have estimated that software faults and failures cost the US economy 59.5\$ billion a year \cite{Rosen2015,nist}.
+
+Typical approaches focus on analyzing module artifacts such as files or packages and attempt to detect faults in those. However, this often introduces additional problems. Kamei et al. reported on typical drawbacks such as the fact that it is hard to find a responsible expert for an identified faulty code location as development teams tend to become large for large-scale projects, or that an identified faulty package still leaves much effort for the developer to find the actual code location of the fault \cite{Kamei2013}. Finally, a primary problem is that typical approaches find faults only very late during the development cycle, which is much more expensive than fixing it early \cite{Martin08}.
+
+A recent approach for increasing software quality and as such decreasing costs caused by such is the concept of Commit Validation. This concept is used at a very technical level where change commits on software projects are automatically analyzed and verified in regards to the probability that they introduce a new software fault. This is much more efficient because code is analyzed for faults at an early phase when the responsible developer is still concerned with the changes. \cite{Kamei2013}
+
+There exist different approaches on this topic, one of the early works was made as a study on the topic by Kamei et. al. which was based on Just-in-Time Bug Detection on commit data \cite{Kamei2013}. Similar approaches were introduced by Yang and Rosen by introducing approaches called \textit{Deeper} and \textit{Commit Guru} respectively \cite{Yang2015,Rosen2015}. Goyal introduced a concept based on the rating of abnormality of commits, called \textit{Unusual Commits} \cite{Goyal2017}. Finally, one of the most recent approaches was introduced by Nayrolles et. al. as \textit{CLEVER}, which not only detected buggy commits, but also automatically suggested code fixes \cite{Nayrolles2018}.
 
 \subsection{Problem Definition}
 %\begin{itemize}
