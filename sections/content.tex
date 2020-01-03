@@ -63,15 +63,14 @@ Section \ref{sec:comparingapproaches} specifies how Commit Validation approaches
 
 The paper ends with an overview of related surveys on the topic in section \ref{sec:relatedsurveys} and the concluding section \ref{sec:conclusions}.
 
-
-\begin{itemize}
-	\item Describe the outline of this work.
-\end{itemize}
+%\begin{itemize}
+%	\item Describe the outline of this work.
+%\end{itemize}
 
 
 \section{Background on Commit Validation}
 \label{sec:background}
-\todo{Rename just to "Background" because this chapter contains infos about statistics}
+\todo{A more broad title such as "Background" might be more suitable because subsection \ref{sec:statisticalmeasures} about statistical measures does not have anything to do with commit validation}
 
 This chapter introduces the topic of Commit Validation. First the process of Commit Validation, its target and how it is implemented in a developers workflow is described, then its two major components, Just-in-Time Fault-Detection and Just-in-Time Fault Prevention are specified. 
 
@@ -110,9 +109,11 @@ While it may seem to be uncomplicated to hook analysis events to commit-based ve
 
 When trying to identify potentially faulty commits, there are many metrics and characteristics that can be taken into account. Typical metrics include the amount of code-lines that were added, removed or changed in a commit, characteristics about the developer or the time of day during which the commit happened. There are various motivations which justify these metrics, such as the fact that developers who commit during a late time are likely to implement a last-minute bug-fix that could not wait until the next day, and thus are more likely to introduce new bugs as the commit was made under time pressure. \cite{Goyal2017}
 
-There are more complex methods of detecting a faulty commit, which are described in [TODO].
+There are more complex methods of detecting a faulty commit, which are described in [TODO reference].
 
-When validating a new commit, it has to be matched against some kind of database or it has to be evaluated with a model which is trained with a training dataset. Thus, an important part of Fault Detection is the data source from where this training- or matching-information comes from. The approaches that were identified in this paper all used the commit histories of the analyzed project as raw data source, in the work of Nayrolles et. al. even the commit histories of similar projects were taken into account \cite{Nayrolles2018}. Rosen et. al. also stated that enough time had to be elapsed since a commit for it to be taken as training data in form of an faulty example commit so that it had a chance to be fixed by a follow-up commit \cite{Rosen2015} (TODO rephrase). This leads to the second part of the required data, information which identifies the past commit data as either faulty or not. 
+When validating a new commit, it has to be matched against some kind of database or it has to be evaluated with a model which is trained with a training dataset. Thus, an important part of Fault Detection is the data source from where this training- or matching-information comes from. The approaches that were identified in this paper all used the commit histories of the analyzed project as raw data source, in the work of Nayrolles et. al. even the commit histories of similar projects were taken into account \cite{Nayrolles2018}. 
+Rosen et. al. also stated that enough time had to be elapsed since a commit for it to be taken as training data in form of an faulty example commit so that it had a chance to be fixed by a follow-up commit \cite{Rosen2015}.%TODO rephrase
+This leads to the second part of the required data, information which identifies the past commit data as either faulty or not. 
 
 Three of the five considered approaches took external issue systems into account (\cite{Nayrolles2018, Yang2015, Kamei2013}). A issue system, or bug tracker, is a tool used in software engineering to identify bugs introduced to the system as well as their fixes. Such systems typically create associations between issue reports and both the bug-introducing commits as well as commits which fix said bugs. This association between a bug-introducing commit and its fix-commit gives additional useful information which comes handy in the process of just-in-time fault prevention as described in section \ref{sec:faultprevention}.
 One approach simply computed metrics for past commits and classified new commits as outliers by comparing their metrics with the average values of their project \cite{Goyal2017}. Another approach analyzed the commit messages to detect keywords such as \texttt{fix} or \texttt{bug} to identify fix-commits and then backtrack the latest commit before the fix that changed similar lines as the fix-commit to find out when the matching bug was introduced \cite{Rosen2015}.
@@ -182,25 +183,17 @@ A primary goal of this paper is to define a method for choosing suitable Commit 
 \subsection{Classification Scheme for Commit Validation Approaches}
 \label{sec:scheme}
 
-To compare the Commit Validation approaches, a feature model was derived from the features described in the papers which introduce the approaches. 
-todo feature model figure, describe the figure \ref{fig:featuremodel}.
+To compare the Commit Validation approaches, a feature model was derived from the features described in the papers which introduce the approaches. The feature model is shown in figure \ref{fig:featuremodel}.
 
 \begin{figure}[h]
-	\label{fig:featuremodel}
 	\centering
 	\includegraphics[width=15cm]{images/featuremodel}
 	\caption{Featuremodel [TODO]}
+	\label{fig:featuremodel}
 \end{figure}
 
 %Three categories have been specified for comparing Commit Validation approaches.
-%TODO see in pdf view if the following is too long
-For comparing Commit Validation approaches the three categories
-\begin{itemize}
-	\item Technological Features, 
-	\item Event Data Source and
-	\item CI Capability
-\end{itemize}
-have been defined.
+For comparing Commit Validation approaches the three categories Technological Features, Event Data Source and CI Capability have been defined.
 
 The first category compares which \textit{Technological Features} approaches implement. The most important facette in this category are \textit{User Features}, which are features that a relevant to the end user of the approach. 
 %Common user features are the detection of buggy commits and rating the anomality of commits.
@@ -212,8 +205,7 @@ The later facette shows which normalization techniques are used in the approache
 The \textit{Event Data Source} was also considered. This facette describes which sources of data are considered for training the classifier. All approaches are using the commit history of the repository for which new commits are being analyzed. Some approaches also used the commit history of similar repository or issue trackers which correspond to the repositories.
 %TODO rename facettes in featuremodel from "...project" to "...repository".
 
-Last % TODO correct wording?
-the \textit{Capability for Continuous Capability} (or CI Capability) was considered. Because this paper focuses on Commit Validation, it is important how such an approach can be integrated into the commit process. As described in section \ref{sec:cvprocess}, VCM hooks are typical integration methods. The deployment of approaches is also interesting for practical usage, as a cloud based solutions can be incompatible with company guidelines.
+Finally the \textit{Capability for Continuous Capability} (or CI Capability) was considered. Because this paper focuses on Commit Validation, it is important how such an approach can be integrated into the commit process. As described in section \ref{sec:cvprocess}, VCM hooks are typical integration methods. The deployment of approaches is also interesting for practical usage, as a cloud based solutions can be incompatible with company guidelines.
 
 %\begin{itemize}
 %	\item Describe how relevant approaches differ from each other.
@@ -247,18 +239,21 @@ While the previous section has described the comparison schema, the results will
 %TODO use \paragraph{title} per approach
 \subsection{Purely Metric Based Approaches}
 
-\todo{I forgot that Kamei also falls into this category...}
+The approaches \textit{Commit Guru} by Rosen et. al., \textit{Unusual Commits} by Goyal et. al. and the approach by Kamei et. al. fall into the category of purely metric based approaches \cite{Rosen2015,Goyal2017,Kamei2013}. They only rely on metrics that were directly derived from commits and used them to rate commits based on that. While Commit Guru works for any kinds of Git repositories, Unusual Commits only works for repositories hosted on GitHub \cite{Rosen2015,Goyal2017}. Kamei did not state any restrictions of such kind \cite{Kamei2013}.
 
-The approaches \textit{Commit Guru} by Rosen et. al. and \textit{Unusual Commits} by Goyal et. al. fall into the category of purely metric based approaches \cite{Rosen2015,Goyal2017}. They only rely on metrics that were directly derived from commits and used them to rate commits based on that. While Commit Guru works for any kinds of Git repositories, Unusual Commits only works for repositories hosted on GitHub \cite{Rosen2015,Goyal2017}.
-
-Both approaches support Online Learning, thus every new commit after the initial training is taken into account for the analysis of later commits.
+Commit Guru and Unusual Commits both support Online Learning, thus every new commit after the initial training is taken into account for the analysis of later commits.
 %Unusual Commits implemented more data normalization methods than Commit Guru. 
-Unusual Commits also normalizes data in regards to user information by building a profile per project and per developer, thus user information is respected when analyzing commits. Both approaches did not mention that any other normalization techniques were used.
-Both techniques also vary in their output: Unusual Commits is the only approach to not strictly categorize a commit as either buggy or not, instead it rates the likelyhood that a commit is \textit{unusual}, thus it differs from previous commits. Commit Guru outputs the same information as all other approaches, which is said categorization as buggy or not. \cite{Rosen2015,Goyal2017}
+Unusual Commits also normalizes data in regards to user information by building a profile per project and per developer, thus user information is respected when analyzing commits, 
+while Kamei mentioned that they were also using data resampling.
+%Both approaches did not mention that any other normalization techniques were used.
+The techniques also vary in their output: Unusual Commits is the only approach to not strictly categorize a commit as either buggy or not, instead it rates the likelyhood that a commit is \textit{unusual}, thus it differs from previous commits. Commit Guru and Kamei's approach output the same information as all other approaches, which is said categorization as buggy or not. \cite{Rosen2015,Goyal2017,Kamei2013}
 
-They also both use only the past commit history of the project which is analyzed as event data source, not any other data sources. Commit Guru is implemented in Python while Unusual Commits is realized in Java and R. It is also worth to mention that both implement a graphical user interface. Unusual Commits is implemented as Chrome Plugin which embeds classification results into the commit history on GitHub, while Commit Guru runs in a web application that lists a repositories analysis results. It also listens to new commits and automatically reanalyzes them and sends E-Mail notifications in response to the event, thus it shows CI capability in form of a Push Hook. Unusual Commits does not support and CI capabilities. Both are realized as free-to-use cloud applications. \cite{Rosen2015,Goyal2017}
+Commit Guru and Unusual Commits both only use the past commit history of the project which is analyzed as event data source, not any other data sources, whereas Kamei's approach also takes information from the issue system attached to the repository into account.
+Commit Guru is implemented in Python while Unusual Commits is realized in Java and R. It is also worth to mention that both Commit Guru and Unusual Commits implement a graphical user interface. Unusual Commits is implemented as Chrome Plugin which embeds classification results into the commit history on GitHub, while Commit Guru runs in a web application that lists a repositories analysis results. It also listens to new commits and automatically reanalyzes them and sends E-Mail notifications in response to the event, thus it shows CI capability in form of a Push Hook. Unusual Commits does not support and CI capabilities. Both are realized as free-to-use cloud applications. \cite{Rosen2015,Goyal2017,Kamei2013}
 
-Both approaches considered the metrics which regard the content of the commits, such as changed lines of code or the number of changed files. Commit Guru also considered the history of the commit, its purpose and information about the authoring developer, while Unusual Commits considered the length of the commit message, the time of commit and the changed file types. \cite{Rosen2015,Goyal2017}
+Kamei's approach and Commit Guru use the same set of metrics, which are metrics regarding the commit content such as changed lines of codes or the number of changed files, as well as the the commit history, the commit purpose and information about the developer \cite{Rosen2015,Kamei2013}. Unusual Commits also considers the commit content, but instead of the latter metrics the commits metadata is taken into account \cite{Goyal2017}.
+
+%Both approaches considered the metrics which regard the content of the commits, such as changed lines of code or the number of changed files. Commit Guru also considered the history of the commit, its purpose and information about the authoring developer, while Unusual Commits considered the length of the commit message, the time of commit and the changed file types. \cite{Rosen2015,Goyal2017}
 
 %\subsection{Results for Approaches Based on Anomaly Detection}
 %%TODO (TODO: I'm not sure yet if anomaly-based approaches differ from metric-based approaches enough to justify an additional subsection)
@@ -283,7 +278,7 @@ When considering the Event Data Source, CLEVER also stands out here. While both 
 
 They both use the same set of metrics when comparing commits, which are metrics considering the commit content such as changed lines of code or the changed number of files, and information about the 
 commit message %TODO other description for this metric category?
-such as the commit history or the purpose of the commit.
+such as the commit history or the purpose of the commit \cite{Nayrolles2018, Yang2015}.
 
 \subsection{Approaches based on Code-Matching}
 \begin{itemize}
@@ -298,9 +293,7 @@ Yang et. al. included a performance comparison between their approach and Kamei'
 
 Table [TODO] describes the findings from Nayrolle's paper \cite{Nayrolles2018}, while table [TODO] describes the findings from Yang's paper \cite{Yang2015}.
 
-\todo{Tables}
-
-\todo{Describe tables}
+\todo{Tables, description of tables}
 
 %\begin{itemize}
 %	\item Show Performance comparison tables
@@ -315,10 +308,10 @@ Table [TODO] describes the findings from Nayrolle's paper \cite{Nayrolles2018}, 
 The aforementioned results have been collected in Table \ref{fig:classification} where each of the described facettes map to specific values per identified Commit Validation approach.
 
 \begin{figure}[H]
-	\label{fig:classification}
 	\centering
 	\includegraphics[width=15cm]{images/classification}
 	\caption{Classification results [TODO]}
+	\label{fig:classification}
 \end{figure}
 
 \section{Discussion of Comparison Results}
