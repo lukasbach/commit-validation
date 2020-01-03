@@ -124,12 +124,43 @@ From the identified approaches, only the one by Nayrolles et. al. implemented th
 
 In an internal expert study, Nayrolles reported that $41,6\%$ of the proposed fixes have been accepted by all participants in the study while $25\%$ have been accepted by at least one participant \cite{Nayrolles2018}.
 
-\subsection{Background on statistical measures}
-\todo{Section naming}
+\subsection{Statistical Measures}
+\label{sec:statisticalmeasures}
 
-\begin{itemize}
-	\item Describe Precision, Recall, F1 measure
-\end{itemize}
+%\begin{itemize}
+%	\item Describe Precision, Recall, F1 measure
+%\end{itemize}
+
+When evaluating the performance of binary classification techniques such as the classification into buggy or non-buggy commits, statistical measures such as precision, recall and F1 measure are commonly used \cite{Powers2007}. They were also all used in the papers by four of the five identified approaches, specifically in the papers by Nayrolles, Rosen, Yang and Kamei \cite{Nayrolles2018, Rosen2015, Yang2015, Kamei2013}.
+
+\todo{Reference the section where it is described why the measures listed in the original papers can be compared with each other, i.e. because they cross-reference each other}
+
+The measures are based on confusion matrices, which maps an actual binary class to the predicted class by the analyzed classification mechanic. Its four cells describe the number of predicted positives that were correct or incorrect (true positives \textit{tp} and false positives \textit{fp}) and similarly the number of predicted negatives (true negatives \textit{tn} and false negatives \textit{fn}). A typical notion for a confusion matrix is shown in table \ref{tab:confusionmatrix}. \cite{Powers2007, Fawcett2006}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ll|l|l|}
+		\cline{3-4}
+		&       & \multicolumn{2}{l|}{actual class} \\ \cline{3-4} 
+		&       & true            & false           \\ \hline
+		\multicolumn{1}{|l|}{\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}predicted\\ class\end{tabular}}} & true  & tp              & fp              \\ \cline{2-4} 
+		\multicolumn{1}{|l|}{}                                                                           & false & fn              & tn              \\ \hline
+	\end{tabular}
+	\label{tab:confusionmatrix}
+	\caption{An example of an confusion matrix \cite{Fawcett2006}}
+\end{table}
+
+The measures precision, recall and F1 measure are then derived as follows:
+
+\begin{align*}
+	\text{Precision} &= \frac{tp}{tp+fp}\\
+	\text{Recall} &= \frac{tp}{tp+fn}\\
+	\text{F1 measure} &= 2 \cdot \left( \frac{\text{precision} \cdot \text{recall}}{\text{precision} + \text{recall}} \right)
+\end{align*}
+
+The precision thus measures the accuracy of predicted positives in contrast with all predicted positives, while recall measures the rate of true positives among actual positives. The F1 score is a measure for a test's accuracy. \cite{Powers2007}
+
+
 
 %\subsection{Technical Approaches}
 %\cite{Goyal2017,Rosen2015,Nayrolles2018,Kamei2013,Yang2015}
