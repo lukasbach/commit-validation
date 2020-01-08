@@ -154,8 +154,9 @@ When evaluating the performance of binary classification techniques such as the 
 
 The measures are based on confusion matrices, which maps an actual binary class to the predicted class by the analyzed classification mechanic. Its four cells describe the number of predicted positives that were correct or incorrect (true positives \textit{tp} and false positives \textit{fp}) and similarly the number of predicted negatives (true negatives \textit{tn} and false negatives \textit{fn}). A typical notion for a confusion matrix is shown in table \ref{tab:confusionmatrix}. \cite{Powers2007, Fawcett2006}
 
-\begin{table}[h]
+\begin{table}[t]
 	\centering
+	\caption{An example of an confusion matrix \cite{Fawcett2006}}
 	\begin{tabular}{@{}lllr@{}}
 		\toprule
 		&       & \multicolumn{2}{l}{Actual Class}                               \\ \cmidrule(l){3-4} 
@@ -164,16 +165,20 @@ The measures are based on confusion matrices, which maps an actual binary class 
 		& false & \multicolumn{1}{r}{false negative} & true negative             \\ \bottomrule
 	\end{tabular}
 	\label{tab:confusionmatrix}
-	\caption{An example of an confusion matrix \cite{Fawcett2006}}
 \end{table}
 
-The measures precision, recall and F1 measure are then derived as follows:
+The measures precision, recall and F1 measure are then derived as shown in figure \ref{fig:formulas}.
 
-\begin{align*}
+\begin{figure}[t]
+	\centering
+	\begin{align*}
 	\text{Precision} &= \frac{tp}{tp+fp}\\
 	\text{Recall} &= \frac{tp}{tp+fn}\\
 	\text{F1 measure} &= 2 \cdot \left( \frac{\text{precision} \cdot \text{recall}}{\text{precision} + \text{recall}} \right)
-\end{align*}
+	\end{align*}
+	\caption{Formulars of precision, recall and F1 measure \cite{Powers2007}.}
+	\label{fig:formulas}
+\end{figure}
 
 The precision thus measures the accuracy of predicted positives in contrast with all predicted positives, while recall measures the rate of true positives among actual positives. The F1 score is composed of both precision and recall and simply gives a harmonic mean of both. \cite{Powers2007}
 
@@ -328,6 +333,7 @@ It is also notable that Nayrolles approach primarily improved the precision comp
 
 \begin{table}[t]
 	\centering
+	\caption{Performance comparison of CLEVER and Commit Guru, as evaluated by Nayrolles et. al. \cite{Nayrolles2018}}
 	\begin{tabular}{@{}lrr@{}}
 		\toprule
 		& \multicolumn{1}{l}{CLEVER} & \multicolumn{1}{l}{Commit Guru} \\ \midrule
@@ -336,12 +342,12 @@ It is also notable that Nayrolles approach primarily improved the precision comp
 		F1 measure & 71.72\%                    & 64.80\%                         \\ \bottomrule
 	\end{tabular}
 	% TODO precision is avg precision
-	\caption{Performance comparison of CLEVER and Commit Guru, as evaluated by Nayrolles et. al. \cite{Nayrolles2018}}
 	\label{tab:perfclever}
 \end{table}
 
 \begin{table}[t]
 	\centering
+	\caption{Performance comparison of Deeper and Kamei's approach as well as an standard Logistic Regression, denoted as LR. The comparison was evaluated by Yang et. al. \cite{Yang2015}}
 	\begin{tabular}{@{}lrrr@{}}
 		\toprule
 		& \multicolumn{1}{l}{Deeper} & \multicolumn{1}{l}{Kamei} & \multicolumn{1}{l}{LR} \\ \midrule
@@ -349,7 +355,6 @@ It is also notable that Nayrolles approach primarily improved the precision comp
 		Recall     & 69.03\%                    & 65.52\%                   & 18.28\%                \\
 		F1 measure & 45.06\%                    & 43.91\%                   & 25.30\%                \\ \bottomrule
 	\end{tabular}
-	\caption{Performance comparison of Deeper and Kamei's approach as well as an standard Logistic Regression, denoted as LR. The comparison was evaluated by Yang et. al. \cite{Yang2015}}
 	\label{tab:perfdeeper}
 \end{table}
 
