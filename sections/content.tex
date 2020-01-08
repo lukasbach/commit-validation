@@ -227,20 +227,39 @@ Finally the \textit{Capability for Continuous Capability} (or CI Capability) was
 %\end{itemize}
 
 \subsection{Search Process}
+\label{sec:searchprocess}
 %\begin{itemize}
 %	\item Describe why CLEVER was used as starting point for research for this paper. \cite{Nayrolles2018}
 %	\item Describe how other approaches have been found based on CLEVER and how they match the papers scope as described in \ref{sec:scope}.
 %\end{itemize}
 
-The initial starting position of research for this work was the Commit Validation approach CLEVER developed by Nayrolles et. al. \cite{Nayrolles2018}. CLEVER suits the criteria defined in section \ref{sec:scope} of being a Just-in-Time Bug Detection program that uses software commits as primary mechanism and as such resembles a reference approach for the topic. 
+The initial starting position of research for this work was the Commit Validation approach CLEVER developed by Nayrolles et. al. \cite{Nayrolles2018}. CLEVER suits the criteria defined in section \ref{sec:scope} of being a Just-in-Time Bug Detection program that uses software commits as primary mechanism and as such resembles a reference approach for the topic.  
 
-The paper by Nayrolles references the papers by Kamei and Rosen, the latter introduces Commit Guru. Kamei's work was identified to be one of the first approaches on this topic and was included in this comparison due to its early release \cite{Kamei2013}. Rosen's Commit Guru also very much fits the criteria, but differs from the other papers because it was released as an freely usable Open-Source project and as such is a very interesting work to consider \cite{Rosen2015}. Yang's Deeper is a similar approach which builds upon the work of Kamei, but uses different internal mechanics and according to their statement it was the first approach to use a deep neural network for classification \cite{Yang2015}. Finally, the approach Unusual Commits by Goyal et. al. was considered because its scope differs from the other techniques by focusing more on the abnormality of commits rather than a binary classification into buggy or not, and similarly to Commit Guru it was released as Open-Source \cite{Goyal2017}.
+To find more suitable approaches, backwards Snowball Sampling was performed on CLEVER. A forward search did not yield results as CLEVER was still a very recent work at the time of this writing.
+
+The paper by Nayrolles backwards referenced the papers by Kamei and Rosen, the latter introduces Commit Guru. Kamei's work was identified to be one of the first approaches on this topic and was included in this comparison due to its early release \cite{Kamei2013}. Rosen's Commit Guru also very much fits the criteria, but differs from the other papers because it was released as an freely usable Open-Source project and as such is a very interesting work to consider \cite{Rosen2015}. Yang's Deeper is a similar approach which builds upon the work of Kamei, but uses different internal mechanics and according to their statement it was the first approach to use a deep neural network for classification \cite{Yang2015}. Finally, the approach Unusual Commits by Goyal et. al. was considered because its scope differs from the other techniques by focusing more on the abnormality of commits rather than a binary classification into buggy or not, and similarly to Commit Guru it was released as Open-Source \cite{Goyal2017}.
 
 \subsection{Threads to Validity}
-\begin{itemize}
-	\item Discuss if there can be any biases when choosing and comparing Commit Validation approaches (See \cite{Kitchenham2004}).
-	\item Describe how this paper made sure not to be biased.
-\end{itemize}
+%\begin{itemize}
+%	\item Discuss if there can be any biases when choosing and comparing Commit Validation approaches (See \cite{Kitchenham2004}).
+%	\item Describe how this paper made sure not to be biased.
+%\end{itemize}
+
+A primary thread to the validity of this paper was due to the fact that it was written in a low effort seminar by a single person and thus included less research effort than in similar papers, thus a complete research of the field was out of scope. State of the Art research principles such as Snowball Sampling as described in section \ref{sec:searchprocess} and a low yet for the research field representative sampling size were used to still give a qualitative overview of Commit Validation techniques.
+
+A possible Selection Bias towards Nayrolles' approach CLEVER can be attributed because it was selected as starting point for this research and because it is the most recent publication \cite{Nayrolles2018}. This is also due to the novelty of the research area. Approaches differing from typical Commit Validation techniques such as Unusual Commits by Goyal et. al. were taken into consideration to fight this bias \cite{Goyal2017}.
+
+Another clear issue with the novelty of the research area is that not many papers were released which published openly usable and verifiable programs. Unusual Commits and Commit Guru were the only approaches that made their software Open-Source, most other papers do not publish their software due to academic or company guideline reasons. This not only applies to the papers mentioned in this work, but also to many others on the topic of Just-in-Time Fault Detection, such as the in section \ref{sec:scope} mentioned iFixR and Getafix programs \cite{Koyuncu2019,Bader2019}. This makes complete and unbiased performance reviews even with more research effort hard to realize. This paper tries to still give insights into the performance of Commit Validation techniques by stating the comparisons stated in the papers which introduce the respective techniques. Because no performance information was available for Unusual Commits, this also introduces an Attribution Bias. 
+
+As this paper only attempts to give an overview of the topic of Commit Validation, it hopefully still succeeds in doing so without in-depth performance benchmarks. However, this is an relevant topic for future work, as with the time more openly usable programs will emerge and more research papers on their performance will be published.
+
+
+%* This paper was developed by a single person with low research effort, but I followed sota research principles (snowballing).
+%* Thus a complete research of the field was out of scope. But a small yet high-variety subset of approaches was considered to cover many branches of the field.
+%* The topic is still emerging, many approaches do not offer freely usable and verifiable programs, but existing performance information in previous papers were considered and as much available information was taken into account. A complete performance review makes sense as future research project when more projects emerge and become freely available.
+%(regarding the previous point:) * comparing the performance between CLEVER, Deeper, Kamei and Commit Guru would create a performance bias because the performance comparisons cannot be compared with each other. Considering only the performance data seperately without considering the performance of Unusual Commits creates an Attrition Bias. Because this comparison seeks to only give an overview of the topic, it hopefully still succeeds in doing that?
+%* Possible bias towards CLEVER as that was the starting point and the most recent approach (Selection Bias). However approaches were taken into account that do differ from CLEVER in various aspects such as Deeper or Unusual Commits.
+
 
 
 \section{Comparison of Commit Validation Approaches}
