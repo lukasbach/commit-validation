@@ -369,14 +369,47 @@ It is also notable that Nayrolles approach primarily improved the precision comp
 %	\item Table mapping all metrics/criteria (described in \ref{sec:scheme}) and all 5 approaches to results.
 %\end{itemize}
 
-The aforementioned results have been collected in Table \ref{fig:classification} where each of the described facettes map to specific values per identified Commit Validation approach.
+The aforementioned results have been collected in Table \ref{tab:classification} where each of the described facettes map to specific values per identified Commit Validation approach.
 
-\begin{figure}[H]
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=15cm]{images/classification}
+%	\caption{Classification results [TODO]}
+%	\label{fig:classification}
+%\end{figure}
+
+\begin{table}[t]
 	\centering
-	\includegraphics[width=15cm]{images/classification}
-	\caption{Classification results [TODO]}
-	\label{fig:classification}
-\end{figure}
+	\caption{Classification results of the five identified approaches: CLEVER by Nayrolles \cite{Nayrolles2018}, Commit Guru by Rosen \cite{Rosen2015}, Unusual Commits by Goyal \cite{Goyal2017}, Deeper by Yang \cite{Yang2015}, Kamei's approach \cite{Kamei2013}.}
+	\begin{tabular}{@{}llllll@{}}
+		\toprule
+		& CLEVER     & Guru   & Unusual & Deeper & Kamei \\ \midrule
+		User Features                      &            &        &         &        &       \\ \midrule
+		Online Learning                    & Yes        & Yes    & Yes     & No     & No    \\
+		Normalization to user information  & No         & No     & Yes     & No     & No    \\
+		Metric normalization               & N/A        & N/A    & Yes     & Yes    & Yes   \\
+		Code Cleaning                      & Yes        & No     & No      & No     & No    \\
+		Data Resampling                    & N/A        & N/A    & No      & Yes    & Yes   \\
+		Commit Bug-Detection               & Yes        & Yes    & No      & Yes    & Yes   \\
+		Commit Anormality Score            & Yes        & Yes    & No      & Yes    & Yes   \\
+		Code Altering Suggestions          & Yes        & No     & No      & No     & No    \\ \midrule
+		Event Data Source                  &            &        &         &        &       \\ \midrule
+		Commit history of relevant project & Yes        & Yes    & Yes     & Yes    & Yes   \\
+		Commit history of similar projects & Yes        & No     & No      & No     & No    \\
+		External Issue-System              & Yes        & No     & No      & Yes    & Yes   \\ \midrule
+		Technical internal Platform        & N/A        & Python & Java, R & TODO   & TODO  \\ \midrule
+		CI Capability                      &            &        &         &        &       \\ \midrule
+		Precommit Hook                     & Yes        & No     & No      & TODO   & TODO  \\
+		Push Hook                          & No         & Yes    & No      & TODO   & TODO  \\
+		E-Mail Notification                & N/A        & Yes    & No      & TODO   & TODO  \\
+		Cloud or On-Premise                & On-Premise & Cloud  & Cloud   & TODO   & TODO  \\ \midrule
+		Considered Metrics                 &            &        &         &        &       \\ \midrule
+		Commit Content                     & Yes        & Yes    & Yes     & Yes    & Yes   \\
+		Commit Metadata                    & No         & No     & Yes     & No     & No    \\
+		Commit Message                     & Yes        & Yes    & No      & Yes    & Yes  
+	\end{tabular}
+	\label{tab:classification}
+\end{table}
 
 \section{Discussion of Comparison Results}
 \label{sec:discussion}
