@@ -297,8 +297,6 @@ Kamei's approach and Commit Guru use the same set of metrics, which are metrics 
 %\item Describe the results for machine learning approaches.
 %\end{itemize}
 
-\todo{Use the term "Deep-Learning" instead of "Machine-learning"?}
-
 This category describes approaches which use Machine Learning techniques to increase evaluation performance. Deeper by Yang and CLEVER by Nayrolles both use such techniques \cite{Nayrolles2018, Yang2015}. It is worth to mention that CLEVER also belongs to the next category of approaches based on Code-Matching.
 
 CLEVER is designed to work in production context inside Ubisoft where is was developed, while Deeper was developed in a research context. Thus CLEVER supports Online-Learning while Deeper does not. CLEVER stands out as the only approach which not only offers Bug Detection, but also Code Altering Suggestions, and as such also normalizes code syntax while Deeper does not. \cite{Nayrolles2018, Yang2015}
@@ -322,9 +320,13 @@ When comparing Commit Validation approaches, the evaluation performance is an im
 way, %TODO wording?
 Yang et. al. included a performance comparison between their approach and Kamei's \cite{Yang2015}. While both use different datasets, it does give insights into how CLEVER compares to Commit Guru and how Deeper compares to Kamei's approach in regards to evaluation performance.
 
-Table \ref{tab:perfclever} describes the findings from Nayrolle's paper \cite{Nayrolles2018}, while table \ref{tab:perfdeeper} describes the findings from Yang's paper \cite{Yang2015}.
+Table \ref{tab:perfclever} describes the findings from Nayrolle's paper \cite{Nayrolles2018}, while table \ref{tab:perfdeeper} describes the ones from Yang's paper \cite{Yang2015}.
 
-\begin{table}[h]
+Nayrolles findings show that his approach performs better than Commit Guru, with an precision increase of more than $13\%$ and an increase in the F1 measure of about $7\%$. Yang also found that his approach performs better than the one described by Kamei, which he compared with in his paper. Even though the performance gap was not as big in his case (with an increase of the F1 measure of only about $1\%$), there was still an improvement. 
+
+It is also notable that Nayrolles approach primarily improved the precision compared to Commit Guru, while Deeper improved the recall compared to Kamei's approach. A likely cause for this are differing training settings, as increasing the precision in model training often leads to worse recall and vice versa. However the more interesting correlation from the numbers suggests that establishing machine learning methods brings noticeable performance improvements compared to relying solely on metric-based techniques. Nayrolles also reported that incorporating code matching significantly increases performance in CLEVER \cite{Nayrolles2018}.
+
+\begin{table}[t]
 	\centering
 	\begin{tabular}{l|l|l|}
 		\cline{2-3}
@@ -338,7 +340,7 @@ Table \ref{tab:perfclever} describes the findings from Nayrolle's paper \cite{Na
 	\label{tab:perfclever}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[t]
 	\centering
 	\begin{tabular}{l|l|l|l|}
 		\cline{2-4}
@@ -351,8 +353,6 @@ Table \ref{tab:perfclever} describes the findings from Nayrolle's paper \cite{Na
 	\label{tab:perfdeeper}
 \end{table}
 
-
-\todo{Tables, description of tables}
 
 %\begin{itemize}
 %	\item Show Performance comparison tables
