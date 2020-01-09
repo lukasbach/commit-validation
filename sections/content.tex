@@ -387,29 +387,30 @@ The aforementioned results have been collected in Table \ref{tab:classification}
 	\begin{tabular}{@{}llllll@{}}
 		\toprule
 		& CLEVER     & Guru   & Unusual & Deeper & Kamei \\ \midrule
-		User Features                      &            &        &         &        &       \\ \midrule
+		\textit{User Features}             &            &        &         &        &       \\ 
 		Online Learning                    & Yes        & Yes    & Yes     & No     & No    \\
 		Normalization to user information  & No         & No     & Yes     & No     & No    \\
 		Metric normalization               & N/A        & N/A    & Yes     & Yes    & Yes   \\
-		Code Cleaning                      & Yes        & No     & No      & No     & No    \\
+		Code Cleaning and Matching         & Yes        & No     & No      & No     & No    \\
 		Data Resampling                    & N/A        & N/A    & No      & Yes    & Yes   \\
-		Commit Bug-Detection               & Yes        & Yes    & No      & Yes    & Yes   \\
-		Commit Anormality Score            & Yes        & Yes    & No      & Yes    & Yes   \\
+		Commit Bug Detection               & Yes        & Yes    & No      & Yes    & Yes   \\
+		Commit Abnormality Score           & Yes        & Yes    & No      & Yes    & Yes   \\
 		Code Altering Suggestions          & Yes        & No     & No      & No     & No    \\ \midrule
-		Event Data Source                  &            &        &         &        &       \\ \midrule
+		\textit{Event Data Source}         &            &        &         &        &       \\ 
 		Commit history of relevant project & Yes        & Yes    & Yes     & Yes    & Yes   \\
 		Commit history of similar projects & Yes        & No     & No      & No     & No    \\
 		External Issue-System              & Yes        & No     & No      & Yes    & Yes   \\ \midrule
-		Technical internal Platform        & N/A        & Python & Java, R & TODO   & TODO  \\ \midrule
-		CI Capability                      &            &        &         &        &       \\ \midrule
+		\textit{Technical background}      &            &        &         &        &       \\ 
+		Technical internal Platform        & No         & Python & Java, R & TODO   & TODO  \\ \midrule
+		\textit{CI Capability}             &            &        &         &        &       \\ 
 		Precommit Hook                     & Yes        & No     & No      & TODO   & TODO  \\
 		Push Hook                          & No         & Yes    & No      & TODO   & TODO  \\
 		E-Mail Notification                & N/A        & Yes    & No      & TODO   & TODO  \\
 		Cloud or On-Premise                & On-Premise & Cloud  & Cloud   & TODO   & TODO  \\ \midrule
-		Considered Metrics                 &            &        &         &        &       \\ \midrule
+		\textit{Considered Metrics}        &            &        &         &        &       \\ 
 		Commit Content                     & Yes        & Yes    & Yes     & Yes    & Yes   \\
 		Commit Metadata                    & No         & No     & Yes     & No     & No    \\
-		Commit Message                     & Yes        & Yes    & No      & Yes    & Yes  
+		Commit Message                     & Yes        & Yes    & No      & Yes    & Yes   \\ \bottomrule
 	\end{tabular}
 	\label{tab:classification}
 \end{table}
