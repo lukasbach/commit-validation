@@ -329,7 +329,10 @@ Table \ref{tab:perfclever} describes the findings from Nayrolle's paper \cite{Na
 
 Nayrolles findings show that his approach performs better than Commit Guru, with an precision increase of more than $13\%$ and an increase in the F1 measure of about $7\%$. Yang also found that his approach performs better than the one described by Kamei, which he compared with in his paper. Even though the performance gap was not as big in his case (with an increase of the F1 measure of only about $1\%$), there was still an improvement. 
 
-It is also notable that Nayrolles approach primarily improved the precision compared to Commit Guru, while Deeper improved the recall compared to Kamei's approach. A likely cause for this are differing training settings, as increasing the precision in model training often leads to worse recall and vice versa. However the more interesting correlation from the numbers suggests that establishing machine learning methods brings noticeable performance improvements compared to relying solely on metric-based techniques. Nayrolles also reported that incorporating code matching significantly increases performance in CLEVER \cite{Nayrolles2018}.
+It is also notable that Nayrolles approach primarily improved the precision compared to Commit Guru, while Deeper improved the recall compared to Kamei's approach. A likely cause for this are differing training settings, as increasing the precision in model training often leads to worse recall and vice versa. 
+
+% MOVED INTO DISCUSSION
+%It is also notable that Nayrolles approach primarily improved the precision compared to Commit Guru, while Deeper improved the recall compared to Kamei's approach. A likely cause for this are differing training settings, as increasing the precision in model training often leads to worse recall and vice versa. However the more interesting correlation from the numbers suggests that establishing machine learning methods brings noticeable performance improvements compared to relying solely on metric-based techniques. Nayrolles also reported that incorporating code matching significantly increases performance in CLEVER \cite{Nayrolles2018}.
 
 \begin{table}[t]
 	\centering
@@ -414,20 +417,51 @@ The aforementioned results have been collected in Table \ref{tab:classification}
 \section{Discussion of Comparison Results}
 \label{sec:discussion}
 \begin{itemize}
-	\item Emphasize interesting findings from the results.
-	\item Describe how performance was evaluated on the approaches and how their performance can be compared.
+%	\item Emphasize interesting findings from the results.
+%	\item Describe how performance was evaluated on the approaches and how their performance can be compared.
 	\item Describe how the specified categories of Commit Validation techniques can be mapped to use cases.
 	\item Outline how this mapping can be used to find an suitable Commit Validation technique for a new project.
 \end{itemize}
 
+When considering the classification results in table \ref{tab:classification}, various interesting findings can be deduced. In the following section, notable correlations will be emphasized and their possible causes discussed.
+
+All approaches supply some result to the user, either Commit Bug Detection where each commit is either marked as buggy or not, a score which rates the abnormality of commits in contrast to other commits, or automatically generated altering suggestions for possibly faulty code. As a primary topic of Commit Validation lies in Fault Detection, the binary detection of bugs in commits is implemented by most approaches. Only Unusual Commits generates an abnormality score which lets the decision of whether a commit is actually faulty up to the user, only \"strange\" commits are highlighted to guide the user's focus \cite{Goyal2017}.
+
+CI Capability was a feature which was considered very important for this paper, however not many approaches actually implemented it. Especially among more research focuses papers this was usually either not realized or reported on, while performance was more emphasized. With more emerging papers on the topic of Commit Validation and increasing usage in industry, this capability is likely to be more broadly implemented in future methods.
+
+The user feature Online Learning correlates with whether a paper had a scientific goal or not. Deeper and Kamei's approach focused on evaluating Fault Detection methods by building respective classification models \cite{Yang2015, Kamei2013}, while CLEVER, Commit Guru and Unusual Commits implemented programs which were meant to be used in an industrial context \cite{Nayrolles2018,Rosen2015,Goyal2017}. In the latter approaches, only Offline Learning was established, thus they performed initial training on a dataset and then evaluated the resulting models.
+
+One interesting finding comes from the numbers of the aforementioned performance comparisons, as both CLEVER and Deeper perform better than their reference approaches. They also implement similar methods as both rely on machine learning. This correlation suggests that establishing machine learning methods brings noticable performance improvements compared to relying solely on metric-based techniques. Nayrolles also reported that incorporating code matching significantly increases performance in CLEVER, which explains the mayor advantage it has in numbers compared to Commit Guru \cite{Nayrolles2018}.
+
+The Event Data Source is also closely related to the classification performance. Here CLEVER also stands out as it is the only approach to consider projects that are similar to the project for which commits are analyzed. The usage of previous Commit Data of the analyzed project are typical event sources which are used by all approaches. Incorporating data from issue systems also correlates with the performance increases and usually makes sense because issue systems are used in most industrial software engineering projects anyway.
+
+Another feature that likely affects classification performance is data normalization regarding user information and behavior, a feature which was only implemented by Unusual Commits \cite{Goyal2017}.
+% TODO if this was not described before, describe here
+Because no performance comparison of Unusual Commits was found, a implication on the positive or negative effect of this method cannot be concluded here, but it is an interesting finding nonetheless.
+
+A topic closely related to the classification performance are the metrics which were taken into consideration during classification. Between most approaches, the used metrics did not differ too much: CLEVER, Commit Guru, Deeper and Kamei all used metrics regarding commit content and the commit message. Only Unusual Commits used commit metadata instead of the commit message. This suggests that a typical set of relevant metrics for defect detection has been established in the research area. The metrics were initially introduced by Kamei's original paper and referenced by the other papers, thus Kamei et. al. initially defined these relevant metrics and they were used mostly unchanged since \cite{Kamei2013}.
+
+
+
 
 \section{Related Surveys on Commit Validation}
 \label{sec:relatedsurveys}
-\begin{itemize}
-	\item Discuss and describe other surveys such as \cite{Kim2008,Catolino2019,Syed2019,Yang2016}.
-	\item Highlight for each survey how its scope differs from the scope of this paper.
-\end{itemize}
+%\begin{itemize}
+%	\item Discuss and describe other surveys such as \cite{Kim2008,Catolino2019,Syed2019,Yang2016}.
+%	\item Highlight for each survey how its scope differs from the scope of this paper.
+%\end{itemize}
 
+There exist various studies and surveys on either the topic of Commit Validation or Just-in-Time Defect Prediction. While some such as Catolino et. al. \cite{Catolino2019} and Syed \cite{Syed2019} took practical implementations into account, most focused on comparing the performance of underlying components such as the prediction model, resampling and ensemble learning methods or used set of metrics. For Catolino's and Syed's papers it is notable that both also referenced CLEVER and Commit Guru.
+
+Kiehn et. al. reported on existing publications and developed a new classification model which extended used metrics from previous approaches by new information based on code ownership and more, showing that code ownership can successfully be applied in change risk classification \cite{Kiehn2019}.
+
+A similar focus on evaluating the underlying components of Commit Validation approaches was set by the study of Zhu et. al. \cite{Zhu2018}. They explored imbalance data handling methods such as resampling and ensemble learning to evaluate their performance effect in change classification. They found that a combination of ensemble learning and resampling show better results than other methods. 
+
+Similarly, Malhotra et. al. explored various machine learning methods to determine their overall predictive capability \cite{Malhotra2017}. According to them, their work confirms the overall predictive capability of all machine learning methods used in their research for defect prediction. This matches our suggestion made in section [TODO] approaches which rely on machine learning yield better results than the ones that do not. They also highlighted which metrics are relevant for bug detection and that single layered perceptron shows the best result as machine learning method.
+
+Finally, in a very early study (almost five years before all other mentioned studies), Punitha and Chitra developed a novel approach for defect prediction which was based on three different classification methods, namely Support Vector Machine, Fuzzy Inference System and Genetic Algorithm \cite{Punitha2013}. They verified that the combination of these learners leads to a better prediction model.
+
+All identified studies varied from the scope of this paper by focusing on the performance of defect classification. As mentioned, studies concentrating on user features and the practical use of Commit Validation methods are rare, especially because the research topic focuses on Fault Detection and less on the aspect of commits. Especially CI Capability is a feature which was considered important for this paper, but was usually not taken into account by any of the studies.
 
 \section{Conclusions}
 \label{sec:conclusions}
