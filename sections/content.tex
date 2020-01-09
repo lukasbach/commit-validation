@@ -115,9 +115,9 @@ However, this paper focuses on approaches which do not require manual specificat
 
 While it may seem to be uncomplicated to hook analysis events to commit-based version-control systems, the actual analysis of commits to determine whether they are faulty or not, i.e. they introduce a bug which was not part of the system before, is a much more complicated task. This procedure is referred to as \textit{just-in-time fault detection}. \cite{Nayrolles2018, Kamei2013}
 
-When trying to identify potentially faulty commits, there are many metrics and characteristics that can be taken into account. Typical metrics include the amount of code-lines that were added, removed or changed in a commit, characteristics about the developer or the time of day during which the commit happened. There are various motivations which justify these metrics, such as the fact that developers who commit during a late time are likely to implement a last-minute bug-fix that could not wait until the next day, and thus are more likely to introduce new bugs as the commit was made under time pressure. \cite{Goyal2017}
+When trying to identify potentially faulty commits, there are many metrics and characteristics that can be taken into account. Typical metrics include the amount of code-lines that were added, removed or changed in a commit, characteristics about the developer or the time of day during which the commit happened. There are various motivations which justify these metrics, such as the fact that developers who commit during a late time are likely to implement a last-minute bug-fix that could not wait until the next day, and thus are more likely to introduce new bugs as the commit was made under time pressure.~\cite{Goyal2017}
 
-There are more complex methods of detecting a faulty commit, which are described in [TODO reference].
+There are more complex methods of detecting a faulty commit, which are described in~[TODO reference].
 
 When validating a new commit, it has to be matched against some kind of database or it has to be evaluated with a model which is trained with a training dataset. Thus, an important part of Fault Detection is the data source from where this training- or matching-information comes from. The approaches that were identified in this paper all used the commit histories of the analyzed project as raw data source, in the work of Nayrolles et. al. even the commit histories of similar projects were taken into account \cite{Nayrolles2018}. 
 Rosen et. al. also stated that enough time had to be elapsed since a commit for it to be taken as training data in form of an faulty example commit so that it had a chance to be fixed by a follow-up commit \cite{Rosen2015}.%TODO rephrase
@@ -152,7 +152,7 @@ When evaluating the performance of binary classification techniques such as the 
 
 \todo{Reference the section where it is described why the measures listed in the original papers can be compared with each other, i.e. because they cross-reference each other}
 
-The measures are based on confusion matrices, which maps an actual binary class to the predicted class by the analyzed classification mechanic. Its four cells describe the number of predicted positives that were correct or incorrect (true positives \textit{tp} and false positives \textit{fp}) and similarly the number of predicted negatives (true negatives \textit{tn} and false negatives \textit{fn}). A typical notion for a confusion matrix is shown in table \ref{tab:confusionmatrix}. \cite{Powers2007, Fawcett2006}
+The measures are based on confusion matrices, which maps an actual binary class to the predicted class by the analyzed classification mechanic. Its four cells describe the number of predicted positives that were correct or incorrect (true positives and false positives) and similarly the number of predicted negatives (true negatives and false negatives). A typical notion for a confusion matrix is shown in table \ref{tab:confusionmatrix}. \cite{Powers2007, Fawcett2006}
 
 \begin{table}[t]
 	\centering
