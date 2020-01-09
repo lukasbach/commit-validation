@@ -302,24 +302,43 @@ Kamei's approach and Commit Guru use the same set of metrics, which are metrics 
 %\item Describe the results for machine learning approaches.
 %\end{itemize}
 
-This category describes approaches which use Machine Learning techniques to increase evaluation performance. Deeper by Yang and CLEVER by Nayrolles both use such techniques \cite{Nayrolles2018, Yang2015}. It is worth to mention that CLEVER also belongs to the next category of approaches based on Code-Matching.
+This category describes approaches which use Machine Learning techniques to increase evaluation performance.
+While both Deeper by Yang (\cite{Yang2015}) and CLEVER by Nayrolles (\cite{Nayrolles2018}) implement such techniques, according to Yang et. al. Deeper was the first Just-in-Time Fault Detection approach to leverage deep neural networks for improved classification performance. Nayrolles' CLEVER on the other hand additionally implemented Code-Matching alongside a Machine Learning model and will thus be described in more detail in section \ref{sec:codematching}.
 
-CLEVER is designed to work in production context inside Ubisoft where is was developed, while Deeper was developed in a research context. Thus CLEVER supports Online-Learning while Deeper does not. CLEVER stands out as the only approach which not only offers Bug Detection, but also Code Altering Suggestions, and as such also normalizes code syntax while Deeper does not. \cite{Nayrolles2018, Yang2015}
+Deeper was developed primarily in a research context and builds off the work of Kamei's approach \cite{Kamei2013}, successfully attempting to increase its performance with the new neural network. Due to the scientific background of the paper, Online Learning is not supported by Deeper. Typical methods used in machine learning such as data normalization and resampling are used. As most approaches Deeper only supports Commit Bug Detection without special features like the abnormality score supplied by Unusual Commits \cite{Goyal2017}. It also uses the most common data sources for training its model, which are the past commit history of the project for which new commits are being analyzed alongside an external issue system. Likely caused by its inspiration of Kamei, it also uses the same metrics for classification, which are metrics regarding the commits content and message. 
 
-When considering the Event Data Source, CLEVER also stands out here. While both use the commit history of the project on which commits are analyzed on as well as the associated issue tracker, CLEVER also takes the commit history of similar projects into account \cite{Nayrolles2018, Yang2015}. Nayrolles et. al. describes how the dependencies between projects are analyzed to calculate a measure of similarity for distinct projects \cite{Nayrolles2018}.
+It is easy to see that Deeper is similar to Kamei's work in many aspects, which is not surprising because the primary contribution of Yang's paper was the integration of the neural network instead and because both are motivated by a scientific rather than an industrial context.
 
-\todo{Technical platform and CI Capability if/when author of Deeper answers.}
+%TODO change if author responds
+Information about the technical internal platform or the CI capability was not reported by the original paper by Yang. They did however mention that they used a deep belief network algorithm to build a set of features and performed logistic regression on that.
 
-They both use the same set of metrics when comparing commits, which are metrics considering the commit content such as changed lines of code or the changed number of files, and information about the 
-commit message %TODO other description for this metric category?
-such as the commit history or the purpose of the commit \cite{Nayrolles2018, Yang2015}.
+% Deeper by Yang and CLEVER by Nayrolles both use such techniques \cite{Nayrolles2018, Yang2015}. It is worth to mention that CLEVER also belongs to the next category of approaches based on Code-Matching.
 
-\subsection{Approaches based on Code-Matching}
-\begin{itemize}
-\item Describe the results for machine learning approaches.
-\end{itemize}
+%CLEVER is designed to work in production context inside Ubisoft where is was developed, while Deeper was developed in a research context. Thus CLEVER supports Online-Learning while Deeper does not. CLEVER stands out as the only approach which not only offers Bug Detection, but also Code Altering Suggestions, and as such also normalizes code syntax while Deeper does not. \cite{Nayrolles2018, Yang2015}
+
+%When considering the Event Data Source, CLEVER also stands out here. While both use the commit history of the project on which commits are analyzed on as well as the associated issue tracker, CLEVER also takes the commit history of similar projects into account \cite{Nayrolles2018, Yang2015}. Nayrolles et. al. describes how the dependencies between projects are analyzed to calculate a measure of similarity for distinct projects \cite{Nayrolles2018}.
+
+%\todo{Technical platform and CI Capability if/when author of Deeper answers.}
+
+%They both use the same set of metrics when comparing commits, which are metrics considering the commit content such as changed lines of code or the changed number of files, and information about the 
+%commit message %TODO other description for this metric category?
+%such as the commit history or the purpose of the commit \cite{Nayrolles2018, Yang2015}.
+
+\subsection{Approaches based on Code Matching}%TODO bindestrich?
+\label{sec:codematching}
+%\begin{itemize}
+%\item Describe the results for machine learning approaches.
+%\end{itemize}
+
+Being published in 2018, Nayrolles' CLEVER was the most recent approach and implements features which none of the other publications do \cite{Nayrolles2018}. CLEVER is the only one which not only detects buggy commits, but also automatically generates altering suggestions for fault locations based on previous fixes in the commit history. While it uses past commits from the relevant project and the affiliated issue system in a similar way as other approaches do to detect faults, CLEVER is also the only approach to leverage commit data from similar projects. Nayrolles reports in his paper how dependency information of projects is used to cluster them based on their similarity.
+
+The used metrics do not vary much by the ones used by other approaches. CLEVER's model was built off the foundation of Commit Guru and uses the same metrics as they do. However, as section \ref{sec:performance} which details the performance of the approaches will show, CLEVER significantly outperforms Commit Guru. According to Nayrolles' paper, this is caused by its code matching component. This attempts to reduce the number of false-positive which is higher in other approaches and results in better precision. In CLEVER, commits are first analyzed by a machine learning model, and only after positive classification code matching is performed to revalidate the likelihood of a fault.
+
+In contrast to other approaches, CLEVER was motivated by an industrial rather than an scientific context. It was developed for production use within Ubisoft with an company-internal deployment planned. Because of that, its realized Online Learning and Continuous Integration capabilities are both important. On the latter one, Nayrolles et. al. decided on precommit hooks which run directly on the developers machines at the moment they commit source code, resulting in fast feedback.
+
 
 \subsection{Performance comparison}
+\label{sec:performance}
 
 When comparing Commit Validation approaches, the evaluation performance is an important point to consider. Due to the effort of this work and the fact that not all approaches are publicly available, an objective performance evaluation on all five approaches on a consistent dataset was out of scope for this paper. However, Nayrolles et. al. included an objective performance comparison between their approach and Rosen's approach \cite{Nayrolles2018}. In the same 
 way, %TODO wording?
@@ -372,7 +391,9 @@ It is also notable that Nayrolles approach primarily improved the precision comp
 %	\item Table mapping all metrics/criteria (described in \ref{sec:scheme}) and all 5 approaches to results.
 %\end{itemize}
 
-The aforementioned results have been collected in Table \ref{tab:classification} where each of the described facettes map to specific values per identified Commit Validation approach.
+The aforementioned results have been collected in Table \ref{tab:classification} where each of the described facettes map to specific values per identified Commit Validation approach. The basic structure of the table maps to the featuremodel described in figure \ref{fig:featuremodel}. 
+
+Cells marked with \textit{N/A} indicate that the respective information was not mentioned in the reporting paper. While I have tried to contact the authors of Deeper and Kamei's approach, they could not be reached for further details. The technical platform was also hard to determine for many papers that only reported the classification model, even though it is interesting to know as that can influence the practicality of integrating the system in production environments. Only Commit Guru and Unusual Commits have reported on their platform as they were also the only approaches that published their source code as open source.
 
 %\begin{figure}[H]
 %	\centering
@@ -401,12 +422,12 @@ The aforementioned results have been collected in Table \ref{tab:classification}
 		Commit history of similar projects & Yes        & No     & No      & No     & No    \\
 		External Issue-System              & Yes        & No     & No      & Yes    & Yes   \\ \midrule
 		\textit{Technical background}      &            &        &         &        &       \\ 
-		Technical internal Platform        & No         & Python & Java, R & TODO   & TODO  \\ \midrule
+		Technical internal Platform        & N/A        & Python & Java, R & N/A    & N/A   \\ \midrule
 		\textit{CI Capability}             &            &        &         &        &       \\ 
-		Precommit Hook                     & Yes        & No     & No      & TODO   & TODO  \\
-		Push Hook                          & No         & Yes    & No      & TODO   & TODO  \\
-		E-Mail Notification                & N/A        & Yes    & No      & TODO   & TODO  \\
-		Cloud or On-Premise                & On-Premise & Cloud  & Cloud   & TODO   & TODO  \\ \midrule
+		Precommit Hook                     & Yes        & No     & No      & N/A    & N/A   \\
+		Push Hook                          & No         & Yes    & No      & N/A    & N/A   \\
+		E-Mail Notification                & N/A        & Yes    & No      & N/A    & N/A   \\
+		Cloud or On-Premise                & On-Premise & Cloud  & Cloud   & N/A    & N/A   \\ \midrule
 		\textit{Considered Metrics}        &            &        &         &        &       \\ 
 		Commit Content                     & Yes        & Yes    & Yes     & Yes    & Yes   \\
 		Commit Metadata                    & No         & No     & Yes     & No     & No    \\
@@ -417,12 +438,14 @@ The aforementioned results have been collected in Table \ref{tab:classification}
 
 \section{Discussion of Comparison Results}
 \label{sec:discussion}
+\todo{
 \begin{itemize}
 %	\item Emphasize interesting findings from the results.
 %	\item Describe how performance was evaluated on the approaches and how their performance can be compared.
 	\item Describe how the specified categories of Commit Validation techniques can be mapped to use cases.
 	\item Outline how this mapping can be used to find an suitable Commit Validation technique for a new project.
 \end{itemize}
+}
 
 When considering the classification results in table \ref{tab:classification}, various interesting findings can be deduced. In the following section, notable correlations will be emphasized and their possible causes discussed.
 
