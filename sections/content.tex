@@ -327,9 +327,11 @@ As Unusual Commits only measures the abnormality of commits, it does not need an
 Commit Guru on the other hand analyzed commit messages to detect keywords such as \texttt{fix} or \texttt{bug} to identify fix-commits and then backtrack the latest commit before the fix that changed similar lines to find out when the matching bug was introduced. This allows Commit Guru to effectively find previous buggy commits without the need for an additional data source such as an issue system.
 
 Commit Guru is implemented in Python while Unusual Commits is realized in Java and R. It is also worth mentioning that both Commit Guru and Unusual Commits implement a graphical user interface. Unusual Commits is implemented as a Google Chrome plug-in which embeds classification results into the commit history on GitHub, while Commit Guru runs in a web application that lists the analysis results for a selected repository. It also listens to new commits, automatically reanalyzes them and sends E-Mail notifications in response to the event, thus it shows CI capability in form of a Push Hook. Unusual Commits does not support any CI capabilities. Both are realized as free-to-use cloud applications.
-Unlike Commit Guru and Unusual Commits, Kamei did not publish an openly usable program, thus CI capability or any technological information cannot be reported on.
+Unlike Commit Guru and Unusual Commits, Kamei did not publish an openly usable program, thus their CI capability or any technological information cannot be reported on.
 
 Kamei's approach and Commit Guru use the same set of metrics, which are metrics regarding the commit content such as changed lines of codes or the number of changed files, as well as the the commit history, such as the commit purpose and information about the developer. Unusual Commits also considers the commit content, but instead of the latter metrics the commits metadata is taken into account.
+
+Classification approaches that rely on purely metric based methods generally show high potential and are well represented in the research area. However, the availability of metrical vectors extracted from commit data also offers the usage of machine learning methods to further increase classification performance. The next section will detail the use of machine learning in existing Commit Validation approaches.
 
 %Both approaches considered the metrics which regard the content of the commits, such as changed lines of code or the number of changed files. Commit Guru also considered the history of the commit, its purpose and information about the authoring developer, while Unusual Commits considered the length of the commit message, the time of commit and the changed file types. \cite{Rosen2015,Goyal2017}
 
@@ -356,6 +358,8 @@ due to their shared motivation by a scientific rather than an industrial context
 
 %TODO change if author responds
 Information about the technical internal platform or the CI capability was not reported on by the original paper by Yang. They did however mention that they used a deep belief network algorithm to build a set of features and performed logistic regression on that.
+
+While research shows that machine learning can increase performance in contrast to naive metric based methods, Nayrolles mentioned approach of code matching introduces a very different method for better classification results \cite{Nayrolles2018}. The next section will detail the use of code matching methods.
 
 % Deeper by Yang and CLEVER by Nayrolles both use such techniques \cite{Nayrolles2018, Yang2015}. It is worth to mention that CLEVER also belongs to the next category of approaches based on Code-Matching.
 
