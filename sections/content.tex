@@ -117,6 +117,15 @@ There exists a variety of approaches for analyzing the quality of code changes a
 However, this paper focuses on approaches which do not require manual specifications such as test cases to detect a faulty commit, but instead automatically rate the probability of a commit to introduce a bug by leveraging external data sources that are available.
 While such typical approaches such as manual test cases come with extra effort and other drawbacks, a primary disadvantage over more automatized methods like Fault Detection becomes clear with the well known quote by Dijkstra: "Testing shows the presence, not the absence of bugs!" \cite{JohnN1969}.
 
+A concluding overview of the typical commit validation process is shown in figure \ref{fig:cvprocess}. As detailed, the process starts either in response to the precommit hook directly after the commit process or to the push hook after a set of commits was pushed to a remote server. Then, the commit changesets are usually used to extract metrical vectors which in turn are used to classify the commit data as faulty or not.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\textwidth]{images/commitvalidation-process/cvprocess}
+	\caption{The typical commit validation process.}
+	\label{fig:cvprocess}
+\end{figure}
+
 \subsection{Just-In-Time Fault Detection}
 %TODO (TODO: Some of these subsections might have to be moved to section \ref{sec:cvprocess})
 %\begin{itemize}
