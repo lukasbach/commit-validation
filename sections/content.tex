@@ -15,7 +15,9 @@ Typical approaches focus on analyzing module artifacts such as files or packages
 
 A recent approach for increasing software quality and thus decreasing costs is the concept of Commit Validation. This concept is used at a very technical level where change commits on software projects are automatically analyzed and verified in regards to the probability that they introduce a new software fault. This is much more efficient because code is analyzed for faults at an early phase when the responsible developer is still involved with the changes. \cite{Kamei2013}
 
-There exist different approaches on this topic, one of the early works was made as a study on the topic by Kamei et. al. which was based on Just-in-Time Bug Detection on commit data \cite{Kamei2013}. Similar approaches were introduced by Yang and Rosen by introducing approaches called \textit{Deeper} and \textit{Commit Guru} respectively \cite{Yang2015,Rosen2015}. Goyal introduced a concept based on the rating of abnormality of commits, called \textit{Unusual Commits} \cite{Goyal2017}. Finally, one of the most recent approaches was introduced by Nayrolles et. al. as \textit{CLEVER}, which not only detected buggy commits, but also automatically suggested code fixes \cite{Nayrolles2018}. This paper will focus on these five approaches in more detail.
+Different approaches exist on this topic,
+%There exist different approaches on this topic, 
+one of the early works was made as a study on the topic by Kamei et. al. which was based on Just-in-Time Bug Detection on commit data \cite{Kamei2013}. Similar approaches were introduced by Yang and Rosen by introducing approaches called \textit{Deeper} and \textit{Commit Guru} respectively \cite{Yang2015,Rosen2015}. Goyal introduced a concept based on the rating of abnormality of commits, called \textit{Unusual Commits} \cite{Goyal2017}. Finally, one of the most recent approaches was introduced by Nayrolles et. al. as \textit{CLEVER}, which not only detected buggy commits, but also automatically suggested code fixes \cite{Nayrolles2018}. This paper will focus on these five approaches in more detail.
 
 \subsection{Problem Definition}
 %\begin{itemize}
@@ -112,10 +114,12 @@ Git supports a concept called \textit{Hooks}. A hook specifies a custom script w
 Git distinguishes between \textit{Client-Side Hooks}, which run on the local device of the developer that is authoring the commit, and \textit{Server-Side Hooks}, which run on the remote server \cite{Chacon:2014:PG:2695634}.
 %Such hooks are differentiated into \textit{Client-Side Hooks}, which run on the local device of the developer that is authoring the commit, and \textit{Server-Side Hooks}, which run on the remote server. \cite{Chacon:2014:PG:2695634}
 
-There exists a variety of approaches for analyzing the quality of code changes at commit time. A popular approach is the manual authoring of unit-, integration- or end-to-end-tests to verify that a project's implementation fulfills its specification \cite{Maayan2018}. Such test definitions can be setup as a commit hook for them to run at commit time.
+A variety of approaches exist
+%There exists a variety of approaches 
+for analyzing the quality of code changes at commit time. A popular approach is the manual authoring of unit-, integration- or end-to-end-tests to verify that a project's implementation fulfills its specification \cite{Maayan2018}. Such test definitions can be setup as a commit hook for them to run at commit time.
 
 However, this paper focuses on approaches which do not require manual specifications such as test cases to detect a faulty commit, but instead automatically rate the probability of a commit to introduce a bug by leveraging external data sources that are available.
-While such typical approaches such as manual test cases come with extra effort and other drawbacks, a primary disadvantage over more automatized methods like Fault Detection becomes clear with the well known quote by Dijkstra: "Testing shows the presence, not the absence of bugs!" \cite{JohnN1969}.
+While such typical approaches like manual test cases come with extra effort and other drawbacks, a primary disadvantage over more automatized methods like Fault Detection becomes clear with the well known quote by Dijkstra: "Testing shows the presence, not the absence of bugs!" \cite{JohnN1969}.
 
 A concluding overview of the typical commit validation process is shown in figure \ref{fig:cvprocess}. As detailed, the process starts either in response to the precommit hook directly after the commit process or to the push hook after a set of commits was pushed to a remote server. Then, the commit changesets are usually used to extract metrical vectors which in turn are used to classify the commit data as faulty or not.
 
@@ -145,7 +149,10 @@ When trying to identify potentially faulty commits, there are many metrics and c
 
 When validating a new commit, it has to be matched against some kind of database or it has to be evaluated with a model trained with a training dataset. Thus, an important part of Fault Detection is the data source from where this training or matching information comes. Usually the past commit data of the project is used as training data.
 %Rosen et. al. also stated that enough time had to be elapsed since a commit for it to be taken as training data in form of a faulty example commit such that it had a chance to be fixed by a follow-up commit \cite{Rosen2015}.
-This data needs to be labeled for bugs so that it can be used to train the bug detection model. There exist various ways of extracting labels for commit data, like using external issue systems which associate issue reports and bug-introducing commits.
+This data needs to be labeled for bugs so that it can be used to train the bug detection model.
+%There exist various ways
+Various ways
+of extracting labels for commit data exist, like using external issue systems which associate issue reports and bug-introducing commits.
 %This leads to the second part of the required data, information which identifies the past commit data as either faulty or not. 
 
 %TODO evtl absatz ebenfalls woanderst einbringen oder (eher das:) umformulieren sodass die 5 ansätze nicht so stark referenziert werden und es nicht als vergleich rüberkommt
@@ -170,7 +177,10 @@ This data needs to be labeled for bugs so that it can be used to train the bug d
 
 A process closely related to Fault Detection is \textit{Just-in-Time Fault Prevention}, which describes the process of automatically generating a potential patch for a newly introduced bug~\cite{Nayrolles2018}. If the Fault Detection mechanism detects a buggy commit as described in the previous section, this is often done by finding a past commit which introduced a similar bug. Using information from issue systems, the fix-commit for a similar bug can be used to find out how it was fixed in the past, and use that information to suggest how the newly introduced bug can be fixed as well.
 
-From the identified approaches, only the one by Nayrolles et. al. implemented this technique \cite{Nayrolles2018}, however there exist other works in the literature where such techniques have been explored without a focus on Commit Validation. %such as the work by Pan et. al. and the work by Kim et. al \cite{Nayrolles2018, Kim2013, Pan2009}.
+From the identified approaches, only the one by Nayrolles et. al. implemented this technique \cite{Nayrolles2018}, 
+%however there exist other works 
+however other works exist
+in the literature where such techniques have been explored without a focus on Commit Validation. %such as the work by Pan et. al. and the work by Kim et. al \cite{Nayrolles2018, Kim2013, Pan2009}.
 They include the paper by Pan et. al. on the understanding of bug fix patterns~\cite{Pan2009}, and the paper by Kim et. al. reporting on a novel patch generation method which learns from human-written patches~\cite{Kim2013}.
 
 In an internal expert study, Nayrolles reported that $41,6\%$ of the fixes proposed by his method have been accepted by all participants in the study while $25\%$ have been accepted by at least one participant~\cite{Nayrolles2018}.
@@ -274,7 +284,7 @@ The initial starting point of research for this work was the Commit Validation a
 
 To find more suitable approaches, backwards Snowball Sampling was performed on CLEVER. A forward search did not yield results as CLEVER was still a very recent work at the time of this writing.
 
-The paper by Nayrolles backwards referenced the papers by Kamei and Rosen, the latter introduced Commit Guru. Kamei's work was identified to be one of the first approaches on this topic and was included in this comparison due to its early release~\cite{Kamei2013}. Rosen's Commit Guru also very much fits the criteria, but differs from the other papers because it was released as an freely usable Open-Source project and as such is a very interesting work to consider~\cite{Rosen2015}. Yang's Deeper is a similar approach which builds upon the work of Kamei, but uses different internal mechanics and according to their statement was the first approach to use a deep neural network for classification~\cite{Yang2015}. Finally, the approach Unusual Commits by Goyal et. al. was considered because its scope differs from the other techniques by focusing more on the abnormality of commits rather than a binary classification into buggy or not, and similarly to Commit Guru, it was released as Open Source~\cite{Goyal2017}.
+The paper by Nayrolles backwards referenced the papers by Kamei and Rosen, the latter introduced Commit Guru. Kamei's work was identified to be one of the first approaches on this topic and was included in this comparison due to its early release~\cite{Kamei2013}. Rosen's Commit Guru also very much fits the criteria, but differs from the other papers because it was released as a freely usable Open-Source project and as such is a very interesting work to consider~\cite{Rosen2015}. Yang's Deeper is a similar approach which builds upon the work of Kamei, but uses different internal mechanics and according to their statement was the first approach to use a deep neural network for classification~\cite{Yang2015}. Finally, the approach Unusual Commits by Goyal et. al. was considered because its scope differs from the other techniques by focusing more on the abnormality of commits rather than a binary classification into buggy or not, and similarly to Commit Guru, it was released as Open Source~\cite{Goyal2017}.
 
 \subsection{Threats to Validity}
 %\begin{itemize}
@@ -313,7 +323,7 @@ The results are then presented in tabular form in table \ref{tab:classification}
 \subsection{Purely Metric Based Approaches}
 \label{sec:comparison-metricbased}
 
-The approaches \textit{Commit Guru} by Rosen et. al. \cite{Rosen2015}, \textit{Unusual Commits} by Goyal et. al. \cite{Goyal2017} and the approach by Kamei et. al. \cite{Kamei2013} fall into the category of purely metric based approaches. They rely only on metrics that were directly derived from commits and use them to rate commits based on that. While Commit Guru works for any kinds of Git repositories, Unusual Commits only works for repositories hosted on GitHub. Kamei did not state any restrictions of such kind \cite{Kamei2013}.
+The approaches \textit{Commit Guru} by Rosen et. al. \cite{Rosen2015}, \textit{Unusual Commits} by Goyal et. al. \cite{Goyal2017} and the approach by Kamei et. al. \cite{Kamei2013} fall into the category of purely metric based approaches. They rely only on metrics that were directly derived from commits and use them to rate commits based on that. While Commit Guru works for any kind of Git repositories, Unusual Commits only works for repositories hosted on GitHub. Kamei did not state any restrictions of such kind \cite{Kamei2013}.
 
 Commit Guru and Unusual Commits both support online learning, thus every new commit after the initial training is taken into account for the analysis of later commits.
 %Unusual Commits implemented more data normalization methods than Commit Guru. 
@@ -324,12 +334,12 @@ The techniques also vary in their output: Unusual Commits is the only approach t
 
 Commit Guru and Unusual Commits both only use the past commit history of the project which is analyzed as their event data source, not any other data sources, whereas Kamei's approach also takes information from the issue system attached to the repository into account.
 As Unusual Commits only measures the abnormality of commits, it does not need any data labeling specifying which past commits are buggy or not, the comparison of derived metrics of new commits with average values already shows results.
-Commit Guru on the other hand analyzed commit messages to detect keywords such as \texttt{fix} or \texttt{bug} to identify fix-commits and then backtrack the latest commit before the fix that changed similar lines to find out when the matching bug was introduced. This allows Commit Guru to effectively find previous buggy commits without the need for an additional data source such as an issue system.
+Commit Guru on the other hand analyzes commit messages to detect keywords such as \texttt{fix} or \texttt{bug} to identify fix-commits and then backtrack the latest commit before the fix that changed similar lines to find out when the matching bug was introduced. This allows Commit Guru to effectively find previous buggy commits without the need for an additional data source such as an issue system.
 
 Commit Guru is implemented in Python while Unusual Commits is realized in Java and R. It is also worth mentioning that both Commit Guru and Unusual Commits implement a graphical user interface. Unusual Commits is implemented as a Google Chrome plug-in which embeds classification results into the commit history on GitHub, while Commit Guru runs in a web application that lists the analysis results for a selected repository. It also listens to new commits, automatically reanalyzes them and sends E-Mail notifications in response to the event, thus it shows CI capability in form of a Push Hook. Unusual Commits does not support any CI capabilities. Both are realized as free-to-use cloud applications.
 Unlike Commit Guru and Unusual Commits, Kamei did not publish an openly usable program, thus their CI capability or any technological information cannot be reported on.
 
-Kamei's approach and Commit Guru use the same set of metrics, which are metrics regarding the commit content such as changed lines of codes or the number of changed files, as well as the the commit history, such as the commit purpose and information about the developer. Unusual Commits also considers the commit content, but instead of the latter metrics the commits metadata is taken into account.
+Kamei's approach and Commit Guru use the same set of metrics, which are metrics regarding the commit content such as changed lines of codes or the number of changed files, as well as the commit history, such as the commit purpose and information about the developer. Unusual Commits also considers the commit content, but instead of the latter metrics the commits metadata is taken into account.
 
 Classification approaches that rely on purely metric based methods generally show high potential and are well represented in the research area. However, the availability of metrical vectors extracted from commit data also offers the usage of machine learning methods to further increase classification performance. The next section will detail the use of machine learning in existing Commit Validation approaches.
 
@@ -341,7 +351,7 @@ Classification approaches that rely on purely metric based methods generally sho
 %\item Describe the results for approaches based on anomaly detection such as UnusualCommit (\cite{Goyal2017}).
 %\end{itemize}
 
-\subsection{Approaches based on Machine Learning}
+\subsection{Approaches Based on Machine Learning}
 \label{sec:comparison-ml}
 %\begin{itemize}
 %\item Describe the results for machine learning approaches.
@@ -373,7 +383,7 @@ While research shows that machine learning can increase performance in contrast 
 %commit message %TODO other description for this metric category?
 %such as the commit history or the purpose of the commit \cite{Nayrolles2018, Yang2015}.
 
-\subsection{Approaches based on Code Matching}%TODO bindestrich?
+\subsection{Approaches Based on Code Matching}%TODO bindestrich?
 \label{sec:codematching}
 \label{sec:comparison-codematching}
 %\begin{itemize}
@@ -393,7 +403,7 @@ With the code matching analysis results linking a similar bug introducing commit
 In contrast to other approaches, CLEVER was motivated by an industrial rather than a scientific context. It was developed for production use within Ubisoft with a company-internal deployment planned. Because of that, its online learning and Continuous Integration capabilities are both important and were both implemented. On the latter one, Nayrolles et. al. decided on precommit hooks which run directly on the developers machines at the moment they commit source code, resulting in fast feedback.
 
 
-\subsection{Performance comparison}
+\subsection{Performance Comparison}
 \label{sec:performance}
 
 When comparing Commit Validation approaches, the evaluation performance is an important point to consider. Due to the effort of this work and the fact that not all approaches are publicly available, an objective performance evaluation on all five approaches on a consistent dataset was out of scope for this paper. However, Nayrolles et. al. included an objective performance comparison between their approach and Rosen's approach \cite{Nayrolles2018}. In the same 
@@ -427,7 +437,7 @@ A likely cause for this is Nayrolles' implementation of code matching, which red
 
 \begin{table}[t]
 	\centering
-	\caption{Performance comparison of Deeper and Kamei's approach as well as an standard Logistic Regression, denoted as LR. The comparison was evaluated by Yang et. al. \cite{Yang2015}}
+	\caption{Performance comparison of Deeper and Kamei's approach as well as a standard Logistic Regression, denoted as LR. The comparison was evaluated by Yang et. al. \cite{Yang2015}}
 	\begin{tabular}{@{}lrrr@{}}
 		\toprule
 		& \multicolumn{1}{l}{Deeper} & \multicolumn{1}{l}{Kamei} & \multicolumn{1}{l}{LR} \\ \midrule
@@ -452,7 +462,7 @@ A likely cause for this is Nayrolles' implementation of code matching, which red
 The aforementioned results have been collected in Table \ref{tab:classification} where each of the described facets map to specific values per identified Commit Validation approach. The basic structure of the table maps to the feature model described in figure \ref{fig:featuremodel}. 
 
 %TODO change if authors answer
-Cells marked with \textit{N/A} indicate that the respective information was not mentioned in the reporting paper. While I have tried to contact the authors of Deeper and Kamei's approach, they could not be reached for further details. The technical platform was also hard to determine for many papers that only reported on the classification model, even though it is interesting to know as it can influence the practicality of integrating the system in production environments. Only Commit Guru and Unusual Commits have reported on their platform as they were also the only approaches that published their source code as open source.
+Cells marked with \textit{N/A} indicate that the respective information was not mentioned in the reporting paper. While I have tried to contact the authors of Deeper and Kamei's approach, they could not be reached for further details. The technical platform was also hard to determine for many papers that only reported on the classification model, even though it would be interesting to know as it can influence the practicality of integrating the system in production environments. Only Commit Guru and Unusual Commits have reported on their platform as they were also the only approaches that published their source code as open source.
 
 %\begin{figure}[H]
 %	\centering
@@ -508,11 +518,11 @@ Cells marked with \textit{N/A} indicate that the respective information was not 
 
 When considering the classification results in table \ref{tab:classification}, various interesting findings can be deduced. In the following section, notable correlations will be emphasized and their possible causes discussed.
 
-All approaches supply some result to the user, either Commit Bug Detection where each commit is either marked as buggy or not, a score which rates the abnormality of commits in contrast to other commits, or automatically generated suggested alterations for possibly faulty code. As a primary topic of Commit Validation lies in Fault Detection, the binary detection of bugs in commits is implemented by most approaches. Only Unusual Commits \cite{Goyal2017} generates an abnormality score which leaves the decision of whether a commit is actually faulty up to the user, only "strange" commits are highlighted to guide the user's focus.
+All approaches supply some result to the user, either Commit Bug Detection where each commit is either marked as buggy or not, a score which rates the abnormality of commits in contrast to other commits, or automatically generated suggested alterations for possibly faulty code. Since a primary topic of Commit Validation lies in Fault Detection, the binary detection of bugs in commits is implemented by most approaches. Only Unusual Commits \cite{Goyal2017} generates an abnormality score which leaves the decision of whether a commit is actually faulty up to the user, only "strange" commits are highlighted to guide the user's focus.
 
-CI Capability was a feature which was considered very important for this paper, however not many approaches actually implemented it. Especially among papers focused more on research this was usually either not realized or not reported on, while performance was more emphasized. With more emerging papers on the topic of Commit Validation and increasing usage in industry, this capability is likely to be more broadly implemented in future methods.
+CI Capability was a feature which was considered very important for this paper, however not many approaches actually implemented it. Especially among papers focused on research this was usually either not realized or not reported on, while performance was more emphasized. With more emerging papers on the topic of Commit Validation and increasing usage in industry, this capability is likely to be more broadly implemented in future methods.
 
-The feature online learning correlates with whether a paper had a scientific goal or not. Deeper and Kamei's approach focused on evaluating Fault Detection methods by building respective classification models \cite{Yang2015, Kamei2013}, while CLEVER, Commit Guru and Unusual Commits implemented programs which were meant to be used in an industrial context \cite{Nayrolles2018,Rosen2015,Goyal2017}. In the first two approaches, only Offline Learning was established, thus they performed initial training on a dataset and then evaluated the resulting models.
+The feature online learning correlates with whether a paper had a scientific goal or not. Deeper and Kamei's approach focused on evaluating Fault Detection methods by building respective classification models \cite{Yang2015, Kamei2013}, while CLEVER, Commit Guru and Unusual Commits implemented programs which were meant to be used in an industrial context \cite{Nayrolles2018,Rosen2015,Goyal2017}. In the first two approaches, only offline learning was established, thus they performed initial training on a dataset and then evaluated the resulting models.
 
 One interesting finding comes from the numbers of the aforementioned performance comparisons, as both CLEVER and Deeper perform better than their reference approaches. They also implement similar methods as both rely on machine learning. This correlation suggests that establishing machine learning methods brings noticable performance improvements compared to relying solely on metric-based techniques. Nayrolles also reported that incorporating code matching significantly increases performance in CLEVER, which explains the major advantage it has in numbers compared to Commit Guru \cite{Nayrolles2018}.
 
@@ -534,13 +544,15 @@ A topic closely related to the classification performance are the metrics which 
 %	\item Highlight for each survey how its scope differs from the scope of this paper.
 %\end{itemize}
 
-There exist various studies and surveys on either the topic of Commit Validation or Just-in-Time Defect Prediction. While some such as Catolino et. al. \cite{Catolino2019} and Syed \cite{Syed2019} took practical implementations into account, most focused on comparing the performance of underlying components such as the prediction model, resampling and ensemble learning methods or used set of metrics. For Catolino's and Syed's papers it is notable that both also referenced CLEVER and Commit Guru.
+%There exist various studies and surveys 
+Various studies and surveys exist
+on the topic of either Commit Validation or Just-in-Time Defect Prediction. While some such as Catolino et. al. \cite{Catolino2019} and Syed \cite{Syed2019} took practical implementations into account, most focused on comparing the performance of underlying components such as the prediction model, resampling and ensemble learning methods or used set of metrics. For Catolino's and Syed's papers it is notable that both also referenced CLEVER and Commit Guru.
 
 Kiehn et. al. reported on existing publications and developed a new classification model which extended the used metrics from previous approaches by new information based on code ownership and more, showing that code ownership can successfully be applied in change risk classification \cite{Kiehn2019}.
 
 A similar focus on evaluating the underlying components of Commit Validation approaches was set by the study of Zhu et. al. \cite{Zhu2018}. They explored imbalance data handling methods such as resampling and ensemble learning to evaluate their performance effect in change classification. They found that a combination of ensemble learning and resampling shows better results than other methods. 
 
-Similarly, Malhotra et. al. explored various machine learning methods to determine their overall predictive capability \cite{Malhotra2017}. According to them, their work confirms the overall predictive capability of all machine learning methods used in their research for defect prediction. This matches our suggestion made in section \ref{sec:discussion} that approaches which rely on machine learning yield better results than the ones that do not. They also highlighted that a single layered perceptron shows the best result as machine learning method.
+Similarly, Malhotra et. al. explored various machine learning methods to determine their overall predictive capability \cite{Malhotra2017}. According to them, their work confirms the overall predictive capability of all machine learning methods used in their research for defect prediction. This matches our suggestion made in section \ref{sec:discussion} that approaches which rely on machine learning yield better results than the ones that do not. They also highlighted that a single layered perceptron shows the best result as a machine learning method.
 
 Finally, in a very early study almost five years before all other mentioned studies, Punitha and Chitra developed a novel approach for defect prediction which was based on three different classification methods, namely Support Vector Machine, Fuzzy Inference System and Genetic Algorithm \cite{Punitha2013}. They verified that the combination of these learners leads to a better prediction model.
 
@@ -587,4 +599,4 @@ The contributions of this paper include the basic introduction of Commit Validat
 Interesting findings have shown that many differences in the classification approaches exist and affect their performance. It was also shown that on this novel topic many new publications and methods continue to emerge and new concepts and features are introduced. With it becoming more relevant in industrial contexts, production features such as CI capability and online learning are likely to be implemented more often as well. Especially the deployment of Nayrolles' CLEVER in Ubisoft is an important step of bringing the topic closer to industry \cite{Nayrolles2018}.
 
 %future work
-As the threats to the validity of this paper have shown, comparing the performance of Commit Validation methods continues to be a hard objective with many approaches staying close source and not being openly published, and with not many reports on the performance of programs available. This marks an important area for future research, with more emerging methods and papers. While the performance of programs seems not to be well covered yet, the performance of underlying components such as relevant machine learning models or such supplies more papers and surveys, thus more research by involving these performance data can lead to more interesting findings.
+As the threats to the validity of this paper have shown, comparing the performance of Commit Validation methods continues to be a difficult objective with many approaches staying closed source and not being openly published, and with not many reports on the performance of programs available. This marks an important area for future research, with more emerging methods and papers. While the performance of programs seems not to be well covered yet, the performance of underlying components such as relevant machine learning models or similar supplies more papers and surveys, thus more research by involving these performance data can lead to more interesting findings.
