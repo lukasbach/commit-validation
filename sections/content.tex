@@ -282,7 +282,7 @@ Finally, the \textit{Capability for Continuous Integration} (or CI Capability) w
 
 The initial starting point of research for this work was the Commit Validation approach CLEVER developed by Nayrolles et.~al.~\cite{Nayrolles2018}. CLEVER suits the criteria defined in section \ref{sec:scope} of being a Just-in-Time Fault Detection program that uses software commits as primary mechanism and as such resembles a reference approach for the topic.  
 
-To find more suitable approaches, backwards Snowball Sampling was performed on CLEVER. A forward search did not yield results as CLEVER was still a very recent work at the time of this writing.
+To find more suitable approaches, backwards Snowball Sampling was performed on CLEVER \cite{10.2307/2237615}. A forward search did not yield results as CLEVER was still a very recent work at the time of this writing.
 
 The paper by Nayrolles backwards referenced the papers by Kamei and Rosen, the latter introduced Commit Guru. Kamei's work was identified to be one of the first approaches on this topic and was included in this comparison due to its early release~\cite{Kamei2013}. Rosen's Commit Guru also very much fits the criteria, but differs from the other papers because it was released as a freely usable Open-Source project and as such is a very interesting work to consider~\cite{Rosen2015}. Yang's Deeper is a similar approach which builds upon the work of Kamei, but uses different internal mechanics and according to their statement was the first approach to use a deep neural network for classification~\cite{Yang2015}. Finally, the approach Unusual Commits by Goyal et. al. was considered because its scope differs from the other techniques by focusing more on the abnormality of commits rather than a binary classification into buggy or not, and similarly to Commit Guru, it was released as Open Source~\cite{Goyal2017}.
 
@@ -292,7 +292,7 @@ The paper by Nayrolles backwards referenced the papers by Kamei and Rosen, the l
 %	\item Describe how this paper made sure not to be biased.
 %\end{itemize}
 
-A primary threat to the validity of this paper was due to the fact that it was written in a low effort seminar by a single person and thus included less research effort than in similar papers, thus a complete research of the scientific area was out of scope. State of the Art research principles such as Snowball Sampling as described in section \ref{sec:searchprocess} and a low yet for the research field representative sampling size were used to still give a qualitative overview of Commit Validation techniques.
+A primary threat to the validity of this paper was due to the fact that it was written in a low effort seminar by a single person and thus included less research effort than in similar papers, thus a complete research of the scientific area was out of scope. State of the Art research principles such as Snowball Sampling as described in section \ref{sec:searchprocess} and a low yet for the research field representative sampling size were used to still give a qualitative overview of Commit Validation techniques \cite{10.2307/2237615}.
 
 A possible Selection Bias towards Nayrolles' approach CLEVER can be attributed because it was selected as starting point for this research and because it is the most recent publication~\cite{Nayrolles2018}. This is also due to the novelty of the research area. Approaches differing from typical Commit Validation techniques such as Unusual Commits by Goyal et. al. were taken into consideration to counter this bias~\cite{Goyal2017}.
 
