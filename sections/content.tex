@@ -498,8 +498,12 @@ A likely cause for this is Nayrolles' implementation of code matching, which red
 
 The aforementioned results have been collected in Table \ref{tab:classification} where each of the described facets map to specific values per identified Commit Validation approach. The basic structure of the table maps to the feature model described in Figure \ref{fig:featuremodel}. 
 
+\newcommand{\pointyes}{\CIRCLE}
+\newcommand{\pnotapplicable}{\LEFTcircle}
+\newcommand{\pointno}{\Circle}
+
 %TODO change if authors answer
-Cells marked with \textit{N/A} indicate that the respective information was not mentioned in the reporting paper. While I have tried to contact the authors of Deeper and Kamei's approach, they could not be reached for further details. The technical platform was also hard to determine for many papers that only reported on the classification model, even though it would be interesting to know as it can influence the practicality of integrating the system in production environments. Only Commit Guru and Unusual Commits have reported on their platform as they were also the only approaches that published their source code as open source.
+Cells marked with \pnotapplicable $ $ or \textit{N/A} indicate that the respective information was not mentioned in the reporting paper. While I have tried to contact the authors of Deeper and Kamei's approach, they could not be reached for further details. The technical platform was also hard to determine for many papers that only reported on the classification model, even though it would be interesting to know as it can influence the practicality of integrating the system in production environments. Only Commit Guru and Unusual Commits have reported on their platform as they were also the only approaches that published their source code as open source.
 
 %\begin{figure}[H]
 %	\centering
@@ -508,36 +512,37 @@ Cells marked with \textit{N/A} indicate that the respective information was not 
 %	\label{fig:classification}
 %\end{figure}
 
-\begin{table}[t]
+\begin{table}[p]
 	\centering
 	\caption{Classification results of the five identified approaches: CLEVER by Nayrolles \cite{Nayrolles2018}, Commit Guru by Rosen \cite{Rosen2015}, Unusual Commits by Goyal \cite{Goyal2017}, Deeper by Yang \cite{Yang2015}, Kamei's approach \cite{Kamei2013}.}
-	\begin{tabular}{@{}llllll@{}}
+	\begin{tabular}{@{}lccccc@{}}
 		\toprule
-		& CLEVER     & Guru   & Unusual & Deeper & Kamei \\ \midrule
-		\textit{User Features}             &            &        &         &        &       \\ 
-		Online Learning                    & Yes        & Yes    & Yes     & No     & No    \\
-		Normalization to user information  & No         & No     & Yes     & No     & No    \\
-		Metric normalization               & N/A        & N/A    & Yes     & Yes    & Yes   \\
-		Code Cleaning and Matching         & Yes        & No     & No      & No     & No    \\
-		Data Resampling                    & N/A        & N/A    & No      & Yes    & Yes   \\
-		Commit Bug Detection               & Yes        & Yes    & No      & Yes    & Yes   \\
-		Commit Abnormality Score           & Yes        & Yes    & No      & Yes    & Yes   \\
-		Suggestions of Code Alteration     & Yes        & No     & No      & No     & No    \\ \midrule
-		\textit{Event Data Source}         &            &        &         &        &       \\ 
-		Commit history of relevant project & Yes        & Yes    & Yes     & Yes    & Yes   \\
-		Commit history of similar projects & Yes        & No     & No      & No     & No    \\
-		External Issue-System              & Yes        & No     & No      & Yes    & Yes   \\ \midrule
-		\textit{Technical background}      &            &        &         &        &       \\ 
-		Technical internal Platform        & N/A        & Python & Java, R & N/A    & N/A   \\ \midrule
-		\textit{CI Capability}             &            &        &         &        &       \\ 
-		Precommit Hook                     & Yes        & No     & No      & N/A    & N/A   \\
-		Push Hook                          & No         & Yes    & No      & N/A    & N/A   \\
-		E-Mail Notification                & N/A        & Yes    & No      & N/A    & N/A   \\
-		Cloud or On-Premise                & On-Premise & Cloud  & Cloud   & N/A    & N/A   \\ \midrule
-		\textit{Considered Metrics}        &            &        &         &        &       \\ 
-		Commit Content                     & Yes        & Yes    & Yes     & Yes    & Yes   \\
-		Commit Metadata                    & No         & No     & Yes     & No     & No    \\
-		Commit Message                     & Yes        & Yes    & No      & Yes    & Yes   \\ \bottomrule
+		& CLEVER & Guru & Unusual & Deeper & Kamei \\ 
+		& \cite{Nayrolles2018} & \cite{Rosen2015} & \cite{Goyal2017} & \cite{Yang2015} & \cite{Kamei2013} \\ \midrule
+		\textit{User Features} & & & & & \\ 
+		Online Learning & \pointyes & \pointyes & \pointyes & \pointno & \pointno \\
+		Normalization to user info & \pointno & \pointno & \pointyes & \pointno & \pointno \\
+		Metric normalization & \pnotapplicable & \pnotapplicable & \pointyes & \pointyes & \pointyes \\
+		Code Cleaning and Matching & \pointyes & \pointno & \pointno & \pointno & \pointno \\
+		Data Resampling & \pnotapplicable & \pnotapplicable & \pointno & \pointyes & \pointyes \\
+		Commit Bug Detection & \pointyes & \pointyes & \pointno & \pointyes & \pointyes \\
+		Commit Abnormality Score & \pointyes & \pointyes & \pointno & \pointyes & \pointyes \\
+		Code Alteration Suggestions & \pointyes & \pointno & \pointno & \pointno & \pointno \\ \midrule
+		\textit{Event Data Source} & & & & & \\
+		History relevant project & \pointyes & \pointyes & \pointyes & \pointyes & \pointyes \\
+		History similar projects & \pointyes & \pointno & \pointno & \pointno & \pointno \\
+		External Issue-System & \pointyes & \pointno & \pointno & \pointyes & \pointyes \\ \midrule
+		\textit{Technical background} & & & & & \\
+		Technical internal Platform & N/A & Python & Java, R & N/A & N/A \\ \midrule
+		\textit{CI Capability} & & & & & \\
+		Precommit Hook & \pointyes & \pointno & \pointno & \pnotapplicable & \pnotapplicable \\
+		Push Hook & \pointno & \pointyes & \pointno & \pnotapplicable & \pnotapplicable \\
+		E-Mail notification & \pnotapplicable & \pointyes & \pointno & \pnotapplicable & \pnotapplicable \\
+		Cloud or On-Premise & On-Pr. & Cloud & Cloud & N/A & N/A \\ \midrule
+		\textit{Considered Metrics} & & & & & \\
+		Commit Content & \pointyes & \pointyes & \pointyes & \pointyes & \pointyes \\
+		Commit Metadata & \pointno & \pointno & \pointyes & \pointno & \pointno \\
+		Commit Message & \pointyes & \pointyes & \pointno & \pointyes & \pointyes \\ \bottomrule
 	\end{tabular}
 	\label{tab:classification}
 \end{table}
