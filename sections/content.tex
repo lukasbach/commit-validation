@@ -336,12 +336,49 @@ Commit Guru and Unusual Commits both only use the past commit history of the pro
 As Unusual Commits only measures the abnormality of commits, it does not need any data labeling specifying which past commits are buggy or not, the comparison of derived metrics of new commits with average values already shows results.
 Commit Guru on the other hand analyzes commit messages to detect keywords such as \texttt{fix} or \texttt{bug} to identify fix-commits and then backtrack the latest commit before the fix that changed similar lines to find out when the matching bug was introduced. This allows Commit Guru to effectively find previous buggy commits without the need for an additional data source such as an issue system.
 
-Commit Guru is implemented in Python while Unusual Commits is realized in Java and R. It is also worth mentioning that both Commit Guru and Unusual Commits implement a graphical user interface. Unusual Commits is implemented as a Google Chrome plug-in which embeds classification results into the commit history on GitHub, while Commit Guru runs in a web application that lists the analysis results for a selected repository. It also listens to new commits, automatically reanalyzes them and sends E-Mail notifications in response to the event, thus it shows CI capability in form of a Push Hook. Unusual Commits does not support any CI capabilities. Both are realized as free-to-use cloud applications.
+Commit Guru is implemented in Python while Unusual Commits is realized in Java and R. It is also worth mentioning that both Commit Guru and Unusual Commits implement a graphical user interface. 
+Figure \ref{fig:ui} shows the UI's of them both. 
+
+Commit Guru deploys a standalone web application which is built upon Google's Angular framework where one can see the classification results \cite{Rosen2015}. On its website \url{https://commit.guru} a Git repository URL can be entered to initialize the analysis. This repository will then be added to the ones continuously reanalyzed on changes and will be added to a list on the page. From there the analysis results can be opened as depicted in figure \ref{fig:ui-commitguru}, where the classification results for all commits as well as various metrics are listed. When new changes are detected on a repository, it is automatically reanalyzed and an E-Mail notification is sent as response to the event, thus it shows CI capability in form of a Push Hook.
+
+Unusual Commits on the other hand does not deploy its own webpage, but integrates into the GitHub web frontend, which causes the aforementioned restriction of only working with GitHub repositories \cite{Goyal2017}. The integration is realized by a Google Chrome plugin which can be installed from the Chrome Extension store\footnote{\url{https://chrome.google.com/webstore/detail/unusual-commits/hncljhkoaognphcmhdelchclkogepnae}}. Figure \ref{fig:ui-unusualcommits-history} shows how the calculated abnormality scores for each commit are embedded into GitHub's commit history. Their colors indicate the abnormality, giving the user a good overview at a glance. While no kind of CI capability is realized as new commits are only analyzed by actually visiting the commit history page, it still integrates well into a typical developer's workflow as this page is commonly visited to get an overview of changes made in the repository. 
+
+When clicking on a commit in GitHub, a detail overview of it is opened. Unusual Commits also embeds information on this page as depicted in figure \ref{fig:ui-unusualcommits-details}. Here the abnormal facts are listed for this commit which justify the generated abnormality score.
+
+%Unusual Commits is implemented as a Google Chrome plug-in which embeds classification results into the commit history on GitHub, while Commit Guru runs in a web application that lists the analysis results for a selected repository. It also listens to new commits, automatically reanalyzes them and sends E-Mail notifications in response to the event, thus it shows CI capability in form of a Push Hook. 
+%Unusual Commits does not support any CI capabilities. 
+Both are realized as free-to-use cloud applications.
 Unlike Commit Guru and Unusual Commits, Kamei did not publish an openly usable program, thus their CI capability or any technological information cannot be reported on.
 
 Kamei's approach and Commit Guru use the same set of metrics, which are metrics regarding the commit content such as changed lines of codes or the number of changed files, as well as the commit history, such as the commit purpose and information about the developer. Unusual Commits also considers the commit content, but instead of the latter metrics the commits metadata is taken into account.
 
 Classification approaches that rely on purely metric based methods generally show high potential and are well represented in the research area. However, the availability of metrical vectors extracted from commit data also offers the usage of machine learning methods to further increase classification performance. The next section will detail the use of machine learning in existing Commit Validation approaches.
+
+
+\begin{figure}[p!]
+	\centering
+	
+	\begin{subfigure}[t]{\textwidth}
+		\centering
+		\includegraphics[width=.75\textwidth]{images/ui/commitguru/screenshot-repo-commits-buggy-smaller}
+		\caption{Web panel of Commit Guru \cite{Rosen2015}. A dedicated page lists all commits of a repository and shows their classification result.}
+		\label{fig:ui-commitguru}
+	\end{subfigure}
+	
+	\begin{subfigure}[t]{.75\textwidth}
+		\includegraphics[width=\textwidth]{images/ui/unusualcommits/github-integration2-smaller}
+		\caption{Unusual Commit embeds commit's abnormality scores in GitHub's commit history \cite{Goyal2017}.}
+		\label{fig:ui-unusualcommits-history}
+	\end{subfigure}
+	
+	\begin{subfigure}[t]{.75\textwidth}
+		\includegraphics[width=\textwidth]{images/ui/unusualcommits/commit-details-smaller}
+		\caption{When opening a commit, Unusual Commit describes why a potentially high abnormality score was calculated \cite{Goyal2017}.}
+		\label{fig:ui-unusualcommits-details}
+	\end{subfigure}
+	\caption{Graphical user interfaces of Commit Guru \cite{Rosen2015} and Unusual Commits \cite{Goyal2017}}
+	\label{fig:ui}
+\end{figure}
 
 %Both approaches considered the metrics which regard the content of the commits, such as changed lines of code or the number of changed files. Commit Guru also considered the history of the commit, its purpose and information about the authoring developer, while Unusual Commits considered the length of the commit message, the time of commit and the changed file types. \cite{Rosen2015,Goyal2017}
 
