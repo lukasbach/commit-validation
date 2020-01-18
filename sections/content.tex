@@ -126,7 +126,7 @@ A concluding overview of the typical commit validation process is shown in Figur
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=\textwidth]{images/commitvalidation-process/typicalprocess-pdf}
-	\caption{The typical commit validation process.}
+	\caption{The typical Commit Validation process.}
 	\label{fig:cvprocess}
 \end{figure}
 
@@ -322,6 +322,7 @@ The results are then presented in tabular form in Table \ref{tab:classification}
 %TODO use \paragraph{title} per approach
 \subsection{Purely Metric Based Approaches}
 \label{sec:comparison-metricbased}
+%TODO proof read again as much has changed
 
 The approaches \textit{Commit Guru} by Rosen et. al. \cite{Rosen2015}, \textit{Unusual Commits} by Goyal et. al. \cite{Goyal2017} and the approach by Kamei et. al. \cite{Kamei2013} fall into the category of purely metric based approaches. They rely only on metrics that were directly derived from commits and use them to rate commits based on that. While Commit Guru works for any kind of Git repositories, Unusual Commits only works for repositories hosted on GitHub. Kamei did not state any restrictions of such kind \cite{Kamei2013}.
 
@@ -352,8 +353,29 @@ Unlike Commit Guru and Unusual Commits, Kamei did not publish an openly usable p
 
 Kamei's approach and Commit Guru use the same set of metrics, which are metrics regarding the commit content such as changed lines of codes or the number of changed files, as well as the commit history, such as the commit purpose and information about the developer. Unusual Commits also considers the commit content, but instead of the latter metrics the commits metadata is taken into account.
 
-Classification approaches that rely on purely metric based methods generally show high potential and are well represented in the research area. However, the availability of metrical vectors extracted from commit data also offers the usage of machine learning methods to further increase classification performance. The next section will detail the use of machine learning in existing Commit Validation approaches.
+%TODO figure positionings
+\begin{figure}[t]
+	\centering
+	
+	\begin{subfigure}[t]{\textwidth}
+		\includegraphics[width=\textwidth]{images/commitvalidation-process/commitguruprocess-pdf}
+		%\caption{The Commit Validation process as implemented by Rosen's Commit Guru \cite{Rosen2015}}
+		\label{fig:cvprocess-commitguru}
+	\end{subfigure}
+	
+	\begin{subfigure}[t]{\textwidth}
+		\includegraphics[width=\textwidth]{images/commitvalidation-process/unusualcommitsprocess-pdf}
+		%\caption{The Commit Validation process as implemented by Goyal's Unusual Commits \cite{Goyal2017}}
+		\label{fig:cvprocess-unusual}
+	\end{subfigure}
+	\caption{The Commit Validation process as implemented by Rosen's Commit Guru \cite{Rosen2015} and by Goyal's Unusual Commits \cite{Goyal2017}}
+	\label{fig:cvprocess-guru-unusual}
+\end{figure}
 
+%TODO describe further if more content is needed.
+In section \ref{sec:cvprocess}, figure \ref{fig:cvprocess} depicted the typical Commit Validation process. Figure \ref{fig:cvprocess-guru-unusual} shows the adapted processes as implemented by Commit Guru and Unusual Commits. As one can see, they are initialized by either a push event on the repository in the case of Commit Guru or by opening the commit history in GitHub in the case of Unusual Commits. Both approaches then extract metrical vectors and perform classification or calculations based on that, followed by reporting the process results on either Commit Guru's website or embedded into the commit history by Unusual Commits.
+
+Classification approaches that rely on purely metric based methods generally show high potential and are well represented in the research area. However, the availability of metrical vectors extracted from commit data also offers the usage of machine learning methods to further increase classification performance. The next section will detail the use of machine learning in existing Commit Validation approaches.
 
 \begin{figure}[p!]
 	\centering
