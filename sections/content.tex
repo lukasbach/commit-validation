@@ -74,13 +74,10 @@ There exist various approaches which just focus on detecting bugs and generating
 
 
 \subsection{Outline}
-This Section gives an introduction on the topic and a problem definition and scope for this paper.
-
-Section \ref{sec:background} introduces the background of Commit Validation, Just-in-Time Fault Detection and -Prevention as well as statistical measures which were used during the performance comparison.
-
+%This Section gives an introduction on the topic and a problem definition and scope for this paper.
+Section \ref{sec:background} introduces the background of Commit Validation, Just-in-Time Fault Detection and -prevention as well as statistical measures which were used during the performance comparison.
 Section \ref{sec:comparingapproaches} specifies how Commit Validation approaches can be compared, while the following Section \ref{sec:comparison} describes the results from the comparison on the five selected approaches. A discussion of the results follows in Section \ref{sec:discussion}.
-
-The paper concludes with an overview of related surveys on the topic in Section \ref{sec:relatedsurveys} and the concluding Section \ref{sec:conclusions}.
+The paper concludes with an overview of related surveys on the topic in Section \ref{sec:relatedsurveys} and the final Section \ref{sec:conclusions}.
 
 %\begin{itemize}
 %	\item Describe the outline of this work.
@@ -119,7 +116,7 @@ A variety of approaches exist
 for analyzing the quality of code changes at commit time. A popular approach is the manual authoring of unit-, integration- or end-to-end-tests to verify that a project's implementation fulfills its specification \cite{Maayan2018}. Such test definitions can be setup as a commit hook for them to run at commit time.
 
 However, this paper focuses on approaches which do not require manual specifications such as test cases to detect a faulty commit, but instead automatically rate the probability of a commit to introduce a bug by leveraging external data sources that are available.
-While such typical approaches like manual test cases come with extra effort and other drawbacks, a primary disadvantage over more automatized methods like Fault Detection becomes clear with the well known quote by Dijkstra: "Testing shows the presence, not the absence of bugs!" \cite{JohnN1969}.
+While such typical approaches like manual test cases come with extra effort and other drawbacks, a primary disadvantage over more automatized methods like Fault Detection becomes clear with the well known quote by Dijkstra: \textit{"Testing shows the presence, not the absence of bugs!"} \cite[p.~16]{JohnN1969}.
 
 A concluding overview of the typical commit validation process is shown in Figure \ref{fig:cvprocess}. As detailed, the process starts either in response to the precommit hook directly after the commit process or to the push hook after a set of commits was pushed to a remote server. Then, the commit changesets are usually used to extract metrical vectors which in turn are used to classify the commit data as faulty or not.
 
@@ -197,6 +194,7 @@ When evaluating the performance of binary classification techniques such as the 
 %\todo{Reference the section where it is described why the measures listed in the original papers can be compared with each other, i.e. because they cross-reference each other}
 
 The measurements are based on confusion matrices, which maps an actual binary class to the predicted class by the analyzed classification mechanic~\cite{Powers2007}. Its four cells describe the number of predicted positives that were correct or incorrect (true positives and false positives) and similarly the number of predicted negatives (true negatives and false negatives)~\cite{Fawcett2006}. A typical notion for a confusion matrix is shown in Table \ref{tab:confusionmatrix}.
+The measures precision, recall and F1 measure are then derived from the numbers in a confusion matrix as shown in Figure~\ref{fig:formulas}~\cite{Powers2007}.
 
 \begin{table}[t]
 	\centering
@@ -210,8 +208,6 @@ The measurements are based on confusion matrices, which maps an actual binary cl
 	\end{tabular}
 	\label{tab:confusionmatrix}
 \end{table}
-
-The measures precision, recall and F1 measure are then derived from the numbers in a confusion matrix as shown in Figure~\ref{fig:formulas}~\cite{Powers2007}.
 
 \begin{figure}[t]
 	\centering
@@ -479,7 +475,7 @@ Yang et. al. included a performance comparison between their approach and Kamei'
 
 Table \ref{tab:perfclever} describes the findings from Nayrolles' paper \cite{Nayrolles2018}, while Table \ref{tab:perfdeeper} describes those from Yang's paper \cite{Yang2015}.
 
-Nayrolles findings show that his approach performs better than Commit Guru, with an precision increase of more than $13\%$ and an increase in the F1 measure of about $7\%$. Yang also found that his approach performs better than the one described by Kamei, with which he compared with in his paper. Even though the performance gap was not as noticeable in his case (with an increase of the F1 measure of only about $1\%$), there was still an improvement. 
+Nayrolles findings show that his approach performs better than Commit Guru, with a precision increase of more than $13\%$ and an increase in the F1 measure of about $7\%$. Yang also found that his approach performs better than the one described by Kamei, with which he compared with in his paper. Even though the performance gap was not as noticeable in his case (with an increase of the F1 measure of only about $1\%$), there was still an improvement. 
 
 It is also notable that Nayrolles approach primarily improved precision compared to Commit Guru, while Deeper improved recall compared to Kamei's approach. 
 A likely cause for this is Nayrolles' implementation of code matching, which reduced the number of false positives, resulting in better precision.
