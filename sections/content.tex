@@ -459,8 +459,16 @@ Nayrolles reported that just resorting to the code matching method and refrain f
 
 With the code matching analysis results linking a similar bug introducing commit, the generation of altered code suggestions is almost a trivial process: the fix commit for the bug is determined using the issue system, and the fix changeset is adapted to the new code context by changing indentation depth and variable names.
 
-In contrast to other approaches, CLEVER was motivated by an industrial rather than a scientific context. It was developed for production use within Ubisoft with a company-internal deployment planned. Because of that, its online learning and Continuous Integration capabilities are both important and were both implemented. On the latter one, Nayrolles et. al. decided on precommit hooks which run directly on the developers machines at the moment they commit source code, resulting in fast feedback.
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\textwidth]{images/commitvalidation-process/cleverprocess-pdf}
+	\caption{The Commit Validation process as implemented by Nayrolles' CLEVER \cite{Nayrolles2018}}
+	\label{fig:cvprocess-clever}
+\end{figure}
 
+Figure \ref{fig:cvprocess-clever} depicts the Commit Validation process as implemented by CLEVER. With the code matching component and the generation of altered code suggestions, this process is longer than the processes mentioned before for other approaches as new steps are introduced. It is notable that, as CLEVER implements a pure Pre-Commit Hook which checks during the commit action and responds by blocking in case of a detected fault, the process is canceled after the classification step if the commit is considered non-faulty.
+
+In contrast to other approaches, CLEVER was motivated by an industrial rather than a scientific context. It was developed for production use within Ubisoft with a company-internal deployment planned. Because of that, its online learning and Continuous Integration capabilities are both important and were both implemented. On the latter one, Nayrolles et. al. decided on precommit hooks which run directly on the developers machines at the moment they commit source code, resulting in fast feedback.
 
 \subsection{Performance Comparison}
 \label{sec:performance}
