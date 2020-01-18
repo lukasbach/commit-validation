@@ -458,6 +458,7 @@ A likely cause for this is Nayrolles' implementation of code matching, which red
 % MOVED INTO DISCUSSION
 %It is also notable that Nayrolles approach primarily improved the precision compared to Commit Guru, while Deeper improved the recall compared to Kamei's approach. A likely cause for this are differing training settings, as increasing the precision in model training often leads to worse recall and vice versa. However the more interesting correlation from the numbers suggests that establishing machine learning methods brings noticeable performance improvements compared to relying solely on metric-based techniques. Nayrolles also reported that incorporating code matching significantly increases performance in CLEVER \cite{Nayrolles2018}.
 
+%TODO make sure that the tables follow each other
 \begin{table}[t]
 	\centering
 	\caption{Performance comparison of CLEVER and Commit Guru, as evaluated by Nayrolles et. al. \cite{Nayrolles2018}}
@@ -497,13 +498,22 @@ A likely cause for this is Nayrolles' implementation of code matching, which red
 %\end{itemize}
 
 The aforementioned results have been collected in Table \ref{tab:classification} where each of the described facets map to specific values per identified Commit Validation approach. The basic structure of the table maps to the feature model described in Figure \ref{fig:featuremodel}. 
+Interesting findings from the table will be highlighted and discussed in the following section \ref{sec:discussion}.
+
+The listed category \textit{Technological Features} lists user features, implemented data normalization techniques and Online Learning as resembled in the feature model. While one of the user features of commit bug detection, an commit abnormality score or altered code suggestions has to be implemented, the usage of of data normalization and Online Learning varies between the five approaches.
+
+The event data source indicates where the data comes from which is used for training the classification model. All approaches either use the commit history of the analyzed project or the one from similar projects, the associated issue system is also commonly utilized.
 
 \newcommand{\pointyes}{\CIRCLE}
 \newcommand{\pnotapplicable}{\LEFTcircle}
 \newcommand{\pointno}{\Circle}
 
 %TODO change if authors answer
-Cells marked with \pnotapplicable $ $ or \textit{N/A} indicate that the respective information was not mentioned in the reporting paper. While I have tried to contact the authors of Deeper and Kamei's approach, they could not be reached for further details. The technical platform was also hard to determine for many papers that only reported on the classification model, even though it would be interesting to know as it can influence the practicality of integrating the system in production environments. Only Commit Guru and Unusual Commits have reported on their platform as they were also the only approaches that published their source code as open source.
+The technical platform indicates which platform the approach is implemented in, which can be interesting for the end user as it can influence the practicality of integrating the system in production environments. The category CI capability is reflected from the feature model to report on how approaches integrate into CI systems, a quality which was considered important for this paper. As both a approaches platform and its CI capability are very technical features and not all papers report on the deployment of their methods but rather their classification model, this information was not always available. Especially the technical platform was only reported on by Commit Guru and Unusual Commits. While I have tried to contact the authors of Deeper and Kamei's approach, they could not be reached for further details. Cells marked with \pnotapplicable $ $ or \textit{N/A} thus indicate that the respective information was not mentioned in the reporting paper.
+
+Finally, the last category of considered metrics describes which measures were used by the classification model for training and evaluation. Metrics regarding the commit content contain added, removed or changed lines of code, as well as the number of changed directories, files or similar. Commit metadata contains information about the length of the describing message, the time of commit and the types of files changed in that commit. Metrics regarding the commit message contain the purpose of the commit such as a fix or a new feature, as well as information about the developer or similar.
+
+%Cells marked with \pnotapplicable $ $ or \textit{N/A} indicate that the respective information was not mentioned in the reporting paper. While I have tried to contact the authors of Deeper and Kamei's approach, they could not be reached for further details. The technical platform was also hard to determine for many papers that only reported on the classification model, even though it would be interesting to know as it can influence the practicality of integrating the system in production environments. Only Commit Guru and Unusual Commits have reported on their platform as they were also the only approaches that published their source code as open source.
 
 %\begin{figure}[H]
 %	\centering
@@ -512,6 +522,7 @@ Cells marked with \pnotapplicable $ $ or \textit{N/A} indicate that the respecti
 %	\label{fig:classification}
 %\end{figure}
 
+%TODO check values, might have destroyed the values here...
 \begin{table}[p]
 	\centering
 	\caption{Classification results of the five identified approaches: CLEVER by Nayrolles \cite{Nayrolles2018}, Commit Guru by Rosen \cite{Rosen2015}, Unusual Commits by Goyal \cite{Goyal2017}, Deeper by Yang \cite{Yang2015}, Kamei's approach \cite{Kamei2013}.}
@@ -519,14 +530,14 @@ Cells marked with \pnotapplicable $ $ or \textit{N/A} indicate that the respecti
 		\toprule
 		& CLEVER & Guru & Unusual & Deeper & Kamei \\ 
 		& \cite{Nayrolles2018} & \cite{Rosen2015} & \cite{Goyal2017} & \cite{Yang2015} & \cite{Kamei2013} \\ \midrule
-		\textit{User Features} & & & & & \\ 
+		\textit{Technological Features} & & & & & \\ 
 		Online Learning & \pointyes & \pointyes & \pointyes & \pointno & \pointno \\
 		Normalization to user info & \pointno & \pointno & \pointyes & \pointno & \pointno \\
 		Metric normalization & \pnotapplicable & \pnotapplicable & \pointyes & \pointyes & \pointyes \\
 		Code Cleaning and Matching & \pointyes & \pointno & \pointno & \pointno & \pointno \\
 		Data Resampling & \pnotapplicable & \pnotapplicable & \pointno & \pointyes & \pointyes \\
 		Commit Bug Detection & \pointyes & \pointyes & \pointno & \pointyes & \pointyes \\
-		Commit Abnormality Score & \pointyes & \pointyes & \pointno & \pointyes & \pointyes \\
+		Commit Abnormality Score & \pointno & \pointno & \pointyes & \pointno & \pointno \\
 		Code Alteration Suggestions & \pointyes & \pointno & \pointno & \pointno & \pointno \\ \midrule
 		\textit{Event Data Source} & & & & & \\
 		History relevant project & \pointyes & \pointyes & \pointyes & \pointyes & \pointyes \\
@@ -557,6 +568,8 @@ Cells marked with \pnotapplicable $ $ or \textit{N/A} indicate that the respecti
 %	\item Outline how this mapping can be used to find an suitable Commit Validation technique for a new project.
 %\end{itemize}
 %}
+
+%TODO report on technical background?
 
 When considering the classification results in Table \ref{tab:classification}, various interesting findings can be deduced. In the following section, notable correlations will be emphasized and their possible causes discussed.
 
