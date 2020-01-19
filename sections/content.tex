@@ -118,7 +118,7 @@ for analyzing the quality of code changes at commit time. A popular approach is 
 However, this paper focuses on approaches which do not require manual specifications such as test cases to detect a faulty commit, but instead automatically rate the probability of a commit to introduce a bug by leveraging external data sources that are available.
 While such typical approaches like manual test cases come with extra effort and other drawbacks, a primary disadvantage over more automatized methods like Fault Detection becomes clear with the well known quote by Dijkstra: \textit{"Testing shows the presence, not the absence of bugs!"} \cite[p.~16]{JohnN1969}.
 
-A concluding overview of the typical commit validation process is shown in Figure \ref{fig:cvprocess}. As detailed, the process starts either in response to the precommit hook directly after the commit process or to the push hook after a set of commits was pushed to a remote server. Then, the commit changesets are usually used to extract metrical vectors which in turn are used to classify the commit data as faulty or not.
+A concluding overview of the typical commit validation process is shown in Figure \ref{fig:cvprocess}. As detailed, the process starts either in response to the pre-commit hook directly after the commit process or to the push hook after a set of commits was pushed to a remote server. Then, the commit changesets are usually used to extract metrical vectors which in turn are used to classify the commit data as faulty or not.
 
 \begin{figure}[t]
 	\centering
@@ -246,16 +246,21 @@ To compare the Commit Validation approaches, a feature model was derived from th
 %Three categories have been specified for comparing Commit Validation approaches.
 For comparing Commit Validation approaches the three categories Technological Features, Event Data Source and CI Capability have been defined.
 
-The first category compares which \textit{Technological Features} approaches implement. The most important facet in this category is \textit{User Features}, which are features that are interesting to the end user of the approach. 
+The first category compares which \textit{Technological Features} approaches implement. The most important facet in this category is \textit{User Features}, which are features that are interesting to the end user of the approach. The three selected possibilities reflect features that are implemented by at least one approach.
+
 %Common user features are the detection of buggy commits and rating the anomality of commits.
 More relevant to the performance of a method are the facets \textit{Metrics} and \textit{Data Normalization}. All approaches use some metrics to compare commit data, however the respectively used metrics vary between the approaches.
 The latter facet shows which normalization techniques are used in the approaches to further improve their classification performance.
-\textit{Online Learning} describes whether an approach is able to integrate analysis results made during production use into its analysis database, otherwise only the analysis results made on initial training data are considered. 
+Both facets are also derived from the five approaches, as each of the metrics or normalization techniques are also all used by at least one approach and thus define a good opportunity for comparison. Section \ref{sec:performance} gives an in-depth performance comparison of approaches.
+
+\textit{Online Learning} describes whether an approach is able to integrate analysis results made during production use into its analysis database, otherwise only the analysis results made on initial training data are considered~\cite{MAL-018}. This facet is relevant for production contexts where new commits should affect the existing classification model, but due to the scientific background of some papers it is not implemented in all approaches such as Deeper by Yang et. al.~\cite{Yang2015}.
 
 The \textit{Event Data Source} was also considered. This facet describes which sources of data are considered for training the classifier. All approaches are using the commit history of the repository for which new commits are being analyzed. Some approaches also used the commit history of similar repositories or issue trackers which belong to the repositories.
+Especially Nayrolles et al. describes their data source in detail and motivates how using additional data can further improve classification performance \cite{Nayrolles2018}. The used data source is also relevant when considering using the approach in a production context as some sources such as issue systems are not always available. 
 %TODO rename facettes in featuremodel from "...project" to "...repository". (oder doch einfach so lassen?)
 
-Finally, the \textit{Capability for Continuous Integration} (or CI Capability) was considered. Because this paper focuses on Commit Validation, it is important how such an approach can be integrated into the commit process. As described in Section \ref{sec:cvprocess}, VCM hooks are typical integration methods. The deployment of approaches is also interesting for practical usage, as a cloud based solution can be incompatible with company guidelines.
+%TODO was CI Capability defined before?
+Finally, the \textit{Capability for Continuous Integration} (or CI Capability) was considered. Because this paper focuses on Commit Validation, it is important how such an approach can be integrated into the commit process. As described in Section \ref{sec:cvprocess}, VCM hooks are typical integration methods. The deployment of approaches is also interesting for practical usage, as a cloud based solution can be incompatible with company guidelines. Again Nayrolles' recent approach implements CI capability in form of a pre-commit hook and describes the importance of such features for an improved quality assurance workflow \cite{Nayrolles2018}.
 %TODO if more text is needed, go into detail which kinds of hooks can be used
 
 %\begin{itemize}
@@ -464,7 +469,7 @@ With the code matching analysis results linking a similar bug introducing commit
 
 Figure \ref{fig:cvprocess-clever} depicts the Commit Validation process as implemented by CLEVER. With the code matching component and the generation of altered code suggestions, this process is longer than the processes mentioned before for other approaches as new steps are introduced. It is notable that, as CLEVER implements a pure Pre-Commit Hook which checks during the commit action and responds by blocking in case of a detected fault, the process is canceled after the classification step if the commit is considered non-faulty.
 
-In contrast to other approaches, CLEVER was motivated by an industrial rather than a scientific context. It was developed for production use within Ubisoft with a company-internal deployment planned. Because of that, its online learning and Continuous Integration capabilities are both important and were both implemented. On the latter one, Nayrolles et. al. decided on precommit hooks which run directly on the developers machines at the moment they commit source code, resulting in fast feedback.
+In contrast to other approaches, CLEVER was motivated by an industrial rather than a scientific context. It was developed for production use within Ubisoft with a company-internal deployment planned. Because of that, its online learning and Continuous Integration capabilities are both important and were both implemented. On the latter one, Nayrolles et. al. decided on pre-commit hooks which run directly on the developers machines at the moment they commit source code, resulting in fast feedback.
 
 \subsection{Performance Comparison}
 \label{sec:performance}
@@ -572,7 +577,7 @@ Finally, the last category of considered metrics describes which measures were u
 		\textit{Technical background} & & & & & \\
 		Technical internal Platform & N/A & Python & Java, R & N/A & N/A \\ \midrule
 		\textit{CI Capability} & & & & & \\
-		Precommit Hook & \pointyes & \pointno & \pointno & \pnotapplicable & \pnotapplicable \\
+		Pre-commit Hook & \pointyes & \pointno & \pointno & \pnotapplicable & \pnotapplicable \\
 		Push Hook & \pointno & \pointyes & \pointno & \pnotapplicable & \pnotapplicable \\
 		E-Mail notification & \pnotapplicable & \pointyes & \pointno & \pnotapplicable & \pnotapplicable \\
 		Cloud or On-Premise & On-Pr. & Cloud & Cloud & N/A & N/A \\ \midrule
