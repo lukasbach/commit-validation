@@ -614,12 +614,26 @@ One interesting finding comes from the numbers of the aforementioned performance
 
 The event data source is also closely related to the classification performance. Here CLEVER also stands out as it is the only approach to consider projects that are similar to the project for which commits are analyzed. The usage of previous Commit Data of the analyzed project are typical event sources which are used by all approaches. Incorporating data from issue systems also correlates with the performance increases and usually makes sense to do because issue systems are used in most industrial software engineering projects, thus their data is available anyway.
 
-Another feature that likely affects classification performance is data normalization regarding user information and behavior, a feature which was only implemented by Unusual Commits \cite{Goyal2017}.
+Another feature that likely affects classification performance is data normalization regarding user information and behavior, a feature which was only implemented by Unusual Commits~\cite{Goyal2017}.
 % TODO if this was not described before, describe here
 Because no performance comparison of Unusual Commits was found, an implication of the positive or negative effect of this method cannot be concluded here, but it is an interesting finding nonetheless.
 
-A topic closely related to the classification performance are the metrics which were taken into consideration during classification. Between most approaches, the used metrics did not differ too much: CLEVER, Commit Guru, Deeper and Kamei all used metrics regarding commit content and the commit message. Only Unusual Commits used commit metadata instead of the commit message. This suggests that a typical set of relevant metrics for defect detection has been established in the research area. The metrics were initially introduced by Kamei's original paper and referenced by the other papers, thus Kamei et. al. initially defined these relevant metrics and they were used mostly unchanged since \cite{Kamei2013}.
+A topic closely related to the classification performance are the metrics which were taken into consideration during classification. Between most approaches, the used metrics did not differ too much: CLEVER, Commit Guru, Deeper and Kamei all used metrics regarding commit content and the commit message. Only Unusual Commits used commit metadata instead of the commit message. This suggests that a typical set of relevant metrics for defect detection has been established in the research area. The metrics were initially introduced by Kamei's original paper and referenced by the other papers, thus Kamei et. al. initially defined these relevant metrics and they were used mostly unchanged since~\cite{Kamei2013}.
 
+% TODO proof read
+In conclusion, there are many differences in existing Commit Validation approaches and more variations are likely to appear in the future. Due to the scientific nature of many approaches and their lack of open availability, choosing the right method for a production project is no easy task.
+%
+CI capability is a relevant feature that is especially implemented by industrial and more recent approaches, and is important to consider for production deployments. While some kind of VCM hooks are often used for continuous integration, the kind of hook depends on the application context: Nayrolles et al. reported that pre-commit hooks have the advantage of giving feedback to the user during the moment when they are most concerned with the changes~\cite{Nayrolles2018}, while push hooks are easier to set up as they do not have to be installed on every developers machine.
+The event data source is also important to consider, as not all possible data sources are always available in specific production contexts. External issue systems are not always used in a developers environment.
+On the other hand, using an approach that does not use a data source which is available anyways can unnecessarily hurt classification performance.
+%
+Similar to CI capability, online learning is also generally implemented by approaches that focus on an industrial context. This feature is relevant for production use as not supporting online learning only makes sense for approaches where the scientific analysis of classification performance is of primary importance.
+%
+%The implemented user features also vary between commit validation approaches. The feature of bug detection is implemented by all but one of the analyzed approaches, and 
+%dictates %TODO correct wording?
+%this paper due to its scope as described in section~\ref{sec:scope}. Additional 
+%
+There are more facets which primarily affect classification performance where existing approaches are hard to compare due to the aforementioned complications of lacking performance reports. However, there are noticeable trends to see on the data that novel features such as neural networks or code matching can significantly increase performance, and thus should be taken into account when choosing an commit validation method for a production project. One undoubtable takeaway of the study is that new technologies on the topic continue to emerge and positively impact the performance of future approaches. 
 
 
 
