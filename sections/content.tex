@@ -350,7 +350,9 @@ Commit Guru and Kamei's approach on the other hand output the same information a
 
 Commit Guru and Unusual Commits both only use the past commit history of the project which is analyzed as their event data source, not any other data sources, whereas Kamei's approach also takes information from the issue system attached to the repository into account.
 As Unusual Commits only measures the abnormality of commits, it does not need any data labeling specifying which past commits are faulty or not, the comparison of derived metrics of new commits with average values already shows results.
-Commit Guru on the other hand analyzes commit messages to detect keywords such as \texttt{fix} or \texttt{bug} to identify fix-commits and then backtrack the latest commit before the fix that changed similar lines to find out when the matching bug was introduced. This allows Commit Guru to effectively find previous faulty commits without the need for an additional data source such as an issue system~\cite{Rosen2015}.
+%Commit Guru on the other hand analyzes commit messages to detect keywords such as \texttt{fix} or \texttt{bug} to identify fix-commits and then backtrack the latest commit before the fix that changed similar lines to find out when the matching bug was introduced. 
+Commit Guru on the other hand analyzes commit messages to detect keywords such as \texttt{fix} or \texttt{bug} to identify fix-commits. It then backtracks the latest commit before the fix that changed similar lines to find out when the matching bug was introduced. 
+This allows Commit Guru to effectively find previous faulty commits without the need for an additional data source such as an issue system~\cite{Rosen2015}.
 
 Commit Guru is implemented in Python while Unusual Commits is realized in Java and R. It is also worth mentioning that both Commit Guru and Unusual Commits implement a graphical user interface. 
 Figure \ref{fig:ui} shows the UI's of them both. 
