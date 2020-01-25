@@ -116,7 +116,9 @@ There are many ways of increasing software quality in the field of software engi
 An important concept for VCS are \textit{commits}, small sets of code changes that usually happen atomically and are annotated by the developer describing what the changes do. Commits are explicitly performed by the developer and usually mark a finished feature, bug-fix, chore work or similar artifacts. Because of that, the time at which a developer performs a commit is a suitable time for validating the change and analyzing it to find potential bugs that have been introduced while the developer still has the changes in his mind, yet considers them to be final. %TODO citation?
 
 Git supports a concept called \textit{Hooks}. A hook specifies a custom script which runs programmatically in response to an event such as commits or uploading a set of commits to a remote server (which is called a \textit{Push} event). 
-Git distinguishes between \textit{Client-Side Hooks}, which run on the local device of the developer that is authoring the commit, and \textit{Server-Side Hooks}, which run on the remote server \cite{Chacon:2014:PG:2695634}.
+Git distinguishes between \textit{Client-Side Hooks}, which run on the local device of the developer that is authoring the commit, and \textit{Server-Side Hooks}, which run on the remote server \cite{Chacon:2014:PG:2695634}. 
+Especially hooks that run locally in response to a commit should preferably run quickly as the developer has to actively wait for them to complete. Because of that it is also important that a locally evaluating commit validation process executes fast. Nayrolles et al. for example reported that his approach CLEVER takes an average of $3.75$ seconds to complete~\cite{Nayrolles2018}.
+%Server-Side Hooks are commonly used to automatically run test automation after pushed changes and deploy internal or public production versions of the software.
 %Such hooks are differentiated into \textit{Client-Side Hooks}, which run on the local device of the developer that is authoring the commit, and \textit{Server-Side Hooks}, which run on the remote server. \cite{Chacon:2014:PG:2695634}
 
 A variety of approaches exist
@@ -125,6 +127,8 @@ for analyzing the quality of code changes at commit time. A popular approach is 
 
 However, this paper focuses on approaches which do not require manual specifications such as test cases to detect a faulty commit, but instead automatically rate the probability of a commit to introduce a bug by leveraging external data sources that are available.
 While such typical approaches like manual test cases come with extra effort and other drawbacks, a primary disadvantage over more automatized methods like Fault Detection becomes clear with the well known quote by Dijkstra: \textit{"Testing shows the presence, not the absence of bugs!"} \cite[p.~16]{JohnN1969}.
+
+Code analysis tools are also distinguished into \textit{executing} and \textit{static} analysis methods. Executing methods run the code and use the evaluated responses to identify faults. Manually written test cases fall into this category. The methods considered in this paper belong to the category of static analysis methods, where the code structure is statically analyzed and checked for suspicious locations rather than actually executing it~\cite{Wichmann1995}.
 
 A concluding overview of the typical commit validation process is shown in Figure \ref{fig:cvprocess}. As detailed, the process starts either in response to the pre-commit hook directly after the commit process or to the push hook after a set of commits was pushed to a remote server. Then, the commit changesets are usually used to extract metrical vectors which in turn are used to classify the commit data as faulty or not.
 
@@ -271,7 +275,8 @@ Especially Nayrolles et al. describes their data source in detail and motivates 
 %TODO rename facettes in featuremodel from "...project" to "...repository". (oder doch einfach so lassen?)
 
 %TODO was CI Capability defined before?
-Finally, the \textit{Capability for Continuous Integration} (or CI Capability) is considered. Because this paper focuses on Commit Validation, it is important how such an approach can be integrated into the commit process. As described in Section \ref{sec:cvprocess}, VCS hooks are typical integration methods. The deployment of the different approaches is also interesting for practical usage, as a cloud based solution can be incompatible with company guidelines. Again Nayrolles' recent approach implements CI capability in form of a pre-commit hook and describes the importance of such features for an improved quality assurance workflow \cite{Nayrolles2018}.
+Finally, the \textit{Capability for Continuous Integration} (or CI Capability) is considered. Continuous Integration describes the autonomous infrastructure that works alongside the developers workflow and continuously tests, verifies and deploys code artifacts in response to new commits~\cite{booch1991object}.
+Because this paper focuses on Commit Validation, it is important how such an approach can be integrated into the commit process. As described in Section \ref{sec:cvprocess}, VCS hooks are typical integration methods. The deployment of the different approaches is also interesting for practical usage, as a cloud based solution can be incompatible with company guidelines. Again Nayrolles' recent approach implements CI capability in form of a pre-commit hook and describes the importance of such features for an improved quality assurance workflow \cite{Nayrolles2018}.
 %TODO if more text is needed, go into detail which kinds of hooks can be used
 
 %\begin{itemize}
