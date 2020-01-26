@@ -266,9 +266,9 @@ The first category compares which \textit{Technological Features} are implement 
 %Common user features are the detection of buggy commits and rating the anomality of commits.
 More relevant to the performance of a method are the facets \textit{Metrics} and \textit{Data Normalization}. All approaches use some metrics to compare commit data, however the respectively used metrics vary between the approaches.
 The latter facet shows which normalization techniques are used in the approaches to further improve their classification performance.
-Both facets are also derived from the five approaches, as each of the metrics or normalization techniques are also all used by at least one approach and thus define a good opportunity for comparison. Section \ref{sec:performance} gives an in-depth performance comparison of approaches.
+Both facets are also derived from the five approaches, as each of the metrics or normalization techniques are also all used by at least one approach and thus define a good opportunity for comparison. Section \ref{sec:performance} gives an in-depth performance comparison.% of approaches.
 
-\textit{Online Learning} describes whether an approach is able to integrate analysis results made during production use into its analysis database, otherwise only the analysis results made on initial training data are considered~\cite{MAL-018}. This facet is relevant for production contexts where new commits should affect the existing classification model, but due to the scientific background of some papers it is not implemented in all approaches such as Deeper by Yang et al.~\cite{Yang2015}.
+\textit{Online Learning} describes whether an approach is able to integrate analysis results made during production use into its analysis database, otherwise only the analysis results made on initial training data are considered~\cite{MAL-018}. This facet is relevant for production contexts where new commits should affect the existing classification model, but due to the scientific background of some papers it is not implemented in all approaches such as the one by Kamei et al.~\cite{Yang2015}.
 
 The \textit{Event Data Source} is also considered. This facet describes which sources of data are considered for training the classifier. All approaches are using the commit history of the repository for which new commits are being analyzed. Some approaches also used the commit history of similar repositories or issue trackers which belong to the repositories.
 Especially Nayrolles et al. describes their data source in detail and motivates how using additional data can further improve classification performance \cite{Nayrolles2018}. The used data source is also relevant when considering using the approach in a production context as some sources such as issue systems are not always available. 
@@ -442,7 +442,10 @@ Classification approaches that rely on purely metric based methods generally sho
 This category describes approaches which use machine learning techniques to increase evaluation performance.
 While both \textit{Deeper} by Yang~\cite{Yang2015} and \textit{CLEVER} by Nayrolles~\cite{Nayrolles2018} implement such techniques, according to Yang et al. Deeper was the first Just-in-Time Fault Detection approach to leverage deep neural networks for improved classification performance. Nayrolles' CLEVER on the other hand additionally implemented code matching alongside a machine learning model and will thus be described in more detail in Section \ref{sec:codematching}.
 
-Deeper was developed primarily in a research context and builds off the work of Kamei's approach \cite{Kamei2013}, successfully attempting to increase its classification performance with the new neural network. Due to the scientific background of the paper, online learning is not supported by Deeper. Typical methods common in machine learning such as data normalization and resampling are used. Like most approaches Deeper only supports detecting faulty commits without special features like the abnormality score supplied by Unusual Commits \cite{Goyal2017}. It also uses the most common data sources for training its model, which are the past commit history of the project for which new commits are being analyzed alongside an external issue system. Likely inspired by Kamei's work, it also uses the same metrics for classification, which regard the commits content and message. 
+Deeper was developed primarily in a research context and builds off the work of Kamei's approach \cite{Kamei2013}, successfully attempting to increase its classification performance with the new neural network. 
+%Due to the scientific background of the paper, online learning is not supported by Deeper. 
+They also mention how online learning is established by Deeper.
+Typical methods common in machine learning such as data normalization and resampling are used. Like most approaches Deeper only supports detecting faulty commits without special features like the abnormality score supplied by Unusual Commits \cite{Goyal2017}. It also uses the most common data sources for training its model, which are the past commit history of the project for which new commits are being analyzed alongside an external issue system. Likely inspired by Kamei's work, it also uses the same metrics for classification, which regard the commits content and message. 
 
 It is easy to see that Deeper is similar to Kamei's work in many aspects, which is not surprising because the primary contribution of Yang's paper was the integration of the neural network instead of Kamei's purely metric based method and 
 due to their shared motivation by a scientific rather than an industrial context.
@@ -553,7 +556,7 @@ A likely cause for this is Nayrolles' implementation of code matching, which red
 The aforementioned results have been collected in Table \ref{tab:classification} where each of the described facets map to specific values per identified Commit Validation approach. The basic structure of the table maps to the feature model described in Figure \ref{fig:featuremodel}. 
 Interesting findings from the table will be highlighted and discussed in the following section \ref{sec:discussion}.
 
-The listed category \textit{Technological Features} lists user features, implemented data normalization techniques and Online Learning as resembled in the feature model. While one of the user features of commit bug detection, an commit abnormality score or altered code suggestions has to be implemented, the usage of of data normalization and Online Learning varies between the five approaches.
+The listed category \textit{Technological Features} lists user features, implemented data normalization techniques and online learning as resembled in the feature model. While one of the user features of commit bug detection, an commit abnormality score or altered code suggestions has to be implemented, the usage of of data normalization and online learning varies between the five approaches.
 
 The event data source indicates where the data comes from which is used for training the classification model. All approaches either use the commit history of the analyzed project or the one from similar projects, the associated issue system is also commonly utilized.
 
@@ -584,7 +587,7 @@ Finally, the last category of considered metrics describes which measures were u
 		& CLEVER & Guru & Unusual & Deeper & Kamei \\ 
 		& \cite{Nayrolles2018} & \cite{Rosen2015} & \cite{Goyal2017} & \cite{Yang2015} & \cite{Kamei2013} \\ \midrule
 		\textit{Technological Features} & & & & & \\ 
-		Online Learning & \pointyes & \pointyes & \pointyes & \pointno & \pointno \\
+		Online Learning & \pointyes & \pointyes & \pointyes & \pointyes & \pointno \\
 		Normalization to user info & \pointno & \pointno & \pointyes & \pointno & \pointno \\
 		Metric normalization & \pnotapplicable & \pnotapplicable & \pointyes & \pointyes & \pointyes \\
 		Code Cleaning and Matching & \pointyes & \pointno & \pointno & \pointno & \pointno \\
@@ -631,7 +634,12 @@ All approaches supply some result to the user, either Commit Bug Detection where
 
 CI Capability is a feature which was considered to be very important for this paper, however not many approaches actually implemented it. Especially among papers focused on research this was usually either not realized or not reported on, while performance was more emphasized. With more emerging papers on the topic of Commit Validation and increasing usage in industry, this capability is likely to be more broadly implemented in future methods.
 
-The feature online learning correlates with whether a paper had a scientific goal or not. Deeper and Kamei's approach focused on evaluating Fault Detection methods by building respective classification models \cite{Yang2015, Kamei2013}, while CLEVER, Commit Guru and Unusual Commits implemented programs which were meant to be used in an industrial context \cite{Nayrolles2018,Rosen2015,Goyal2017}. In the first two approaches, only offline learning was established, thus they performed initial training on a dataset and then evaluated the resulting models.
+The feature online learning was implemented by all approaches except Kamei's, which is likely due to its academic goal of verifying the concept rather than defining a industrially usable program~\cite{Kamei2013}. 
+%Thus, only offline learning was established, where they performed i9nitial training on a dataset and then evaluated the resulting model. 
+%TODO satz mitreinbringen?
+Most other approaches like CLEVER and Commit Guru realized methods that were meant to be deployed in industrial context, thus online learning becomes more relevant here~\cite{Nayrolles2018,Rosen2015}.
+
+%The feature online learning correlates with whether a paper had a scientific goal or not. Deeper and Kamei's approach focused on evaluating Fault Detection methods by building respective classification models \cite{Yang2015, Kamei2013}, while CLEVER, Commit Guru and Unusual Commits implemented programs which were meant to be used in an industrial context \cite{Nayrolles2018,Rosen2015,Goyal2017}. In the first two approaches, only offline learning was established, thus they performed initial training on a dataset and then evaluated the resulting models.
 
 One interesting finding comes from the numbers of the aforementioned performance comparisons, as both CLEVER and Deeper perform better than their reference approaches. They also implement similar methods as both rely on machine learning. This correlation suggests that establishing machine learning methods brings noticable performance improvements compared to relying solely on metric-based techniques. Nayrolles also reported that incorporating code matching significantly increases performance in CLEVER, which explains the major advantage it has in numbers compared to Commit Guru \cite{Nayrolles2018}.
 
