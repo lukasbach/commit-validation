@@ -17,7 +17,7 @@ Kamei et al. reported on typical drawbacks of those kinds of approaches~\cite{Ka
 Finally, a primary problem is that typical approaches find faults only very late during the development cycle. Fixing those faults late is much more expensive than fixing them early on after they were introduced~\cite{Martin08}.
 %Finally, a primary problem is that typical approaches find faults only very late during the development cycle, which is much more expensive than fixing them early \cite{Martin08}.
 
-A recent approach for increasing software quality and thus decreasing costs is the concept of Commit Validation. This concept is used at a very technical level where change commits on software projects are automatically analyzed and verified in regard to the probability that they introduce a new software fault. This is much more efficient than typical approaches because code is analyzed for faults at an early phase when the responsible developer is still involved with the changes. \cite{Kamei2013}
+A recent approach for increasing software quality and thus decreasing costs is the concept of Commit Validation. This concept is used at a very technical level where change commits on software projects are automatically analyzed and verified in regard to the probability that they introduce a new software fault. This is much more efficient than typical approaches because code is analyzed for faults at an early phase when the responsible developer is still involved in the changes.~\cite{Kamei2013}
 
 Different approaches exist on this topic,
 %There exist different approaches on this topic, 
@@ -77,7 +77,7 @@ For this paper, four success criteria have been defined:
 This paper focuses on Just-in-Time Fault Detection approaches which have the concept of code commits in mind. 
 While the research area for code quality is large, the focus restricts the area into a limited set of research works.
 
-The Just-in-Time aspect and the relevance of commits is important to fight the aforementioned drawback of typical quality assurance approaches, which is the expensiveness of fixing bugs much later after they were introduced into the project. 
+The Just-in-Time aspect and the relevance of commits is important to fight the aforementioned drawbacks of typical quality assurance approaches, which include the expensiveness of fixing bugs much later after they were introduced into the project. 
 There exist various approaches which just focus on detecting bugs and generating fixes such as \textit{Getafix} by Bader et al. or \textit{iFixR} by Koyuncu et al., however they are out of scope of this paper as the concept of commits is not considered \cite{Bader2019,Koyuncu2019}.
 
 
@@ -113,7 +113,7 @@ Then its two major components, Just-in-Time Fault Detection and Just-in-Time Fau
 
 There are many ways of increasing software quality in the field of software engineering. While the field is very broad, there are many tools and technical utilities that have been established as part of a state of the art technology stack. Among others, that also includes \define{version-control systems}{VCS}. A version-control system is used to track the evolution of source code and enables collaborative teams of software developers to concurrently work on the same code base~\cite{Chacon:2014:PG:2695634}. Currently, the most used VCS is \textit{Git} as shown in stackoverflow's developer survey in 2018, where $87.2\%$ of more than $74,000$ participants reported that they were using Git for version control \cite{Stackoverflow}.
 
-An important concept for VCS are \textit{commits}, small sets of code changes that usually happen atomically and are annotated by the developer describing what the changes do. Commits are explicitly performed by the developer and usually mark a finished feature, bug-fix, chore work or similar artifacts. Because of that, the time at which a developer performs a commit is a suitable time for validating the change and analyzing it to find potential bugs that have been introduced while the developer still has the changes in his mind, yet considers them to be final. %TODO citation?
+An important concept of VCS are \textit{commits}, small sets of code changes that usually happen atomically and are annotated by the developer describing what the changes do. Commits are explicitly performed by the developer and usually mark a finished feature, bug-fix, chore work or similar artifacts. Because of that, the time at which a developer performs a commit is a suitable time for validating the change and analyzing it to find potential bugs that have been introduced while the developer still has the changes in his mind, yet considers them to be final. %TODO citation?
 
 Git supports a concept called \textit{Hooks}. A hook specifies a custom script which runs programmatically in response to an event such as commits or uploading a set of commits to a remote server (which is called a \textit{Push} event). 
 Git distinguishes between \textit{Client-Side Hooks}, which run on the local device of the developer that is authoring the commit, and \textit{Server-Side Hooks}, which run on the remote server \cite{Chacon:2014:PG:2695634}. 
@@ -193,7 +193,7 @@ however other works exist
 in the literature where such techniques have been explored without a focus on Commit Validation. %such as the work by Pan et al. and the work by Kim et al \cite{Nayrolles2018, Kim2013, Pan2009}.
 They include the paper by Pan et al. on the understanding of bug fix patterns~\cite{Pan2009}, and the paper by Kim et al. reporting on a novel patch generation method which learns from human-written patches~\cite{Kim2013}.
 
-In an internal expert study, Nayrolles et al. reported that $41,6\%$ of the fixes proposed by his method have been accepted by all participants in the study while $25\%$ have been accepted by at least one participant~\cite{Nayrolles2018}.
+In an internal expert study, Nayrolles et al. reported that $41,6\%$ of the fixes proposed by his method have been accepted by all participants in the study while $25\%$ have been accepted by at least one participant~\cite{Nayrolles2018}. Obviously, the suggested fixes should be taken with a grain of salt and not naively implemented. They suggest a potential solution to the problem that is supposed to save time and help the developer understand the problem cause, not provide a fail-safe patch that can be applied without review.
 
 \subsection{Statistical Measures}
 \label{sec:statisticalmeasures}
@@ -261,14 +261,14 @@ To compare the Commit Validation approaches, a feature model was derived from th
 %Three categories have been specified for comparing Commit Validation approaches.
 For comparing Commit Validation approaches the three categories Technological Features, Event Data Source and CI Capability have been defined.
 
-The first category compares which \textit{Technological Features} are implement by the different approaches. The most important facet in this category is \textit{User Features}, which are features that are interesting to the end user of the approach. The three selected possibilities reflect features that are implemented by at least one approach.
+The first category compares which \textit{Technological Features} are implement by the different approaches. The most important facet in this category is \textit{User Features}, which are features that are interesting to the end user of the approach. The three selected possibilities reflect features that are each implemented by at least one approach.
 
 %Common user features are the detection of buggy commits and rating the anomality of commits.
 More relevant to the performance of a method are the facets \textit{Metrics} and \textit{Data Normalization}. All approaches use some metrics to compare commit data, however the respectively used metrics vary between the approaches.
 The latter facet shows which normalization techniques are used in the approaches to further improve their classification performance.
 Both facets are also derived from the five approaches, as each of the metrics or normalization techniques are also all used by at least one approach and thus define a good opportunity for comparison. Section \ref{sec:performance} gives an in-depth performance comparison.% of approaches.
 
-\textit{Online Learning} describes whether an approach is able to integrate analysis results made during production use into its analysis database, otherwise only the analysis results made on initial training data are considered~\cite{MAL-018}. This facet is relevant for production contexts where new commits should affect the existing classification model, but due to the scientific background of some papers it is not implemented in all approaches such as the one by Kamei et al.~\cite{Yang2015}.
+\textit{Online Learning} describes whether an approach is able to integrate analysis results made during production use into its analysis database, otherwise only the analysis results made on initial training data are considered~\cite{MAL-018}. This facet is relevant for production contexts where new commits should affect the existing classification model, but due to the scientific background of some papers it is not implemented in all approaches such as the one by Kamei et al.~\cite{Kamei2013}.
 
 The \textit{Event Data Source} is also considered. This facet describes which sources of data are considered for training the classifier. All approaches are using the commit history of the repository for which new commits are being analyzed. Some approaches also used the commit history of similar repositories or issue trackers which belong to the repositories.
 Especially Nayrolles et al. describes their data source in detail and motivates how using additional data can further improve classification performance \cite{Nayrolles2018}. The used data source is also relevant when considering using the approach in a production context as some sources such as issue systems are not always available. 
@@ -360,7 +360,7 @@ Commit Guru on the other hand analyzes commit messages to detect keywords such a
 This allows Commit Guru to effectively find previous faulty commits without the need for an additional data source such as an issue system~\cite{Rosen2015}.
 
 Commit Guru is implemented in Python while Unusual Commits is realized in Java and R. It is also worth mentioning that both Commit Guru and Unusual Commits implement a graphical user interface. 
-Figure \ref{fig:ui} shows the UI's of them both. 
+Figure \ref{fig:ui} their user interfaces. 
 
 Commit Guru deploys a standalone web application which is built upon Google's Angular framework where one can see the classification results \cite{Rosen2015}. On its website \url{https://commit.guru} a Git repository URL can be entered to initialize the analysis. This repository will then be added to the ones continuously reanalyzed on changes and will be added to a list on the page. From there the analysis results can be opened as depicted in Figure \ref{fig:ui-commitguru}, where the classification results for all commits as well as various metrics are listed. When new changes are detected on a repository, it is automatically reanalyzed and an E-Mail notification is sent as response to the event, thus it shows CI capability in form of a Push Hook.
 
@@ -371,7 +371,7 @@ When clicking on a commit in GitHub, a detail overview of it is opened. Unusual 
 %Unusual Commits is implemented as a Google Chrome plug-in which embeds classification results into the commit history on GitHub, while Commit Guru runs in a web application that lists the analysis results for a selected repository. It also listens to new commits, automatically reanalyzes them and sends E-Mail notifications in response to the event, thus it shows CI capability in form of a Push Hook. 
 %Unusual Commits does not support any CI capabilities. 
 Both are realized as free-to-use cloud applications. They are also both powered by custom backend software that run the analysis and are deployed on proprietary servers. %TODO proprietary richtig hier?
-Unlike Commit Guru and Unusual Commits, Kamei did not publish an openly usable program, thus their CI capability or any technological information cannot be reported on.
+Unlike Commit Guru and Unusual Commits, Kamei did not publish an openly usable program, thus their CI capability or technological background cannot be reported on.
 
 Kamei's approach and Commit Guru use the same set of metrics, which are metrics regarding the commit content such as changed lines of codes or the number of changed files, as well as the commit history, such as the commit purpose and information about the developer. Unusual Commits also considers the commit content, but instead of the latter metrics the commits metadata is taken into account.
 
